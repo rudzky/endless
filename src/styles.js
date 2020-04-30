@@ -274,14 +274,14 @@ export const opacityAnimation = keyframes`
 
 export const ScrollDiv = styled.div`
   overflow-y: scroll; 
-  height: 65%;
+  height: 60%;
   // padding: 0px 20px;
 
   animation-name: ${opacityAnimation};
   animation-duration: 2s;
 
   min-width: 100%;
-  padding-top: 5%;
+  margin-top: 5%;
 `;
 
 export const PlayerDiv = styled.div`

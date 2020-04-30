@@ -13,6 +13,7 @@ const Player = (props) => {
     const backToPlaylist = location.state.backToPlaylist;
 
     console.log(location);
+    //console.log(props);
 
     const [tracks, setTracks] = useState([]);
     const [filtered, setFiltered] = useState([]);
@@ -105,7 +106,9 @@ const Player = (props) => {
               (location.state === undefined) ? <Redirect to="/" /> : ''
             }
           
-            <PlayerDiv>
+            <PlayerDiv
+              style={{ height: '100%' }}
+            >
               <motion.div
                 initial={{ opacity: 0, y: 100 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -114,6 +117,7 @@ const Player = (props) => {
               >
                 {
                   !can ? (<motion.div 
+                    style={{ height: '100%' }}
                     initial={{ opacity: 0, y: 100 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 100 }}

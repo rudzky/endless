@@ -8,6 +8,7 @@ import Home from './components/Home';
 import Categories from './components/Categories';
 import Playlists from './components/Playlists';
 import Player from './components/Player';
+import CategoryError from './components/CategoryError';
 
 import "circular-std";
 
@@ -71,6 +72,8 @@ export default function App(){
 
       <GradientBall4 />
 
+      <div style={{position: 'absolute',width: '100%',height: '100%',backgroundImage: 'linear-gradient(-15deg, black, transparent)'}}></div>
+
       <Route
 				render={({ location }) => (
 
@@ -96,6 +99,8 @@ export default function App(){
             )}
 
             <Route path="/about" component={About} />
+
+            <Route path="/error/:name" component={CategoryError} />
 
           </Switch>
         </AnimatePresence>

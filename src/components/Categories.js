@@ -11,6 +11,16 @@ const Categories = ({ authKey }) => {
     const [cats, setCats] = useState([]);
     const [error, setError] = useState(false);
     const [red, setRed] = useState(false);
+    const [randomNumb, setRandomNumb] = useState(null);
+
+      const getRandomCategory = () => {
+          console.log(cats.length);
+          let min = 0;
+          let max = cats.length-1;
+          min = Math.ceil(min);
+          max = Math.floor(max);
+          setRandomNumb(Math.floor(Math.random() * (max - min + 1)) + min);
+      }
 
       const getCategories = async() => {
         if(authKey === undefined){
@@ -37,6 +47,9 @@ const Categories = ({ authKey }) => {
 
       useEffect(() => {
         getCategories();
+        setTimeout(()=>{
+          document.body.style="background: #4dd453";
+        },1000);
       },[]);
 
       //console.log(cats);
@@ -50,6 +63,19 @@ const Categories = ({ authKey }) => {
           exit={{ opacity: 0, y: -100 }}
           transition={{ duration: 0.3 }}
         >
+
+        { (randomNumb!==null) && (
+          <Redirect 
+          to={{ 
+            pathname: `/playlists/${cats[randomNumb].id}`,
+            search: `?name=${cats[randomNumb].name}`,
+            state: {
+              id: cats[randomNumb].id,
+              name: cats[randomNumb].name
+            }}} />
+          )
+        }
+
           <BackToButton to='/'>
             <img src={backTo} alt="Back" />
           </BackToButton>
@@ -59,7 +85,13 @@ const Categories = ({ authKey }) => {
               <h1 style={{ fontSize: '2.4rem', lineHeight: '2.2rem', marginBottom: '5px'}}>Browse</h1>
               <h5 style={{ fontFamily: 'CircularStd', color: '#FFF', fontSize: '1.2rem', lineHeight: '1.2rem', marginBottom: '5px'}}>Choose or random</h5>
             </span>
-            <RandButton>Get random</RandButton>
+            <motion.div 
+              whileTap={{ scale: 0.8 }}
+              style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
+              onClick={() => getRandomCategory()}
+            >
+              <RandButton>Get random</RandButton>
+            </motion.div>
           </CategoriesHeader>
           
 

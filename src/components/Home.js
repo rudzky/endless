@@ -11,6 +11,8 @@ import logo from '../img/logo.svg';
 
 const Home = () => {
 
+    document.body.style="background: #03a9f4";
+
     return (
 
       <motion.div
@@ -29,7 +31,12 @@ const Home = () => {
           </StyledDiv>
          
           <FrontButtons>
-            <Button to='/categories' style={{ margin: '15px 0px' }}>Get Started</Button>
+            <motion.div 
+              whileTap={{ scale: 0.8 }} 
+              style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
+            >
+              <Button to='/categories' style={{ margin: '15px 0px' }}>Get Started</Button>
+            </motion.div>
             <SL to={{
               pathname: "/about",
             }}
