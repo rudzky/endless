@@ -9,6 +9,7 @@ import Categories from './components/Categories';
 import Playlists from './components/Playlists';
 import Player from './components/Player';
 import CategoryError from './components/CategoryError';
+import PlaylistError from './components/PlaylistError';
 
 import "circular-std";
 
@@ -101,6 +102,8 @@ export default function App(){
             <Route path="/about" component={About} />
 
             <Route path="/error/:name" component={CategoryError} />
+
+            <Route path="/play_error/:name" component={PlaylistError} />
 
           </Switch>
         </AnimatePresence>

@@ -346,7 +346,7 @@ export const PlayButton = styled.button`
 // `;
 
 export const Controls = styled.div`
-  width: 65%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -388,4 +388,13 @@ export const BackToButton = styled(Link)`
   position: absolute;
   top: 5%;
   left: 5%;
+`;
+
+export const ControlBar = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    flex-basis: 24%;
 `;

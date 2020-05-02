@@ -5,6 +5,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { switchStyleTrack, ScrollDiv, SwitchDiv, RandButton, CategoriesHeader, BackToButton } from '../styles';
 import backTo from '../img/backTo.svg';
 
+import { Image } from "react-image-and-background-image-fade";
 
 const Categories = ({ authKey }) => {
 
@@ -109,8 +110,19 @@ const Categories = ({ authKey }) => {
                           id: cat.id,
                           name: cat.name,
                         }
-                        }} style={{position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', textDecoration: 'none',}}>
-                        <img src={cat.icons[0].url} style={{ width: '100%' }} />
+                        }} style={{position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', textDecoration: 'none', width: '100%' }}>
+                        
+                        {/* <img src={cat.icons[0].url} style={{ width: '100%' }} decoding='async' loading='lazy' /> */}
+
+                        <Image 
+                          src={cat.icons[0].url} 
+                          style={{ backgroundSize: 'cover',backgroundPosition: 'center top' }} 
+                          width='100%'
+                          height='100%'
+                          isResponsive 
+                          lazyLoad 
+                        />
+                        
                         <p style={{ fontWeight: '600', color: 'white', fontSize: '1rem', margin: '10px 0px 0px 0px'}}>{cat.name}</p>
                       </Link>  
                     </li>

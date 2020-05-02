@@ -6,6 +6,7 @@ import { Link, Redirect, useLocation } from 'react-router-dom';
 import { switchStyleTrack, ScrollDiv, PlayerDiv, ReadyStyle, AcceptButton, SwitchDiv, BackToButton } from '../styles';
 import Track from './Track';
 import backTo from '../img/backTo.svg';
+// import PlaylistError from './PlaylistError';
 
 const Player = (props) => {
 
@@ -20,6 +21,8 @@ const Player = (props) => {
     const [error, setError] = useState(false);
     const [red, setRed] = useState(false);
     const [can, setCan] = useState(false);
+
+    const [isErro, setIsErro] = useState(false);
 
       const getTracks = () => {
         if(props.authKey.access_token === undefined){
@@ -42,22 +45,29 @@ const Player = (props) => {
       };
 
       const filterTracks = () => {
-        //console.log('siema',tracks);
+        console.log('siema',tracks);
         let i = 0;
         let pack = [];
         do{
-            if(tracks.items[i].track.preview_url !== null){
-                let song = {
+          console.log(i);
+          console.log(tracks.items.length);
+            if((tracks.items[i].track !== null)){
+              if((tracks.items[i].track.preview_url !== null)){
+                  let song = {
                     artist: tracks.items[i].track.artists[0].name,
                     name: tracks.items[i].track.name,
                     preview: tracks.items[i].track.preview_url,
                     cover: tracks.items[i].track.album.images[1].url
-                }
-              pack.push(song);
+                  }
+                  pack.push(song);
+              }
             }
             i++;
-        } while(pack.length <= 4);
+        } while((pack.length <= 4) && (i < tracks.items.length));
         setFiltered(pack);
+        if(pack.length < 5){
+          setIsErro(true);
+        }
         // setTimeout(() => setCan(true),3000);
       }
 
@@ -90,6 +100,21 @@ const Player = (props) => {
           exit={{ opacity: 0, y: -100 }}
           transition={{ duration: 0.3 }}
         >
+
+          {/* { filtered.length < 5 && (
+              <PlaylistError name={location.state.backToPlaylist.name} />
+          )} */}
+
+            {
+              isErro && (
+              <Redirect to={{ 
+                pathname: `/play_error/${location.state.backToPlaylist.name}`,
+                search: `?name=${location.state.backToPlaylist.name}`,
+                state: {
+                  playName: location.state.backToPlaylist.name
+                }}}
+              />)
+            }
 
           <BackToButton to={{ 
             pathname: `/playlists/${backToPlaylist.id}`,

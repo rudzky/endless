@@ -8,6 +8,7 @@ import backTo from '../img/backTo.svg';
 import CategoryError from './CategoryError';
 
 import { ColorExtractor } from 'react-color-extractor';
+import { Image } from "react-image-and-background-image-fade";
 
 const Playlists = (props) => {
 
@@ -160,8 +161,19 @@ const Playlists = (props) => {
                           name: play.name,
                           tracks: play.tracks.href,
                           backToPlaylist: location.state,
-                        }}} style={{position: 'relative', display: 'flex', justifyContent: 'center'}}>
-                          <img src={play.images[0].url} style={{ width: '100%' }} />
+                        }}} style={{position: 'relative', display: 'flex', justifyContent: 'center', width: '100%' }}>
+
+                          {/* <Img src={play.images[0].url} style={{ width: '100%' }} loader={Loader} /> */}
+
+                          <Image 
+                            src={play.images[0].url} 
+                            style={{ backgroundSize: 'cover',backgroundPosition: 'center top' }} 
+                            width='100%'
+                            height='100%'
+                            isResponsive 
+                            lazyLoad 
+                          />
+
                         </Link>
                     </li>
                 ) 
@@ -177,3 +189,15 @@ const Playlists = (props) => {
 }
 
 export default Playlists;
+
+const Loader = () => {
+  return(
+    <div
+      style={{
+        padding: '150px',
+        background: 'gray'
+      }}
+    >
+    </div>
+  );
+}

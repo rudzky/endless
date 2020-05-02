@@ -1,20 +1,29 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { pageTransition } from '../App';
 import { motion, useAnimation  } from "framer-motion";
-import { Cover, ArtTitle, Title, Artist, PlayButton, Controls, HeaderPlaylist, PlaylistName } from '../styles';
+import { Cover, ArtTitle, Title, Artist, PlayButton, Controls, HeaderPlaylist, PlaylistName, ControlBar } from '../styles';
 import pauseBut from '../img/pause.svg';
 import playBut from '../img/play.svg';
 import nextBut from '../img/next.svg';
+
+import { Palette } from 'react-palette';
+
 
 //import Marquee from 'react-css-marquee';
 
 const Track = ({source, playName}) => {
 
-    //console.log(source);
+    console.log(source);
     //console.log(playName);
 
     const [play, setPlay] = useState(true);
     const [trackNumber, setTrackNumber] = useState(0);
+
+    // const [{data}, setURL] = usePalette(source[0].cover);
+
+    // useEffect(() => {
+    //     console.log(data);
+    // },[data]);
 
     const fadeAudio = (e) => {
 
@@ -126,9 +135,15 @@ const Track = ({source, playName}) => {
 
                 <Cover src={source[trackNumber].cover} alt='cover' />
 
+                <Palette image={source[trackNumber].cover}>
+                    {palette => {
+                        console.log(palette);
+                    }}
+                </Palette>
+
             </motion.div>
 
-            <div>
+            <ControlBar>
 
                 <ArtTitle>
                     <Title key={source[trackNumber].name}>{source[trackNumber].name}</Title>
@@ -142,12 +157,12 @@ const Track = ({source, playName}) => {
                         {play ? <img src={pauseBut} onClick={handlePlayPause} /> : <img src={playBut} onClick={handlePlayPause} />}
                     </motion.div>
                     
-                    <motion.div whileTap={{ scale: 0.8 }} style={{position: 'absolute', right: '0'}}>
+                    <motion.div whileTap={{ scale: 0.8 }} style={{position: 'absolute', right: '0', padding: '20px'}}>
                         <img src={nextBut} onClick={() => {wowUp(); controls.start();}} />
                     </motion.div>
                 </Controls>
 
-            </div>
+            </ControlBar>
             
         </motion.div>
     );

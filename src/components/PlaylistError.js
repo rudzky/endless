@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useLocation } from 'react-router-dom';
 import { Button } from '../styles';
 
-const CategoryError = () => {
+const PlaylistError = () => {
     const location = useLocation();
     return(
         <motion.div
@@ -22,7 +22,7 @@ const CategoryError = () => {
           transition={{ duration: 0.3 }}
         >
             <h1>ERROR</h1>
-            <h3>"{location.state.catName}" has no playlists now.
+            <h3>"{location.state.playName}" has no tracks now.
             <br />That's probably server issue</h3>
             <Button
                 style={{marginTop: '12%'}}
@@ -35,4 +35,4 @@ const CategoryError = () => {
     )
 };
 
-export default CategoryError;
+export default PlaylistError;
