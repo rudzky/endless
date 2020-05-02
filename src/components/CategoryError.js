@@ -4,7 +4,15 @@ import { useLocation } from 'react-router-dom';
 import { Button } from '../styles';
 
 const CategoryError = () => {
-    const location = useLocation();
+
+    document.body.style="background: #f30909";
+
+    const useQuery = () => {
+        return new URLSearchParams(useLocation().search);
+    };
+    let x = useQuery();
+    x = x.get("name");
+
     return(
         <motion.div
           style={{
@@ -22,7 +30,7 @@ const CategoryError = () => {
           transition={{ duration: 0.3 }}
         >
             <h1>ERROR</h1>
-            <h3>"{location.state.catName}" has no playlists now.
+            <h3>"{x}" has no playlists now.
             <br />That's probably server issue</h3>
             <Button
                 style={{marginTop: '12%'}}

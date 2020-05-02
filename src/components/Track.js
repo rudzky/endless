@@ -1,10 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { pageTransition } from '../App';
+import { withRouter } from 'react-router-dom';
 import { motion, useAnimation  } from "framer-motion";
 import { Cover, ArtTitle, Title, Artist, PlayButton, Controls, HeaderPlaylist, PlaylistName, ControlBar } from '../styles';
 import pauseBut from '../img/pause.svg';
 import playBut from '../img/play.svg';
 import nextBut from '../img/next.svg';
+import tickBut from '../img/tick.svg';
+
+import { Image } from "react-image-and-background-image-fade";
 
 import { Palette } from 'react-palette';
 
@@ -82,11 +86,11 @@ const Track = ({source, playName}) => {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'space-between',
-        height: '85vh',
+        justifyContent: 'space-evenly',
+        height: '100vh',
         opacity: '1',
         transform: 'none',
-        paddingBottom: '20px'
+        padding: '5% 0px'
     };
 
     const titleStyle = {
@@ -127,17 +131,28 @@ const Track = ({source, playName}) => {
             <motion.div
                 style={{
                     display: 'flex',
-                    justifyContent: 'center'
+                    justifyContent: 'center',
+                    width: '100%'
                 }}
                 animate={controls}
                 exit={{ opacity: 0 }}
             >
 
-                <Cover src={source[trackNumber].cover} alt='cover' />
+                <Image 
+                    src={source[trackNumber].cover} 
+                    style={{ backgroundSize: 'cover',backgroundPosition: 'center top' }} 
+                    width='100%'
+                    height='100%'
+                    isResponsive 
+                    lazyLoad 
+                />
 
-                <Palette image={source[trackNumber].cover}>
+                {/* <Cover src={source[trackNumber].cover} alt='cover' /> */}
+
+                <Palette src={source[trackNumber].cover}>
                     {palette => {
                         console.log(palette);
+                        document.body.style=`background: ${palette.data.darkVibrant}`;
                     }}
                 </Palette>
 
@@ -147,7 +162,7 @@ const Track = ({source, playName}) => {
 
                 <ArtTitle>
                     <Title key={source[trackNumber].name}>{source[trackNumber].name}</Title>
-                    <Artist key={source[trackNumber].artist}>by {source[trackNumber].artist}</Artist>
+                    <Artist key={'@' + source[trackNumber].artist}>by {source[trackNumber].artist}</Artist>
                 </ArtTitle>
                 
                 <div style={{ background: 'white', width: '0px', height: '2px', alignSelf: 'flex-start' }}></div>
@@ -158,7 +173,11 @@ const Track = ({source, playName}) => {
                     </motion.div>
                     
                     <motion.div whileTap={{ scale: 0.8 }} style={{position: 'absolute', right: '0', padding: '20px'}}>
-                        <img src={nextBut} onClick={() => {wowUp(); controls.start();}} />
+                        {
+                            (trackNumber === 4) 
+                            ? <img src={tickBut} />
+                            : <img src={nextBut} onClick={() => {wowUp(); controls.start();}} /> 
+                        }
                     </motion.div>
                 </Controls>
 
@@ -168,4 +187,4 @@ const Track = ({source, playName}) => {
     );
 }
 
-export default Track;
+export default withRouter(Track);

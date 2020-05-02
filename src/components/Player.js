@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../App.css';
 import { pageTransition } from '../App';
 import { motion } from "framer-motion";
-import { Link, Redirect, useLocation } from 'react-router-dom';
+import { Link, Redirect, useLocation, withRouter, useParams } from 'react-router-dom';
 import { switchStyleTrack, ScrollDiv, PlayerDiv, ReadyStyle, AcceptButton, SwitchDiv, BackToButton } from '../styles';
 import Track from './Track';
 import backTo from '../img/backTo.svg';
@@ -11,10 +11,29 @@ import backTo from '../img/backTo.svg';
 const Player = (props) => {
 
     const location = useLocation();
-    const backToPlaylist = location.state.backToPlaylist;
 
     console.log(location);
+
+    //const stateTruck = JSON.parse(location.state.tracks);
+    //const stateBack = JSON.parse(location.state.backToPlaylist);
+
+    // const state
+
+    // hook
+      const useQuery = () => {
+        return new URLSearchParams(useLocation().search);
+      };
+      let x = useQuery();
+      x = x.get("name");
+      let { name } = useParams();
+
+      const [names, setNames] = useState({id: name, name: x});
+    // end_hook
+
+    //console.log('PLAYER LOKACJA PROPSY',location);
     //console.log(props);
+
+    //const backToPlaylist = location.state.backToPlaylist;
 
     const [tracks, setTracks] = useState([]);
     const [filtered, setFiltered] = useState([]);
@@ -38,19 +57,21 @@ const Player = (props) => {
           redirect: 'follow'
         };
 
-        fetch(`${location.state.tracks}`, requestOptions)
+        //https://api.spotify.com/v1/playlists/37i9dQZF1DX76Wlfdnj7AP/tracks
+
+        fetch(`https://api.spotify.com/v1/playlists/${names.id}/tracks`, requestOptions)
           .then(response => response.text())
           .then(result => setTracks(JSON.parse(result)))
           .catch(setError(true));
       };
 
       const filterTracks = () => {
-        console.log('siema',tracks);
+        //console.log('siema',tracks);
         let i = 0;
         let pack = [];
         do{
-          console.log(i);
-          console.log(tracks.items.length);
+          //console.log(i);
+          //console.log(tracks.items.length);
             if((tracks.items[i].track !== null)){
               if((tracks.items[i].track.preview_url !== null)){
                   let song = {
@@ -72,10 +93,10 @@ const Player = (props) => {
       }
 
       useEffect(() => {
-        console.log(location.state);
-        if(location.state !== undefined){
+        //console.log(location.state);
+        //if(location.state !== undefined){
           getTracks();
-        }
+        //}
       },[]);
 
       useEffect(() => {
@@ -85,11 +106,11 @@ const Player = (props) => {
       },[tracks]);
 
       const acceptGo = () => {
-        console.log('duppaaaa');
+        //console.log('duppaaaa');
         setCan(true);
       };
 
-      console.log(tracks);
+      //console.log(tracks);
 
     return(
 
@@ -100,35 +121,29 @@ const Player = (props) => {
           exit={{ opacity: 0, y: -100 }}
           transition={{ duration: 0.3 }}
         >
-
-          {/* { filtered.length < 5 && (
-              <PlaylistError name={location.state.backToPlaylist.name} />
-          )} */}
-
-            {
-              isErro && (
-              <Redirect to={{ 
-                pathname: `/play_error/${location.state.backToPlaylist.name}`,
-                search: `?name=${location.state.backToPlaylist.name}`,
-                state: {
-                  playName: location.state.backToPlaylist.name
-                }}}
-              />)
-            }
+          
+          {
+            isErro && (
+            <Redirect to={{ 
+              pathname: `/play_error/${names.id}`,
+              search: `?name=${names.name}`
+            }}
+            />)
+          }
 
           <BackToButton to={{ 
-            pathname: `/playlists/${backToPlaylist.id}`,
-            search: `?name=${backToPlaylist.name}`,
-            state: {
-              id: backToPlaylist.id,
-              name: backToPlaylist.name,
-            }
+            pathname: `/categories`,
+            //search: `?name=${names.name}`
+            // state: {
+            //   id: stateBack.id,
+            //   name: stateBack.name,
+            // }
             }}>
             <img src={backTo} alt="Back" />
           </BackToButton>
 
             {
-              (location.state === undefined) ? <Redirect to="/" /> : ''
+              (names === undefined) ? <Redirect to="/" /> : ''
             }
           
             <PlayerDiv
@@ -155,7 +170,7 @@ const Player = (props) => {
                       exit={{ opacity: 0, y: 100 }}
                       transition={{ delay: 1, duration: 1 }}
                     >
-                      <Track source={filtered} playName={location.state.name}/>
+                      <Track source={filtered} playName={names.name}/>
                     </motion.div>
                   )
                 }
@@ -166,7 +181,7 @@ const Player = (props) => {
     );
 }
 
-export default Player;
+export default withRouter(Player);
 
 const Ready = () => {
   return(

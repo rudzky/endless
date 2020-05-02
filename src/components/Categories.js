@@ -88,7 +88,7 @@ const Categories = ({ authKey }) => {
             </span>
             <motion.div 
               whileTap={{ scale: 0.8 }}
-              style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
+              style={{ width: '50%', display: 'flex', justifyContent: 'center' }}
               onClick={() => getRandomCategory()}
             >
               <RandButton>Get random</RandButton>

@@ -292,7 +292,7 @@ export const PlayerDiv = styled.div`
 `;
 
 export const Cover = styled.img`
-  width: 70vw;
+  width: 85vw;
   box-shadow: 0px 3px 10px #00000066;
 `;
 
@@ -302,7 +302,7 @@ export const ArtTitle = styled.div`
   align-items: center;
   justify-content: flex-end;
   position: relative;
-  width: 80%;
+  width: 100%;
 `;
 
 export const Title = styled.p`
@@ -313,6 +313,10 @@ export const Title = styled.p`
   letter-spacing: -1.23px;
   margin: 0px;
   white-space: nowrap;
+
+  max-width: 100%;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const Artist = styled.p`
@@ -387,14 +391,14 @@ export const CategoriesHeader = styled.div`
 export const BackToButton = styled(Link)`
   position: absolute;
   top: 5%;
-  left: 5%;
+  left: 10%;
 `;
 
 export const ControlBar = styled.div`
-    width: 100%;
+    width: 80vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    flex-basis: 24%;
+    flex-basis: 30%;
 `;
