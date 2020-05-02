@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from "framer-motion";
 import { useLocation } from 'react-router-dom';
-import { Button } from '../styles';
+import { Button } from './styles/mainStyles'; 
 
 const PlaylistError = () => {
 

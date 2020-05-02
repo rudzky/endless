@@ -2,15 +2,20 @@ import React, { useState, useRef, useEffect } from 'react';
 import { pageTransition } from '../App';
 import { withRouter } from 'react-router-dom';
 import { motion, useAnimation  } from "framer-motion";
-import { Cover, ArtTitle, Title, Artist, PlayButton, Controls, HeaderPlaylist, PlaylistName, ControlBar } from '../styles';
 import pauseBut from '../img/pause.svg';
 import playBut from '../img/play.svg';
 import nextBut from '../img/next.svg';
 import tickBut from '../img/tick.svg';
 
+//stylesy
+import { Cover, ArtTitle, Title, Artist, PlayButton, Controls, HeaderPlaylist, PlaylistName, ControlBar } from './styles/TrackStyles';
+
+
 import { Image } from "react-image-and-background-image-fade";
 
 import { Palette } from 'react-palette';
+
+
 
 
 //import Marquee from 'react-css-marquee';

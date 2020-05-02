@@ -3,10 +3,14 @@ import '../App.css';
 import { pageTransition } from '../App';
 import { motion } from "framer-motion";
 import { Link, Redirect, useLocation, withRouter, useParams } from 'react-router-dom';
-import { switchStyleTrack, ScrollDiv, PlayerDiv, ReadyStyle, AcceptButton, SwitchDiv, BackToButton } from '../styles';
+//import { switchStyleTrack, ScrollDiv, PlayerDiv, ReadyStyle, AcceptButton, SwitchDiv, BackToButton } from '../styles';
 import Track from './Track';
 import backTo from '../img/backTo.svg';
 // import PlaylistError from './PlaylistError';
+
+//stylesy
+import { SwitchDiv, BackToButton } from './styles/mainStyles';
+import { PlayerDiv, AcceptButton } from './styles/PlayerStyles';
 
 const Player = (props) => {
 
@@ -114,8 +118,8 @@ const Player = (props) => {
 
     return(
 
-        <motion.div
-          style={SwitchDiv}
+        <SwitchDiv
+          //style={SwitchDiv}
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -100 }}
@@ -177,7 +181,7 @@ const Player = (props) => {
               </motion.div>
             </PlayerDiv>
 
-        </motion.div>
+        </SwitchDiv>
     );
 }
 

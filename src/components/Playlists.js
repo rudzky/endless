@@ -3,9 +3,12 @@ import '../App.css';
 import { pageTransition } from '../App';
 import { motion } from "framer-motion";
 import { Link, Redirect, useLocation, useParams, withRouter } from 'react-router-dom';
-import { SwitchDiv, ScrollDiv, BackToButton, CategoriesHeader, RandButton } from '../styles';
+//import { SwitchDiv, ScrollDiv, BackToButton, CategoriesHeader, RandButton } from '../styles';
 import backTo from '../img/backTo.svg';
 import CategoryError from './CategoryError';
+
+//stylesy
+import { ScrollDiv, SwitchDiv, RandButton, CategoriesHeader, BackToButton } from './styles/mainStyles';
 
 import { ColorExtractor } from 'react-color-extractor';
 import { Image } from "react-image-and-background-image-fade";
@@ -60,8 +63,8 @@ const Playlists = (props) => {
         await fetch(`https://api.spotify.com/v1/browse/categories/${names.id}/playlists?limit=50&country=US`, requestOptions)
         .then(response => response.json())
         .then(result => {
-          console.log(result.error);
-          console.log(result.playlists.items.length);
+          //console.log(result.error);
+          //console.log(result.playlists.items.length);
           if( result.error === undefined && ( result.playlists.items.length > 4 ) ){
             setPlays(result.playlists.items);
           }else{
@@ -81,8 +84,8 @@ const Playlists = (props) => {
 
     return(
 
-        <motion.div
-          style={SwitchDiv}
+        <SwitchDiv
+          //style={SwitchDiv}
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -100 }}
@@ -158,7 +161,7 @@ const Playlists = (props) => {
 
             </ScrollDiv>     
 
-        </motion.div>
+        </SwitchDiv>
     );
 }
 

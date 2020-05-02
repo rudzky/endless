@@ -1,11 +1,13 @@
 import React from 'react';
 import '../App.css';
 
-import { Button, SL, House, Rocket, StyledDiv, SuperDiv, switchStyle, FrontButtons, Logo } from '../styles';
+//import { SL, StyledDiv, FrontButtons, Logo } from '../styles';
 
-import { pageVariants, pageTransition } from '../App';
+//stylesy
+import { SwitchStyle, Button, SwitchDiv } from './styles/mainStyles'; 
+import { SL, StyledDiv, FrontButtons, Logo } from './styles/HomeStyles';
+
 import { motion } from "framer-motion";
-
 import logo from '../img/logo.svg';
 
 
@@ -15,8 +17,8 @@ const Home = () => {
 
     return (
 
-      <motion.div
-          style={switchStyle}
+      <SwitchStyle
+          // style={SwitchStyle}
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -100 }}
@@ -45,7 +47,7 @@ const Home = () => {
             </SL>
           </FrontButtons>
 
-    </motion.div>
+    </SwitchStyle>
     
     );
 }

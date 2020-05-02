@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import { requestOptions } from './headers';
-
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-
 import Home from './components/Home';
 import Categories from './components/Categories';
 import Playlists from './components/Playlists';
 import Player from './components/Player';
 import CategoryError from './components/CategoryError';
 import PlaylistError from './components/PlaylistError';
-
 import "circular-std";
+import { AnimatePresence} from "framer-motion";
+// stylesy
+import { GradientWrapper, SwitchStyle, SwitchDiv } from './components/styles/mainStyles';
+import { Container, GradientBall, GradientBall2, GradientBall3, GradientBall4 } from './components/styles/AppStyles';
 
-import { Container, Logo, switchStyle, GradientBall, GradientBall2, GradientBall3, GradientBall4 } from './styles';
-import { AnimatePresence, motion } from "framer-motion";
 
 export default function App(){
 
@@ -57,8 +56,6 @@ export default function App(){
 
   },[leftTime]);
 
-  // const location = useLocation();
-
   return(
 
     <Router>
@@ -73,7 +70,7 @@ export default function App(){
 
       <GradientBall4 />
 
-      <div style={{position: 'absolute',width: '100%',height: '100%',backgroundImage: 'linear-gradient(-15deg, black, transparent)'}}></div>
+      <GradientWrapper />
 
       <Route
 				render={({ location }) => (
@@ -121,8 +118,7 @@ export default function App(){
 
 function About() {
   return (
-    <motion.div
-      style={switchStyle}
+    <SwitchStyle
       initial={{ opacity: 0, y: 100}}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -100 }}
@@ -136,7 +132,7 @@ function About() {
         </Link>
       </div>
 
-    </motion.div>
+    </SwitchStyle>
   );
 }
 

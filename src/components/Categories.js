@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react';
 import '../App.css';
 import { motion } from "framer-motion";
 import { Link, Redirect } from 'react-router-dom';
-import { switchStyleTrack, ScrollDiv, SwitchDiv, RandButton, CategoriesHeader, BackToButton } from '../styles';
+//import { switchStyleTrack, ScrollDiv, SwitchDiv, RandButton, CategoriesHeader, BackToButton } from '../styles';
 import backTo from '../img/backTo.svg';
+
+//stylesy
+import { ScrollDiv, SwitchDiv, RandButton, CategoriesHeader, BackToButton } from './styles/mainStyles';
 
 import { Image } from "react-image-and-background-image-fade";
 
@@ -57,8 +60,8 @@ const Categories = ({ authKey }) => {
 
     return(
 
-        <motion.div
-          style={SwitchDiv}
+        <SwitchDiv
+          // style={SwitchDiv}
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -100 }}
@@ -132,7 +135,7 @@ const Categories = ({ authKey }) => {
 
             </ScrollDiv>
 
-        </motion.div>
+        </SwitchDiv>
 
     );
 }
