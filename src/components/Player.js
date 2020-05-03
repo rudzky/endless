@@ -16,7 +16,7 @@ const Player = (props) => {
 
     const location = useLocation();
 
-    console.log(location);
+    //console.log(location);
 
     //const stateTruck = JSON.parse(location.state.tracks);
     //const stateBack = JSON.parse(location.state.backToPlaylist);
@@ -71,30 +71,43 @@ const Player = (props) => {
 
       const filterTracks = () => {
         //console.log('siema',tracks);
-        let i = 0;
-        let pack = [];
-        do{
-          //console.log(i);
-          //console.log(tracks.items.length);
-            if((tracks.items[i].track !== null)){
-              if((tracks.items[i].track.preview_url !== null)){
-                  let song = {
-                    artist: tracks.items[i].track.artists[0].name,
-                    name: tracks.items[i].track.name,
-                    preview: tracks.items[i].track.preview_url,
-                    cover: tracks.items[i].track.album.images[1].url
-                  }
-                  pack.push(song);
+        if( tracks !== null && tracks !== undefined ){
+          let min = 0;
+          let max = tracks.items.length - 1;
+          min = Math.ceil(min);
+          max = Math.floor(max);
+        
+          let pack = [];
+          let iterCount = 0;
+
+          do{
+
+            let i = Math.floor(Math.random() * (max - min + 1)) + min;
+
+              if((tracks.items[i].track !== null)){
+                if((tracks.items[i].track.preview_url !== null)){
+                    let song = {
+                      artist: tracks.items[i].track.artists[0].name,
+                      name: tracks.items[i].track.name,
+                      preview: tracks.items[i].track.preview_url,
+                      cover: tracks.items[i].track.album.images[1].url
+                    }
+                    pack.push(song);
+                }
               }
-            }
-            i++;
-        } while((pack.length <= 4) && (i < tracks.items.length));
+              iterCount++;
+          } while((pack.length <= 4) && (iterCount < tracks.items.length - 1));
+
         setFiltered(pack);
+
         if(pack.length < 5){
           setIsErro(true);
         }
-        // setTimeout(() => setCan(true),3000);
+
+      }else{
+        setIsErro(true);
       }
+    };
 
       useEffect(() => {
         //console.log(location.state);

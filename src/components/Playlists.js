@@ -33,7 +33,7 @@ const Playlists = (props) => {
     const [randomNumb, setRandomNumb] = useState(null);
 
     const getRandomPlaylist = () => {
-      console.log(plays.length);
+      //console.log(plays.length);
       let min = 0;
       let max = plays.length-1;
       min = Math.ceil(min);

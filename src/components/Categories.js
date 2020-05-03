@@ -18,7 +18,7 @@ const Categories = ({ authKey }) => {
     const [randomNumb, setRandomNumb] = useState(null);
 
       const getRandomCategory = () => {
-          console.log(cats.length);
+          //console.log(cats.length);
           let min = 0;
           let max = cats.length-1;
           min = Math.ceil(min);

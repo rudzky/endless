@@ -22,7 +22,7 @@ import { Palette } from 'react-palette';
 
 const Track = ({source, playName}) => {
 
-    console.log(source);
+    //console.log(source);
     //console.log(playName);
 
     const [play, setPlay] = useState(true);
@@ -156,7 +156,6 @@ const Track = ({source, playName}) => {
 
                 <Palette src={source[trackNumber].cover}>
                     {palette => {
-                        console.log(palette);
                         document.body.style=`background: ${palette.data.darkVibrant}`;
                     }}
                 </Palette>
