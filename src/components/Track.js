@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { pageTransition } from '../App';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import { motion, useAnimation  } from "framer-motion";
 import pauseBut from '../img/pause.svg';
 import playBut from '../img/play.svg';
@@ -27,6 +27,7 @@ const Track = ({source, playName}) => {
 
     const [play, setPlay] = useState(true);
     const [trackNumber, setTrackNumber] = useState(0);
+    const [doTest, setDoTest] = useState(false);
 
     // const [{data}, setURL] = usePalette(source[0].cover);
 
@@ -124,6 +125,11 @@ const Track = ({source, playName}) => {
             exit={{ opacity: 0, y: -100 }}
             transition={{ duration: 0.3 }}
         >
+
+            {
+                doTest && <Redirect to={{ pathname: "/test/", state: source }} />
+            }
+
             <div>
                 <HeaderPlaylist>playing from playlist</HeaderPlaylist>
                 <PlaylistName>{playName}</PlaylistName>
@@ -179,7 +185,7 @@ const Track = ({source, playName}) => {
                     <motion.div whileTap={{ scale: 0.8 }} style={{position: 'absolute', right: '0', padding: '20px'}}>
                         {
                             (trackNumber === 4) 
-                            ? <img src={tickBut} />
+                            ? <img src={tickBut} onClick={() => {setDoTest(true); handlePlayPause();}} />
                             : <img src={nextBut} onClick={() => {wowUp(); controls.start();}} /> 
                         }
                     </motion.div>

@@ -2,6 +2,15 @@ body{
   /*background: transparent linear-gradient(181deg, #bcecfb 0%, #000000 100%) 0% 0% no-repeat padding-box;*/
   background: #03a9f4;
   transition: background-color 2000ms ease-in-out;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 div::-webkit-scrollbar-track

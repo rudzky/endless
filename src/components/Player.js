@@ -78,11 +78,26 @@ const Player = (props) => {
           max = Math.floor(max);
         
           let pack = [];
+          let usedNumbers = [];
           let iterCount = 0;
 
-          do{
+          const check = (i) => {
+            if(usedNumbers.includes(i)){
+              return true;
+            }else{
+              return false;
+            }
+          };
 
-            let i = Math.floor(Math.random() * (max - min + 1)) + min;
+          do{
+            let i;
+            do{
+              i = Math.floor(Math.random() * (max - min + 1)) + min;
+            }while(check(i));
+
+            // if(check(i)){
+            //   let i = Math.floor(Math.random() * (max - min + 1)) + min;
+            // };
 
               if((tracks.items[i].track !== null)){
                 if((tracks.items[i].track.preview_url !== null)){
@@ -93,6 +108,7 @@ const Player = (props) => {
                       cover: tracks.items[i].track.album.images[1].url
                     }
                     pack.push(song);
+                    usedNumbers.push(i);
                 }
               }
               iterCount++;

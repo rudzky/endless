@@ -58,6 +58,7 @@ export const Controls = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
+  margin-top: 30px;
 `;
 
 export const HeaderPlaylist = styled.p`
@@ -85,6 +86,6 @@ export const ControlBar = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     flex-basis: 30%;
 `;
