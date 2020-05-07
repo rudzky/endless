@@ -2,8 +2,8 @@ import styled, { keyframes } from 'styled-components';
 
 export const Container = styled.div`
   color: palevioletred;
-  width: 100vw;
-  height: 100vh;
+  width: 100%; //100vw - 100vh
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;

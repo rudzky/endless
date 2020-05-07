@@ -60,8 +60,8 @@ export default function App(){
   return(
 
     <Router>
-
-    <Container style={{position: 'relative', overflow: 'hidden'}}>
+      {/* bylo position relative */}
+    <Container style={{position: 'fixed', overflow: 'hidden'}}>
 
       <GradientBall />
 

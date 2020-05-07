@@ -80,9 +80,16 @@ const Categories = ({ authKey }) => {
           )
         }
 
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 2 }}
+        >
           <BackToButton to='/'>
             <img src={backTo} alt="Back" />
           </BackToButton>
+        </motion.div>
           
           <CategoriesHeader>
             <span>

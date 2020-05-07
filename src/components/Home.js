@@ -24,8 +24,14 @@ const Home = () => {
           exit={{ opacity: 0, y: -100 }}
           transition={{ duration: 0.3 }}
       >
-
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 2 }}
+        >
           <Logo src={logo}/>
+        </motion.div>
 
           <StyledDiv>
             <h1>What's up <br />You meloman?</h1>
