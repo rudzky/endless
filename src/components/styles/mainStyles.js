@@ -10,6 +10,7 @@ export const GradientWrapper = styled.div`
 `; 
 
 export const SwitchStyle = styled(motion.div)`
+    will-change: opacity, top;
     position: absolute;
     width: 100%;
     height: 100%;
@@ -40,11 +41,21 @@ export const opacityAnimation = keyframes`
   from { opacity: 0 }
   to { opacity: 1 }
 `;
-export const ScrollDiv = styled.div`
+//TO BYLO WCZESNIEJ _ WERSJA DZIALAJACA XD
+// export const ScrollDiv = styled.div`
+//   overflow-y: scroll; 
+//   height: 60%;
+//   animation-name: ${opacityAnimation};
+//   animation-duration: 2s;
+//   min-width: 100%;
+//   margin-top: 5%;
+// `;
+
+export const ScrollDiv = styled(motion.div)`
   overflow-y: scroll; 
   height: 60%;
-  animation-name: ${opacityAnimation};
-  animation-duration: 2s;
+  // animation-name: ${opacityAnimation};
+  // animation-duration: 2s;
   min-width: 100%;
   margin-top: 5%;
 `;

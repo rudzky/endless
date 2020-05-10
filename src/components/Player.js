@@ -99,7 +99,7 @@ const Player = (props) => {
             //   let i = Math.floor(Math.random() * (max - min + 1)) + min;
             // };
 
-              if((tracks.items[i].track !== null)){
+              if((tracks.items[i].track !== null) && (tracks.items[i].track !== undefined)){
                 if((tracks.items[i].track.preview_url !== null)){
                     let song = {
                       artist: tracks.items[i].track.artists[0].name,
@@ -166,11 +166,6 @@ const Player = (props) => {
 
           <BackToButton to={{ 
             pathname: `/categories`,
-            //search: `?name=${names.name}`
-            // state: {
-            //   id: stateBack.id,
-            //   name: stateBack.name,
-            // }
             }}>
             <img src={backTo} alt="Back" />
           </BackToButton>

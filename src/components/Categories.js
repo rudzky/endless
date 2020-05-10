@@ -84,7 +84,7 @@ const Categories = ({ authKey }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 2 }}
+          // transition={{ duration: 0.3 }}
         >
           <BackToButton to='/'>
             <img src={backTo} alt="Back" />
@@ -106,7 +106,11 @@ const Categories = ({ authKey }) => {
           </CategoriesHeader>
           
 
-            <ScrollDiv>
+            <ScrollDiv
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1 }}
+            >
 
               <ul style={{ padding: '0px', margin: '0px', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-evenly', listStyleType: 'none' }}>
                 {cats.map(cat => { 

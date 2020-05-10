@@ -13,7 +13,7 @@ import logo from '../img/logo.svg';
 
 const Home = () => {
 
-    document.body.style="background: #03a9f4";
+    setTimeout(() => {document.body.style="background: #03a9f4"}, 3000);
 
     return (
 
@@ -28,7 +28,7 @@ const Home = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 2 }}
+          transition={{ duration: 0.3 }}
         >
           <Logo src={logo}/>
         </motion.div>

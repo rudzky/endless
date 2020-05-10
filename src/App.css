@@ -1,11 +1,12 @@
 body{
+  will-change: background-color;  
   /*background: transparent linear-gradient(181deg, #bcecfb 0%, #000000 100%) 0% 0% no-repeat padding-box;*/
   background: #03a9f4;
   transition: background-color 2000ms ease-in-out;
   width: 100%;
   height: 100%;
   /* overflow: hidden; */
-
+        /* Example of <custom-ident> */
   position: fixed;
   top: 0;
   left: 0;
@@ -84,4 +85,26 @@ span{
 }
 .marquee {
   position:absolute;
+}
+
+progress{
+  -webkit-appearance: none;
+}
+progress[value] {
+  width: 250px;
+  height: 20px;
+  height: 3px;
+  margin-top: 10px;
+}
+::-webkit-progress-value {
+  background: #1DB954;
+}
+
+progress::-webkit-progress-bar {
+  background-color: #0000003a;
+   border-radius: 2px;
+ }
+
+ progress::-webkit-progress-value {
+  transition: width .5s ease;
 }

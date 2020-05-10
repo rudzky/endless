@@ -17,28 +17,35 @@ const Test = () => {
     const [tracks, setTracks] = useState(shuffle([0,1,2,3,4]));
     const [kol, setKol] = useState(0);
     const [answers, setAnswers] = useState([]);
+    const [bar, setBar] = useState(0);
 
-    const [play, setPlay] = useState(false);
+    const [play, setPlay] = useState(true);
 
     useEffect(()=>{
-        //setTracks(shuffle(nums));
         if(location.state === undefined){
             setError(true);
         }
     },[]);
 
     const updateAnswers = (idx,event) => {
-        //console.log(idx);
         event.persist();
-        if(kol < 4){
-          setKol((kol) => kol+1);  
+        if(kol === answers.length){
+            if(kol < 4){
+            setKol((kol) => kol+1);  
+            }
+            console.log(kol+1);
+            setAnswers([...answers,idx]);
         }
-        setAnswers([...answers,idx]);
     };
 
-    // console.log(tracks);
-    // console.log(kol);
-    console.log(location.state);
+    const updateBar = (e) => {
+        setBar(parseFloat(e.target.currentTime / e.target.duration).toFixed(2));
+    };
+
+    const checkedTracks = (idx) => {
+        let count = answers.filter(x => x === idx);
+        return count;
+    };
     
     return(
         <TestDiv
@@ -56,15 +63,16 @@ const Test = () => {
         <h1 style={{fontSize: '2.4rem'}}>Track {kol+1}/5</h1>
             <H3>Choose the right song title</H3>
 
-            <audio src={location.state[tracks[kol]].preview} autoPlay onPlay={(play)=>setPlay(play)} onPause={(play)=>setPlay(!play)} />
+            <audio src={location.state[tracks[kol]].preview} autoPlay onPlay={()=>setPlay(true)} onPause={()=>setPlay(false)} onTimeUpdate={(e)=>updateBar(e)} />
 
             <motion.div 
-                whileTap={{ scale: 0.8 }}
                 style={{ width: '50%', display: 'flex', justifyContent: 'center' }}
               >
                 {/* <RandButton style={{ margin: '20px 0px 0px 0px', display: 'none' }}>Pause</RandButton> */}
                 
-                <ProgressBar wth="100%" str={play} stp={!play} on={kol}/>
+                {/* <ProgressBar wth="100%" str={play} stp={!(play)} on={kol} zero="0%" /> */}
+
+                <progress id="seekbar" value={bar} max="1" style={{width: "400px"}}></progress>
 
               </motion.div>
         </TestHeader>
@@ -86,7 +94,12 @@ const Test = () => {
                                     <TestH5>{el.name}</TestH5>
                                     <TestH6>{el.artist}</TestH6>
                                 </TestListDescribe>
-                                { answers.includes(index) && (<Choosen>Choosen</Choosen>) }
+                                {/* { answers.includes(index) && (<Choosen>Choosen</Choosen>) } */}
+                                { 
+                                    checkedTracks(index).map(el => {
+                                        return <Choosen />
+                                    }) 
+                                }
                             </motion.div>
                         </TestListItem>
                     )

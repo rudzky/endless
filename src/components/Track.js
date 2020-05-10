@@ -28,6 +28,7 @@ const Track = ({source, playName}) => {
     const [play, setPlay] = useState(true);
     const [trackNumber, setTrackNumber] = useState(0);
     const [doTest, setDoTest] = useState(false);
+    const [bar, setBar] = useState(0);
 
     // const [{data}, setURL] = usePalette(source[0].cover);
 
@@ -84,8 +85,8 @@ const Track = ({source, playName}) => {
         if(trackNumber < 4){
           setTrackNumber(trackNumber => trackNumber + 1);
           setPlay(true);
+          controls.start();
         }
-        controls.start();
       }
 
     const TrackStyle = {
@@ -117,6 +118,10 @@ const Track = ({source, playName}) => {
         transition: { duration: 3 },
     });
 
+    const updateBar = (e) => {
+        setBar(parseFloat(e.target.currentTime / e.target.duration).toFixed(2));
+    };
+
     return(
         <motion.div
             style={TrackStyle}
@@ -136,7 +141,7 @@ const Track = ({source, playName}) => {
             </div>
             
 
-            <audio src={source[trackNumber].preview} type="audio/mpeg" onCanPlay={fadeAudio} ref={audioRef} onEnded={wowUp}/>
+            <audio src={source[trackNumber].preview} type="audio/mpeg" onCanPlay={fadeAudio} ref={audioRef} onEnded={wowUp} onPause={()=>setPlay(false)} onPlay={()=>setPlay(true)} onTimeUpdate={(e)=>updateBar(e)} />
 
 
             <motion.div
@@ -177,16 +182,18 @@ const Track = ({source, playName}) => {
                 
                 <div style={{ background: 'white', width: '0px', height: '2px', alignSelf: 'flex-start' }}></div>
 
+                <progress id="seekbar" value={bar} max="1" style={{width: "400px"}}></progress>
+
                 <Controls>
-                    <motion.div whileTap={{ scale: 0.8 }} >
-                        {play ? <img src={pauseBut} onClick={handlePlayPause} /> : <img src={playBut} onClick={handlePlayPause} />}
+                    <motion.div onPan={{ scale: 0.8 }} onClick={handlePlayPause} >
+                        {play ? <img src={pauseBut} /> : <img src={playBut} />}
                     </motion.div>
                     
                     <motion.div whileTap={{ scale: 0.8 }} style={{position: 'absolute', right: '0', padding: '20px'}}>
                         {
                             (trackNumber === 4) 
                             ? <img src={tickBut} onClick={() => {setDoTest(true); handlePlayPause();}} />
-                            : <img src={nextBut} onClick={() => {wowUp(); controls.start();}} /> 
+                            : <img src={nextBut} onClick={() => {wowUp(); }} /> 
                         }
                     </motion.div>
                 </Controls>

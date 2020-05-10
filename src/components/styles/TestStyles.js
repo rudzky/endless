@@ -19,7 +19,7 @@ export const TestHeader = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding-top: 10%;
+    // padding-top: 10%;
 `;
 
 export const TestContent = styled.div`
@@ -95,8 +95,17 @@ export const TestListItem = styled.li`
   margin-bottom: 10px;
 `;
 
-export const Choosen = styled.li`
-  margin: 0px;
-  color: #FFFFFFAA;
+// export const Choosen = styled.p`
+//   margin: 0px;
+//   color: #FFFFFFAA;
+//   align-self: center;
+// `;
+
+export const Choosen = styled.div`
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
   align-self: center;
+  margin-right: 10px;
 `;

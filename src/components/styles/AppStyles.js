@@ -62,6 +62,7 @@ export const ani = keyframes`
 
 
 export const GradientBall = styled.div`
+  will-change: left, top;  
   position:absolute;
   left: 0%;
    top: 0%;
@@ -77,6 +78,7 @@ export const GradientBall = styled.div`
 `;
 
 export const GradientBall2 = styled.div`
+  will-change: left, top;
   position:absolute;
   left: 70%;
    top: 99%;
@@ -93,6 +95,7 @@ export const GradientBall2 = styled.div`
 `;
 
 export const GradientBall3 = styled.div`
+  will-change: left, top;
   position:absolute;
   left: 99%; top: 5%;
   
@@ -107,6 +110,7 @@ export const GradientBall3 = styled.div`
 `;
 
 export const GradientBall4 = styled.div`
+  will-change: left, top;
   position:absolute;
   left: 20%; top: 50%;
   
