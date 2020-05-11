@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import { requestOptions } from './headers';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, withRouter } from "react-router-dom";
 import Home from './components/Home';
 import Categories from './components/Categories';
 import Playlists from './components/Playlists';
@@ -9,6 +9,7 @@ import Player from './components/Player';
 import CategoryError from './components/CategoryError';
 import PlaylistError from './components/PlaylistError';
 import Test from './components/Test';
+import Summary from './components/Summary';
 import "circular-std";
 import { AnimatePresence} from "framer-motion";
 // stylesy
@@ -79,6 +80,8 @@ export default function App(){
         <AnimatePresence exitBeforeEnter initial={false} >
           <Switch location={location} key={location.pathname}>
 
+            <Route path="/check" component={Test} />
+
             {
               (auth!==false) && (
                 <Route path="/player/:name" component={() => <Player authKey={auth} />} />
@@ -93,9 +96,11 @@ export default function App(){
               <Route path="/playlists/:name" component={() => <Playlists authKey={auth} />} />
             )}
 
-            { (location.pathname === "/") && (
-              <Route path="/" component={Home} />
-            )}
+            {/* { (location.pathname === "/") && ( */}
+              <Route exact path="/" component={Home} />
+            {/* )} */}
+
+            
 
             <Route path="/about" component={About} />
 
@@ -103,7 +108,7 @@ export default function App(){
 
             <Route path="/play_error/:name" component={PlaylistError} />
 
-            <Route path="/test" component={Test} />
+            <Route path="/summary" component={Summary} />
 
           </Switch>
         </AnimatePresence>

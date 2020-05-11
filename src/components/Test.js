@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, Redirect } from 'react-router-dom';
+import { useLocation, Redirect} from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { TestDiv, TestHeader, TestContent, TestList, TestListItem, TestListImg, TestH3, H3, TestH5, TestH6, TestListDescribe, Choosen } from './styles/TestStyles';
 import { RandButton } from './styles/mainStyles';
@@ -8,6 +8,8 @@ import ProgressBar from './ProgressBar';
 
 const Test = () => {
     let location = useLocation();
+
+    console.log('KOMPONENT TEST WYRENDEROWANY');
 
     const shuffle = array => {
         return array.sort(() => Math.random() - 0.5);
@@ -25,7 +27,7 @@ const Test = () => {
         if(location.state === undefined){
             setError(true);
         }
-    },[]);
+    },[location.state]);
 
     const updateAnswers = (idx,event) => {
         event.persist();
@@ -59,6 +61,17 @@ const Test = () => {
             (error===null) && <Redirect to="/categories" />
         }
 
+        {
+            (answers.length === 5) && 
+            <Redirect to={{ 
+                pathname: "/summary/", 
+                state: { 
+                    order: tracks,
+                    answers: answers
+                } 
+            }} />
+        }
+
         <TestHeader>
         <h1 style={{fontSize: '2.4rem'}}>Track {kol+1}/5</h1>
             <H3>Choose the right song title</H3>
@@ -67,14 +80,9 @@ const Test = () => {
 
             <motion.div 
                 style={{ width: '50%', display: 'flex', justifyContent: 'center' }}
-              >
-                {/* <RandButton style={{ margin: '20px 0px 0px 0px', display: 'none' }}>Pause</RandButton> */}
-                
-                {/* <ProgressBar wth="100%" str={play} stp={!(play)} on={kol} zero="0%" /> */}
-
+            >
                 <progress id="seekbar" value={bar} max="1" style={{width: "400px"}}></progress>
-
-              </motion.div>
+            </motion.div>
         </TestHeader>
 
         <TestContent>

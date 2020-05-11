@@ -26,7 +26,7 @@ const Playlists = (props) => {
     const location = useLocation();
 
     const [plays, setPlays] = useState([]);
-    const [error, setError] = useState(false);
+    const [error, setError] = useState();
     const [red, setRed] = useState(false);
     const [lastPlay, setLastPlay] = useState("");
     const [shouldIFetch, setShouldIFetch] = useState(true);
@@ -67,6 +67,7 @@ const Playlists = (props) => {
           //console.log(result.playlists.items.length);
           if( result.error === undefined && ( result.playlists.items.length > 4 ) ){
             setPlays(result.playlists.items);
+            setError(false);
           }else{
             setError(true);
           }
@@ -82,10 +83,26 @@ const Playlists = (props) => {
       },1000);
     },[]);
 
-    return(
+    if(error === true){
+      return(
+        <SwitchDiv
+          initial={{ opacity: 0, y: 100 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -100 }}
+          transition={{ duration: 0.3 }}
+        >
+          <Redirect to={{ 
+            pathname: `/error/${names.id}`,
+            search: `?name=${names.name}`
+          }}
+          />
+        </SwitchDiv>
+      )
+    }
+    if(error === false){
+      return(
 
         <SwitchDiv
-          //style={SwitchDiv}
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -100 }}
@@ -99,70 +116,68 @@ const Playlists = (props) => {
             }} />
           )}
 
+          {(names === null) && <Redirect to="/" />}
+
           <BackToButton to='/categories'>
             <img src={backTo} alt="Back" />
           </BackToButton>
-
-          {(error === true) && (
-            <Redirect to={{ 
-              pathname: `/error/${names.id}`,
-              search: `?name=${names.name}`
-            }}
-            />)
-          }
-
-          {(names === null) && <Redirect to="/" />}
-                    
-            <CategoriesHeader>
-              <span>
-                <h1 style={{ fontSize: '2.4rem', lineHeight: '2.2rem', marginBottom: '5px'}}>{names.name}</h1>
-                <h5 style={{ fontFamily: 'CircularStd', color: '#FFF', fontSize: '1.2rem', lineHeight: '1.2rem', marginBottom: '5px'}}>Choose or random</h5>
-              </span>
-              <motion.div 
-                whileTap={{ scale: 0.8 }}
-                style={{ width: '50%', display: 'flex', justifyContent: 'center' }}
-                onClick={() => getRandomPlaylist()}
-              >
-                <RandButton>Get random</RandButton>
-              </motion.div>
-            </CategoriesHeader>
-
-            <ScrollDiv>
-
-            { (plays[0] !== null) && (
-
-              <ul style={{ padding: '0px', margin: '0px', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-evenly', listStyleType: 'none' }}>
-                {plays.map((play,idx) => { 
-                
-                return(
-                    <li key={play.id} style={{ width: '40%', height: '40%', marginBottom: '20px', position: 'relative', display: 'flex', justifyContent: 'center' }}>
                       
-                      <Link to={{ 
-                        pathname: `/player/${play.id}`,
-                        search: `?name=${play.name}`,
-                      }} style={{position: 'relative', display: 'flex', justifyContent: 'center', width: '100%' }}>
+          <CategoriesHeader>
+            <span>
+              <h1 style={{ fontSize: '2.4rem', lineHeight: '2.2rem', marginBottom: '5px'}}>{names.name}</h1>
+              <h5 style={{ fontFamily: 'CircularStd', color: '#FFF', fontSize: '1.2rem', lineHeight: '1.2rem', marginBottom: '5px'}}>Choose or random</h5>
+            </span>
+            <motion.div 
+              whileTap={{ scale: 0.8 }}
+              style={{ width: '50%', display: 'flex', justifyContent: 'center' }}
+              onClick={() => getRandomPlaylist()}
+            >
+              <RandButton>Get random</RandButton>
+            </motion.div>
+          </CategoriesHeader>
 
-                        <Image 
-                          src={play.images[0].url} 
-                          style={{ backgroundSize: 'cover',backgroundPosition: 'center top' }} 
-                          width='100%'
-                          height='100%'
-                          isResponsive 
-                          lazyLoad 
-                        />
+          <ScrollDiv>
 
-                        </Link>
-                    </li>
-                ) 
-                  })}
-              </ul>
+              { (plays[0] !== null) && (
 
-            )}
+                <ul style={{ padding: '0px', margin: '0px', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-evenly', listStyleType: 'none' }}>
+                  {plays.map((play,idx) => { 
+                  
+                  return(
+                      <li key={play.id} style={{ width: '40%', height: '40%', marginBottom: '20px', position: 'relative', display: 'flex', justifyContent: 'center' }}>
+                        
+                        <Link to={{ 
+                          pathname: `/player/${play.id}`,
+                          search: `?name=${play.name}`,
+                        }} style={{position: 'relative', display: 'flex', justifyContent: 'center', width: '100%' }}>
 
-            </ScrollDiv>     
+                          <Image 
+                            src={play.images[0].url} 
+                            style={{ backgroundSize: 'cover',backgroundPosition: 'center top' }} 
+                            width='100%'
+                            height='100%'
+                            isResponsive 
+                            lazyLoad 
+                          />
 
+                          </Link>
+                      </li>
+                  ) 
+                    })}
+                </ul>
+
+              )}
+
+              </ScrollDiv>     
+                
         </SwitchDiv>
+      );
+  }
+  else{
+    return(
+      <h1>Loading...</h1>
     );
+  }
 }
 
 export default withRouter(Playlists);

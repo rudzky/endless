@@ -25,9 +25,15 @@ export const Button = styled(Link)`
   border: none;
   background: #1DB954;
   border-radius: 30px;
-  padding: 0.8em 0em;
+  // padding: 0.8em 0em;
+  // width: 100%;
+  // max-width: 10.5em;
   width: 100%;
   max-width: 10.5em;
+  min-height: 2.8em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.251));
   color: #FFF;
   font-size: 2.0em;
@@ -68,7 +74,7 @@ export const SwitchDiv = styled(motion.div)`
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  padding-bottom: 5%;
+  // padding-bottom: 5%;
 `;
 
 export const RandButton = styled.button`

@@ -86,6 +86,12 @@ const Track = ({source, playName}) => {
           setTrackNumber(trackNumber => trackNumber + 1);
           setPlay(true);
           controls.start();
+        }else{
+            setDoTest(true);
+            console.log('hejka');
+            //controls.stop();
+            // audioRef.current.pause();
+            audioRef.current.remove();
         }
       }
 
@@ -99,15 +105,6 @@ const Track = ({source, playName}) => {
         transform: 'none',
         padding: '5% 0px'
     };
-
-    const titleStyle = {
-        fontSize: '1.4rem',
-        fontWeight: '500',
-        color: '#000',
-        textAlign: 'center',
-        letterSpacing: '-1.23px',
-        margin: '0px',
-    }
 
     const controls = useAnimation();
     const variants = {
@@ -132,7 +129,7 @@ const Track = ({source, playName}) => {
         >
 
             {
-                doTest && <Redirect to={{ pathname: "/test/", state: source }} />
+                doTest && <Redirect to={{ pathname: "/check", state: source }} />
             }
 
             <div>
@@ -140,9 +137,16 @@ const Track = ({source, playName}) => {
                 <PlaylistName>{playName}</PlaylistName>
             </div>
             
-
-            <audio src={source[trackNumber].preview} type="audio/mpeg" onCanPlay={fadeAudio} ref={audioRef} onEnded={wowUp} onPause={()=>setPlay(false)} onPlay={()=>setPlay(true)} onTimeUpdate={(e)=>updateBar(e)} />
-
+            <audio 
+                src={source[trackNumber].preview} 
+                type="audio/mpeg" 
+                onCanPlay={fadeAudio} 
+                ref={audioRef} 
+                onPause={()=>setPlay(false)} 
+                onPlay={()=>setPlay(true)} 
+                onTimeUpdate={(e)=>updateBar(e)} 
+                onEnded={() => setDoTest(true)} 
+            />
 
             <motion.div
                 style={{
@@ -162,8 +166,6 @@ const Track = ({source, playName}) => {
                     isResponsive 
                     lazyLoad 
                 />
-
-                {/* <Cover src={source[trackNumber].cover} alt='cover' /> */}
 
                 <Palette src={source[trackNumber].cover}>
                     {palette => {
@@ -189,11 +191,11 @@ const Track = ({source, playName}) => {
                         {play ? <img src={pauseBut} /> : <img src={playBut} />}
                     </motion.div>
                     
-                    <motion.div whileTap={{ scale: 0.8 }} style={{position: 'absolute', right: '0', padding: '20px'}}>
+                    <motion.div onClick={wowUp} whileTap={{ scale: 0.8 }} style={{position: 'absolute', right: '0', padding: '20px'}}>
                         {
                             (trackNumber === 4) 
-                            ? <img src={tickBut} onClick={() => {setDoTest(true); handlePlayPause();}} />
-                            : <img src={nextBut} onClick={() => {wowUp(); }} /> 
+                            ? <img src={tickBut} />
+                            : <img src={nextBut} /> 
                         }
                     </motion.div>
                 </Controls>
@@ -204,4 +206,6 @@ const Track = ({source, playName}) => {
     );
 }
 
+// export default withRouter(Track);
 export default withRouter(Track);
+

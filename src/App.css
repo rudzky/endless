@@ -105,6 +105,6 @@ progress::-webkit-progress-bar {
    border-radius: 2px;
  }
 
- progress::-webkit-progress-value {
+ /* progress::-webkit-progress-value {
   transition: width .5s ease;
-}
+} */
