@@ -6,7 +6,8 @@ export const GradientWrapper = styled.div`
     position: absolute;
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(-15deg, black, transparent);
+    // background-image: linear-gradient(-15deg, black, transparent);
+    background-image: linear-gradient(-19deg,black 65%,rgba(0,0,0,0.7) 80%,transparent);
 `; 
 
 export const SwitchStyle = styled(motion.div)`
@@ -103,7 +104,7 @@ export const CategoriesHeader = styled.div`
   align-items: center;
   padding-top: 10%;
 `;
-
+//link był xd
 export const BackToButton = styled(Link)`
   position: absolute;
   top: 5%;

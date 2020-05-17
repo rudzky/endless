@@ -32,7 +32,7 @@ div::-webkit-scrollbar
 div::-webkit-scrollbar-thumb
 {
     border-radius: 10px;
-    background:rgba(29, 185, 84, 0.404);
+    background:rgba(255, 255, 255, 0.295);
 }
 
 h1{
@@ -108,3 +108,7 @@ progress::-webkit-progress-bar {
  /* progress::-webkit-progress-value {
   transition: width .5s ease;
 } */
+
+a{
+  -webkit-tap-highlight-color: transparent;
+}

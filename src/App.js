@@ -64,13 +64,13 @@ export default function App(){
       {/* bylo position relative */}
     <Container style={{position: 'fixed', overflow: 'hidden'}}>
 
-      <GradientBall />
+      {/* <GradientBall />
 
       <GradientBall2 />
 
       <GradientBall3 />
 
-      <GradientBall4 />
+      <GradientBall4 /> */}
 
       <GradientWrapper />
 
@@ -80,6 +80,10 @@ export default function App(){
         <AnimatePresence exitBeforeEnter initial={false} >
           <Switch location={location} key={location.pathname}>
 
+            { (auth !== false) && (
+              <Route path="/categories" component={() => <Categories authKey={auth} />}/>
+            )}
+
             <Route path="/check" component={Test} />
 
             {
@@ -87,10 +91,6 @@ export default function App(){
                 <Route path="/player/:name" component={() => <Player authKey={auth} />} />
               )
             }
-            
-            { (auth!==false) && (
-              <Route path="/categories" component={() => <Categories authKey={auth} />}/>
-            )}
 
             { (auth!==false) && (
               <Route path="/playlists/:name" component={() => <Playlists authKey={auth} />} />

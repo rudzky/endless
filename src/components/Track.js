@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { pageTransition } from '../App';
-import { withRouter, Redirect } from 'react-router-dom';
+import { withRouter, Redirect, useLocation } from 'react-router-dom';
 import { motion, useAnimation  } from "framer-motion";
 import pauseBut from '../img/pause.svg';
 import playBut from '../img/play.svg';
@@ -20,21 +20,16 @@ import { Palette } from 'react-palette';
 
 //import Marquee from 'react-css-marquee';
 
-const Track = ({source, playName}) => {
+const Track = ({source, playName, unmount}) => {
 
-    //console.log(source);
-    //console.log(playName);
+    //console.log(unMount);
 
     const [play, setPlay] = useState(true);
     const [trackNumber, setTrackNumber] = useState(0);
     const [doTest, setDoTest] = useState(false);
     const [bar, setBar] = useState(0);
 
-    // const [{data}, setURL] = usePalette(source[0].cover);
-
-    // useEffect(() => {
-    //     console.log(data);
-    // },[data]);
+    
 
     const fadeAudio = (e) => {
 
@@ -71,6 +66,8 @@ const Track = ({source, playName}) => {
     };
 
     const audioRef = useRef(null);
+
+    //if(unMount) audioRef.current.pause();
 
     const handlePlayPause = () => {
         setPlay(play => !play);
@@ -119,6 +116,12 @@ const Track = ({source, playName}) => {
         setBar(parseFloat(e.target.currentTime / e.target.duration).toFixed(2));
     };
 
+    useEffect(() => {
+        if(unmount){
+            audioRef.current.pause();
+        }
+    },[unmount]);
+
     return(
         <motion.div
             style={TrackStyle}
@@ -145,7 +148,7 @@ const Track = ({source, playName}) => {
                 onPause={()=>setPlay(false)} 
                 onPlay={()=>setPlay(true)} 
                 onTimeUpdate={(e)=>updateBar(e)} 
-                onEnded={() => setDoTest(true)} 
+                onEnded={() => wowUp()} 
             />
 
             <motion.div

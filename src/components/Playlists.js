@@ -25,6 +25,8 @@ const Playlists = (props) => {
 
     const location = useLocation();
 
+    console.log('PLAYLISTs',location);
+
     const [plays, setPlays] = useState([]);
     const [error, setError] = useState();
     const [red, setRed] = useState(false);
@@ -59,12 +61,12 @@ const Playlists = (props) => {
       //https://api.spotify.com/v1/browse/categories/${location.state.id}/playlists?local=en_US
 
       //https://api.spotify.com/v1/browse/categories/at_home/playlists?limit=50&country=US
-
+        console.log(names.id);
         await fetch(`https://api.spotify.com/v1/browse/categories/${names.id}/playlists?limit=50&country=US`, requestOptions)
         .then(response => response.json())
         .then(result => {
           //console.log(result.error);
-          //console.log(result.playlists.items.length);
+          //console.log(result,"background: red; color: white");
           if( result.error === undefined && ( result.playlists.items.length > 4 ) ){
             setPlays(result.playlists.items);
             setError(false);
@@ -78,9 +80,6 @@ const Playlists = (props) => {
       if(names.id !== undefined){
         getPlaylists();
       }
-      setTimeout(()=>{
-        document.body.style="background: #f7ab1a";
-      },1000);
     },[]);
 
     if(error === true){
@@ -149,6 +148,8 @@ const Playlists = (props) => {
                         <Link to={{ 
                           pathname: `/player/${play.id}`,
                           search: `?name=${play.name}`,
+                          para1: location.pathname,
+                          para2: location.search
                         }} style={{position: 'relative', display: 'flex', justifyContent: 'center', width: '100%' }}>
 
                           <Image 
@@ -175,7 +176,7 @@ const Playlists = (props) => {
   }
   else{
     return(
-      <h1>Loading...</h1>
+      <h1 style={{ zIndex: '0'}}>Loading...</h1>
     );
   }
 }

@@ -13,7 +13,7 @@ import { Image } from "react-image-and-background-image-fade";
 const Categories = ({ authKey }) => {
 
     const [cats, setCats] = useState([]);
-    const [error, setError] = useState(false);
+    const [error, setError] = useState();
     const [red, setRed] = useState(false);
     const [randomNumb, setRandomNumb] = useState(null);
 
@@ -40,115 +40,117 @@ const Categories = ({ authKey }) => {
           redirect: 'follow'
         };
 
-        //https://api.spotify.com/v1/browse/categories?locale=en_US
-        //https://api.spotify.com/v1/browse/categories?limit=50&country=US
-
         await fetch("https://api.spotify.com/v1/browse/categories?limit=50&country=US", requestOptions)
           .then(response => response.text())
-          .then(result => setCats(JSON.parse(result).categories.items))
+          .then(result => { 
+            setCats(JSON.parse(result).categories.items);
+            setError(false); 
+          })
           .catch(setError(true));
       };
 
       useEffect(() => {
         getCategories();
-        setTimeout(()=>{
-          document.body.style="background: #4dd453";
-        },1000);
+        // setTimeout(()=>{
+        //   document.body.style="background: #4dd453";
+        // },1000);
       },[]);
 
-      //console.log(cats);
+    if(error === false){
+      return(
+          <SwitchDiv
+            initial={{ opacity: 0, y: 100 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -100 }}
+            transition={{ duration: 0.3 }}
+          >
 
-    return(
+          { (randomNumb!==null) && (
+            <Redirect 
+            to={{ 
+              pathname: `/playlists/${cats[randomNumb].id}`,
+              search: `?name=${cats[randomNumb].name}`,
+              state: {
+                id: cats[randomNumb].id,
+                name: cats[randomNumb].name
+              }}} />
+            )
+          }
 
-        <SwitchDiv
-          // style={SwitchDiv}
-          initial={{ opacity: 0, y: 100 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -100 }}
-          transition={{ duration: 0.3 }}
-        >
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            // transition={{ duration: 0.3 }}
+          >
+            <BackToButton to='/'>
+              <img src={backTo} alt="Back" />
+            </BackToButton>
+          </motion.div>
+            
+            <CategoriesHeader>
+              <span>
+                <h1 style={{ fontSize: '2.4rem', lineHeight: '2.2rem', marginBottom: '5px'}}>Browse</h1>
+                <h5 style={{ fontFamily: 'CircularStd', color: '#FFF', fontSize: '1.2rem', lineHeight: '1.2rem', marginBottom: '5px'}}>Choose or random</h5>
+              </span>
+              <motion.div 
+                whileTap={{ scale: 0.8 }}
+                style={{ width: '50%', display: 'flex', justifyContent: 'center' }}
+                onClick={() => getRandomCategory()}
+              >
+                <RandButton>Get random</RandButton>
+              </motion.div>
+            </CategoriesHeader>
+            
 
-        { (randomNumb!==null) && (
-          <Redirect 
-          to={{ 
-            pathname: `/playlists/${cats[randomNumb].id}`,
-            search: `?name=${cats[randomNumb].name}`,
-            state: {
-              id: cats[randomNumb].id,
-              name: cats[randomNumb].name
-            }}} />
-          )
-        }
+              <ScrollDiv
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1 }}
+              >
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          // transition={{ duration: 0.3 }}
-        >
-          <BackToButton to='/'>
-            <img src={backTo} alt="Back" />
-          </BackToButton>
-        </motion.div>
-          
-          <CategoriesHeader>
-            <span>
-              <h1 style={{ fontSize: '2.4rem', lineHeight: '2.2rem', marginBottom: '5px'}}>Browse</h1>
-              <h5 style={{ fontFamily: 'CircularStd', color: '#FFF', fontSize: '1.2rem', lineHeight: '1.2rem', marginBottom: '5px'}}>Choose or random</h5>
-            </span>
-            <motion.div 
-              whileTap={{ scale: 0.8 }}
-              style={{ width: '50%', display: 'flex', justifyContent: 'center' }}
-              onClick={() => getRandomCategory()}
-            >
-              <RandButton>Get random</RandButton>
-            </motion.div>
-          </CategoriesHeader>
-          
+                <ul style={{ padding: '0px', margin: '0px', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-evenly', listStyleType: 'none' }}>
+                  {cats.map(cat => { 
+                  
+                  return(
+                      <li key={cat.id} style={{ width: '42%', height: '40%', marginBottom: '25px', position: 'relative', display: 'flex', justifyContent: 'center' }}>
+                        <Link to={{ 
+                          pathname: `/playlists/${cat.id}`,
+                          search: `?name=${cat.name}`,
+                          // state: {
+                          //   id: cat.id,
+                          //   name: cat.name,
+                          // }
+                          }} style={{position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', textDecoration: 'none', width: '100%' }}>
+                          
+                          {/* <img src={cat.icons[0].url} style={{ width: '100%' }} decoding='async' loading='lazy' /> */}
 
-            <ScrollDiv
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1 }}
-            >
+                          <Image 
+                            src={cat.icons[0].url} 
+                            style={{ backgroundSize: 'cover',backgroundPosition: 'center top' }} 
+                            width='100%'
+                            height='100%'
+                            isResponsive 
+                            lazyLoad 
+                          />
+                          
+                          <p style={{ fontWeight: '600', color: 'white', fontSize: '1rem', margin: '10px 0px 0px 0px'}}>{cat.name}</p>
+                        </Link>  
+                      </li>
+                  ) 
+                    })}
+                </ul>
 
-              <ul style={{ padding: '0px', margin: '0px', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-evenly', listStyleType: 'none' }}>
-                {cats.map(cat => { 
-                
-                return(
-                    <li key={cat.id} style={{ width: '42%', height: '40%', marginBottom: '25px', position: 'relative', display: 'flex', justifyContent: 'center' }}>
-                      <Link to={{ 
-                        pathname: `/playlists/${cat.id}`,
-                        search: `?name=${cat.name}`,
-                        state: {
-                          id: cat.id,
-                          name: cat.name,
-                        }
-                        }} style={{position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', textDecoration: 'none', width: '100%' }}>
-                        
-                        {/* <img src={cat.icons[0].url} style={{ width: '100%' }} decoding='async' loading='lazy' /> */}
+              </ScrollDiv>
 
-                        <Image 
-                          src={cat.icons[0].url} 
-                          style={{ backgroundSize: 'cover',backgroundPosition: 'center top' }} 
-                          width='100%'
-                          height='100%'
-                          isResponsive 
-                          lazyLoad 
-                        />
-                        
-                        <p style={{ fontWeight: '600', color: 'white', fontSize: '1rem', margin: '10px 0px 0px 0px'}}>{cat.name}</p>
-                      </Link>  
-                    </li>
-                ) 
-                  })}
-              </ul>
+          </SwitchDiv>
 
-            </ScrollDiv>
-
-        </SwitchDiv>
-
-    );
+      );
+    }else{
+      return(
+        <h1 style={{ zIndex: '0'}}>Loading...</h1>
+      );
+    }
 }
 
 export default Categories;

@@ -1,6 +1,6 @@
 import React from 'react';
 import '../App.css';
-
+import { withRouter } from 'react-router-dom';
 //import { SL, StyledDiv, FrontButtons, Logo } from '../styles';
 
 //stylesy
@@ -41,9 +41,11 @@ const Home = () => {
           <FrontButtons>
             <motion.div 
               whileTap={{ scale: 0.8 }} 
-              style={{ width: '50%', display: 'flex', justifyContent: 'center' }}
+              style={{ width: '50%', display: 'flex', justifyContent: 'center', maxWidth: '12.5rem',
+              margin: '15px 0px',
+              borderRadius: '30px' }}
             >
-              <Button to='/categories' style={{ margin: '15px 0px' }}>Get Started</Button>
+              <Button to='/categories'>Get Started</Button>
             </motion.div>
             <SL to={{
               pathname: "/about",
@@ -57,4 +59,4 @@ const Home = () => {
     
     );
 }
-export default Home;
+export default withRouter(Home);
