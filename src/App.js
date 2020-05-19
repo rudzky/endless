@@ -93,7 +93,7 @@ export default function App(){
             }
 
             { (auth!==false) && (
-              <Route path="/playlists/:name" component={() => <Playlists authKey={auth} />} />
+              <Route path="/playlists/:name" component={() => <Playlists authKey={auth} /> } />
             )}
 
             {/* { (location.pathname === "/") && ( */}

@@ -9,7 +9,8 @@ import tickBut from '../img/tick.svg';
 
 //stylesy
 import { Cover, ArtTitle, Title, Artist, PlayButton, Controls, HeaderPlaylist, PlaylistName, ControlBar } from './styles/TrackStyles';
-
+import { BackToButton } from './styles/mainStyles';
+import backTo from '../img/backTo.svg';
 
 import { Image } from "react-image-and-background-image-fade";
 
@@ -20,15 +21,15 @@ import { Palette } from 'react-palette';
 
 //import Marquee from 'react-css-marquee';
 
-const Track = ({source, playName, unmount}) => {
+const Track = ({ source, playName, p1, p2 }) => {
 
-    //console.log(unMount);
+    //const {p1, p2} = linkBack;
 
     const [play, setPlay] = useState(true);
     const [trackNumber, setTrackNumber] = useState(0);
     const [doTest, setDoTest] = useState(false);
     const [bar, setBar] = useState(0);
-
+    const [back, setBack] = useState(false);
     
 
     const fadeAudio = (e) => {
@@ -116,11 +117,22 @@ const Track = ({source, playName, unmount}) => {
         setBar(parseFloat(e.target.currentTime / e.target.duration).toFixed(2));
     };
 
-    useEffect(() => {
-        if(unmount){
-            audioRef.current.pause();
-        }
-    },[unmount]);
+    // const linkBack = () => {
+    //     audioRef.current.pause();
+    //     // return (<Redirect 
+    //     //     to={{
+    //     //         pathname: p1 || "/categories",
+    //     //         search: p2
+    //     //     }}
+    //     // />);
+    //     // return <h1>DUPA</h1>
+    // };
+
+    // useEffect(() => {
+    //     if(unmount){
+    //         audioRef.current.pause();
+    //     }
+    // },[unmount]);
 
     return(
         <motion.div
@@ -130,6 +142,33 @@ const Track = ({source, playName, unmount}) => {
             exit={{ opacity: 0, y: -100 }}
             transition={{ duration: 0.3 }}
         >
+
+            <div
+                style={{
+                    position: 'absolute',
+                    top: '5%',
+                    left: '10%'
+                }}
+                // to={{
+                //     pathname: p1 || "/categories",
+                //     search: p2
+                // }}
+                onClick={() => {
+                    // audioRef.onpause = (event) => {
+                    //     setBack(true);
+                    // };
+                    audioRef.current.addEventListener('pause',function() {
+                        setBack(true);
+                    });
+                    audioRef.current.pause();
+                }}
+            >
+                <img src={backTo} alt="Back" />
+            </div>
+
+            {
+                back && <Redirect to={{ pathname: p1 || "/categories", search: p2 }} />
+            }
 
             {
                 doTest && <Redirect to={{ pathname: "/check", state: source }} />

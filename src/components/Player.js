@@ -147,22 +147,7 @@ const Player = (props) => {
             />)
           }
           {/* backtobutton */}
-          <div
-            style={{
-              position: 'absolute',
-              top: '5%',
-              left: '10%'
-            }} 
-              onClick = {() => {
-                setUnmount(true);                
-              }}
-              // to={{
-              //   pathname: location.para1 || "/categories",
-              //   search: location.para2
-              // }}
-          >
-            <img src={backTo} alt="Back" />
-          </div>
+          
 
             {
               unmount && (
@@ -201,7 +186,7 @@ const Player = (props) => {
                       exit={{ opacity: 0, y: 100 }}
                       transition={{ delay: 1, duration: 1 }}
                     >
-                      <Track source={filtered} playName={names.name} unmount={unmount} />
+                      <Track source={filtered} playName={names.name} p1={location.para1} p2={location.para2} />
                     </motion.div>
                   )
                 }
@@ -215,8 +200,19 @@ const Player = (props) => {
 export default withRouter(Player);
 
 const Ready = () => {
+  const location = useLocation();
   return(
-    <h1 style={{marginBottom: '20px'}}>Ready?</h1>
+    <>
+      <BackToButton
+        to={{
+          pathname: location.para1 || "/categories",
+          search: location.para2
+        }}
+      >
+        <img src={backTo} alt="Back" />
+      </BackToButton>
+      <h1 style={{marginBottom: '20px'}}>Ready?</h1>
+    </>
   );
 };
 
