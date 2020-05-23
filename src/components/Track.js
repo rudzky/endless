@@ -80,16 +80,15 @@ const Track = ({ source, playName, p1, p2 }) => {
     };
 
     const wowUp = () => {
-        if(trackNumber < 4){
+        if(trackNumber === 4){
+            audioRef.current.addEventListener('pause',function() {
+                setDoTest(true);
+            });
+            audioRef.current.pause();
+        }else{
           setTrackNumber(trackNumber => trackNumber + 1);
           setPlay(true);
           controls.start();
-        }else{
-            setDoTest(true);
-            console.log('hejka');
-            //controls.stop();
-            // audioRef.current.pause();
-            audioRef.current.remove();
         }
       }
 
@@ -117,23 +116,6 @@ const Track = ({ source, playName, p1, p2 }) => {
         setBar(parseFloat(e.target.currentTime / e.target.duration).toFixed(2));
     };
 
-    // const linkBack = () => {
-    //     audioRef.current.pause();
-    //     // return (<Redirect 
-    //     //     to={{
-    //     //         pathname: p1 || "/categories",
-    //     //         search: p2
-    //     //     }}
-    //     // />);
-    //     // return <h1>DUPA</h1>
-    // };
-
-    // useEffect(() => {
-    //     if(unmount){
-    //         audioRef.current.pause();
-    //     }
-    // },[unmount]);
-
     return(
         <motion.div
             style={TrackStyle}
@@ -157,6 +139,9 @@ const Track = ({ source, playName, p1, p2 }) => {
                     // audioRef.onpause = (event) => {
                     //     setBack(true);
                     // };
+                    if(!play){
+                        setBack(true);
+                    }
                     audioRef.current.addEventListener('pause',function() {
                         setBack(true);
                     });

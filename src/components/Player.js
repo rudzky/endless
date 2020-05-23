@@ -178,7 +178,10 @@ const Player = (props) => {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 100 }}
                     transition={{ duration: 1 }}>
-                      <Ready /><Accept fun={setCan} />
+
+                      <Ready />
+                      <Accept fun={setCan} disabled={tracks} />
+
                     </motion.div>) : (
                     <motion.div
                       initial={{ opacity: 0, y: 100 }}
@@ -216,7 +219,7 @@ const Ready = () => {
   );
 };
 
-const Accept = ({fun}) => {
+const Accept = ({fun, disabled}) => {
   return(
     <motion.div
       initial={{ opacity: 0, y: 100 }}
@@ -225,7 +228,9 @@ const Accept = ({fun}) => {
       transition={{ delay: 1, duration: 0.3 }}
       onClick = {() => fun(true)}
     >
-      <AcceptButton>Hell yea!</AcceptButton>
+      <AcceptButton 
+        disabled={ disabled === [] ? true : false }
+      >Hell yea!</AcceptButton>
     </motion.div>
   );
 };

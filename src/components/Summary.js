@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { Link, Redirect, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { TestDiv, TestHeader, TestContent, H3 } from './styles/TestStyles';
+import { AnswerBlock, List } from './styles/SummaryStyles';
 
 const Summary = () => {
     let location = useLocation();
@@ -13,10 +14,10 @@ const Summary = () => {
             setNoData(true);
         }else{
             setNoData(false);
-            let passingData = [];
+            let passingData = Array(5).fill(false);
             location.state.order.forEach((e,i) => {
                 if(e === location.state.answers[i]){
-                    passingData.push(i);
+                    passingData[i] = true;
                 }
             });
             setData(passingData);
@@ -25,25 +26,41 @@ const Summary = () => {
 
     return(
         <TestDiv
-            initial={{ opacity: 0, y: 100 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -100 }}
+            initial={{ opacity: 0}}
+            animate={{ opacity: 1}}
+            exit={{ opacity: 0}}
             transition={{ duration: 0.3 }}
         >
             <TestHeader>
                 <H3>You guessed {data.length} of 5 tracks</H3>
             </TestHeader>
             <TestContent>
-                <ul>
-                    <li>D</li>
-                    <li>U</li>
-                    <li>P</li>
-                    <li>A</li>
-                    <li>!</li>
-                </ul>
+                <List>
+                    {
+                        data.map((e) => {
+                            if(e){
+                                return <Answer correct />;
+                            }else{
+                                return <Answer />;
+                            }
+                        })
+                    }
+                </List>
             </TestContent>
         </TestDiv>
     )
 };
 
 export default Summary;
+
+const Answer = ({correct}) => {
+    return(
+        <AnswerBlock>
+            <h2>
+                {
+                    correct ? "GOOD" : "Bad" 
+                }
+            </h2>
+        </AnswerBlock>
+    );
+};
