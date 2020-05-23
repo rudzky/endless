@@ -1,5 +1,25 @@
 import styled, { keyframes } from 'styled-components';
 
+const size = {
+  mobileS: '320px',
+  mobileM: '375px',
+  mobileL: '425px',
+  tablet: '768px',
+  laptop: '1024px',
+  laptopL: '1440px',
+  desktop: '2560px'
+};
+export const device = {
+  mobileS: `(min-width: ${size.mobileS})`,
+  mobileM: `(min-width: ${size.mobileM})`,
+  mobileL: `(min-width: ${size.mobileL})`,
+  tablet: `(min-width: ${size.tablet})`,
+  laptop: `(min-width: ${size.laptop})`,
+  laptopL: `(min-width: ${size.laptopL})`,
+  desktop: `(min-width: ${size.desktop})`,
+  desktopL: `(min-width: ${size.desktop})`
+};
+
 export const Container = styled.div`
   color: palevioletred;
   width: 100%; //100vw - 100vh
@@ -69,7 +89,7 @@ export const GradientBall = styled.div`
   
   width: 125px;
   height: 125px;
-  background: #00000021;
+  background: #F39A23;
     border-radius: 50%;
 
   animation-name: ${ani};
@@ -83,10 +103,10 @@ export const GradientBall2 = styled.div`
   left: 70%;
    top: 99%;
   
-  width: 225px;
-  height: 225px;
+  width: 25px;
+  height: 25px;
 
-  background: #00000021;
+  background: #F39A23;
   border-radius: 50%;
 
   animation-name: ${ani2};
@@ -99,9 +119,9 @@ export const GradientBall3 = styled.div`
   position:absolute;
   left: 99%; top: 5%;
   
-  width: 325px;
-  height: 325px;
-  background: #00000021;
+  width: 35px;
+  height: 35px;
+  background: #F39A23;
     border-radius: 50%;
 
   animation-name: ${ani3};
@@ -114,9 +134,9 @@ export const GradientBall4 = styled.div`
   position:absolute;
   left: 20%; top: 50%;
   
-  width: 555px;
-  height: 555px;
-  background: #00000021;
+  width: 54px;
+  height: 54px;
+  background: #F39A23;
   border-radius: 50%;
   animation-name: ${ani4};
   animation-duration: 20s;

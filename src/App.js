@@ -64,15 +64,15 @@ export default function App(){
       {/* bylo position relative */}
     <Container style={{position: 'fixed', overflow: 'hidden'}}>
 
-      {/* <GradientBall />
+      <GradientBall />
 
       <GradientBall2 />
 
       <GradientBall3 />
 
-      <GradientBall4 /> */}
+      <GradientBall4 />
 
-      <GradientWrapper />
+      {/* <GradientWrapper /> */}
 
       <Route
 				render={({ location }) => (
