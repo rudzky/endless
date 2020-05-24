@@ -17,6 +17,7 @@
     "react-image-and-background-image-fade": "^1.0.4",
     "react-image-appear": "^1.2.23",
     "react-palette": "^1.0.1",
+    "react-responsive": "^8.0.3",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.4.1",
     "styled-components": "^5.1.0"

@@ -30,6 +30,11 @@ export const SL = styled(Link)`
   padding: 0.5em 0em;
   width: 20%;
   text-align: center;
+
+  @media ${device.laptop} {
+    width: 5%;
+    font-size: 2.8em;
+  }
 `;
 
 export const StyledDiv = styled.div`
@@ -56,6 +61,14 @@ export const FrontButtons = styled.div`
 
 export const Logo = styled.img`
   width: 90%;
+
+  @media ${device.laptop} {
+    width: 10%;
+  }
+
+  @media ${device.tablet} {
+    width: 120%;
+  }
 `;
 
 export const H1 = styled.h1`
@@ -84,8 +97,9 @@ export const H1 = styled.h1`
     text-align: center;
   }
   @media ${device.tablet} {
-    font-size: 4.2rem;
+    font-size: 6.2rem;
     width: 100%;
+    line-height: 6.5rem;
   }
 `;
 
@@ -115,9 +129,10 @@ export const H2 = styled.h2`
     text-align: center;
   }
   @media ${device.tablet} {
-    width: 100%;
+    width: 70%;
     margin-top: 20px;
-    font-size: 3rem;
+    font-size: 4rem;
+    line-height: 4rem;
   }
 `;
 
@@ -125,6 +140,9 @@ export const LogoFramer = styled(motion.div)`
   @media ${device.laptop} {
     align-self: flex-start;
     margin-left: 10%;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
   }
 `;
 

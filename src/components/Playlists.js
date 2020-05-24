@@ -6,10 +6,11 @@ import { Link, Redirect, useLocation, useParams, withRouter } from 'react-router
 //import { SwitchDiv, ScrollDiv, BackToButton, CategoriesHeader, RandButton } from '../styles';
 import backTo from '../img/backTo.svg';
 import CategoryError from './CategoryError';
+import roll from '../img/roll.svg';
 
 //stylesy
 import { ScrollDiv, SwitchDiv, RandButton, CategoriesHeader, BackToButton } from './styles/mainStyles';
-
+import { H1, H5, UL, LI, PlaylistLink, P } from './styles/CategoriesStyles';
 import { ColorExtractor } from 'react-color-extractor';
 import { Image } from "react-image-and-background-image-fade";
 
@@ -116,41 +117,43 @@ const Playlists = (props) => {
           )}
 
           {(names === null) && <Redirect to="/" />}
-
-          <BackToButton to='/categories'>
-            <img src={backTo} alt="Back" />
-          </BackToButton>
                       
           <CategoriesHeader>
+
+            <BackToButton to='/categories'>
+              <img src={backTo} alt="Back" />
+            </BackToButton>
+
             <span>
-              <h1 style={{ fontSize: '2.4rem', lineHeight: '2.2rem', marginBottom: '5px'}}>{names.name}</h1>
-              <h5 style={{ fontFamily: 'CircularStd', color: '#FFF', fontSize: '1.2rem', lineHeight: '1.2rem', marginBottom: '5px'}}>Choose or random</h5>
+              <H1>{names.name}</H1>
+              <H5>Choose or roll</H5>
             </span>
+
             <motion.div 
               whileTap={{ scale: 0.8 }}
-              style={{ width: '50%', display: 'flex', justifyContent: 'center' }}
               onClick={() => getRandomPlaylist()}
             >
-              <RandButton>Get random</RandButton>
+              <img src={roll} alt="roll"/>
             </motion.div>
+
           </CategoriesHeader>
 
           <ScrollDiv>
 
               { (plays[0] !== null) && (
 
-                <ul style={{ padding: '0px', margin: '0px', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-evenly', listStyleType: 'none' }}>
+                <UL>
                   {plays.map((play,idx) => { 
                   
                   return(
-                      <li key={play.id} style={{ width: '40%', height: '40%', marginBottom: '20px', position: 'relative', display: 'flex', justifyContent: 'center' }}>
+                      <LI key={play.id}>
                         
-                        <Link to={{ 
+                        <PlaylistLink to={{ 
                           pathname: `/player/${play.id}`,
                           search: `?name=${play.name}`,
                           para1: location.pathname,
                           para2: location.search
-                        }} style={{position: 'relative', display: 'flex', justifyContent: 'center', width: '100%' }}>
+                        }}>
 
                           <Image 
                             src={play.images[0].url} 
@@ -161,11 +164,13 @@ const Playlists = (props) => {
                             lazyLoad 
                           />
 
-                          </Link>
-                      </li>
+                          <P>{play.name}</P>
+
+                          </PlaylistLink>
+                      </LI>
                   ) 
                     })}
-                </ul>
+                </UL>
 
               )}
 

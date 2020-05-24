@@ -2,7 +2,7 @@ import React from 'react';
 import '../App.css';
 import { withRouter } from 'react-router-dom';
 //import { SL, StyledDiv, FrontButtons, Logo } from '../styles';
-
+import { useMediaQuery } from 'react-responsive';
 //stylesy
 import { SwitchStyle, Button, SwitchDiv } from './styles/mainStyles'; 
 import { SL, StyledDiv, FrontButtons, Logo, H1, H2, LogoFramer, HeaderLogo, ButtonFramer } from './styles/HomeStyles';
@@ -13,7 +13,9 @@ import logo from '../img/logo-end.svg';
 
 const Home = () => {
 
-    //setTimeout(() => {document.body.style="background: #03a9f4"}, 3000);
+    const isLaptop = useMediaQuery({
+      query: '(min-width: 1024px)'
+    });
 
     return (
 
@@ -31,6 +33,16 @@ const Home = () => {
             transition={{ duration: 0.3 }}
           >
             <Logo src={logo}/>
+
+            { isLaptop && (
+              <SL to={{
+                pathname: "/about",
+              }}
+              >
+                Info
+              </SL>
+            )}
+
           </LogoFramer>
 
             <StyledDiv>
@@ -40,17 +52,21 @@ const Home = () => {
         </HeaderLogo>
          
       <FrontButtons>
-        <ButtonFramer
-          whileTap={{ scale: 0.8 }} 
-        >
+        {/* <ButtonFramer
+          whileTap={{ scale: 0.95 }} 
+        > */}
           <Button to='/categories'>Get Started</Button>
-        </ButtonFramer>
-        <SL to={{
-          pathname: "/about",
-        }}
-        >
-          Info
-        </SL>
+        {/* </ButtonFramer> */}
+
+        { isLaptop === false && (
+            <SL to={{
+              pathname: "/about",
+            }}
+            >
+              Info
+            </SL>
+        )}
+    
       </FrontButtons>
 
     </SwitchStyle>

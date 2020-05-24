@@ -29,7 +29,7 @@ export const GradientWrapper = styled.div`
     // background-image: linear-gradient(-15deg, black, transparent);
     background-image: linear-gradient(-19deg,black 65%,rgba(0,0,0,0.7) 80%,transparent);
 `; 
-
+//div
 export const SwitchStyle = styled(motion.div)`
     will-change: opacity, top;
     position: absolute;
@@ -46,7 +46,7 @@ export const Button = styled(Link)`
   border: 2px solid #F39A23;
   background: #000;
   border-radius: 30px;
-  width: 100%;
+  width: 75%;
   min-height: 2.8em;
   display: -webkit-box;
   display: -webkit-flex;
@@ -69,12 +69,24 @@ export const Button = styled(Link)`
   text-align: center;
   -webkit-text-decoration: none;
   text-decoration: none;
+  margin: 15px 0px;
+  transition: transform .1s ease-in-out;
 
   @media ${device.mobileL} {
     width: 60%;
   }
   @media ${device.tablet} {
     width: 50%;
+    font-size: 3em;
+  }
+  @media ${device.laptop} {
+    width: 20%;
+  }
+  @media ${device.laptopL} {
+    width: 15%;
+  }
+  &:hover {
+    transform: scale(0.9);
   }
 `;
 
@@ -94,7 +106,7 @@ export const opacityAnimation = keyframes`
 
 export const ScrollDiv = styled(motion.div)`
   overflow-y: scroll; 
-  height: 60%;
+  height: 80%;
   // animation-name: ${opacityAnimation};
   // animation-duration: 2s;
   min-width: 100%;
@@ -108,7 +120,8 @@ export const SwitchDiv = styled(motion.div)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
+  //byl justi na end
+  justify-content: start;
   // padding-bottom: 5%;
 `;
 
@@ -131,16 +144,13 @@ export const RandButton = styled.button`
 
 export const CategoriesHeader = styled.div`
   width: 100%;
-  height: 35%;
+  height: 15%;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  padding-top: 10%;
+  padding: 0% 5%;
 `;
 //link był xd
 export const BackToButton = styled(Link)`
-  position: absolute;
-  top: 5%;
-  left: 10%;
+  width: 25px;
 `;
