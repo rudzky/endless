@@ -55,6 +55,10 @@ export const LI = styled.li`
     @media ${device.mobileL} {
         width: 30%;
     }
+
+    @media ${device.laptop} {
+        width: 22%;
+    }
 `;
 
 export const PlaylistLink = styled(Link)`

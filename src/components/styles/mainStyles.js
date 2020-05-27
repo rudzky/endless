@@ -77,7 +77,6 @@ export const Button = styled(Link)`
   }
   @media ${device.tablet} {
     width: 50%;
-    font-size: 3em;
   }
   @media ${device.laptop} {
     width: 20%;
@@ -109,8 +108,12 @@ export const ScrollDiv = styled(motion.div)`
   height: 80%;
   // animation-name: ${opacityAnimation};
   // animation-duration: 2s;
-  min-width: 100%;
+  width: 100%;
   margin-top: 5%;
+
+  @media ${device.laptop} {
+    width: 70%;
+  }
 `;
 
 export const SwitchDiv = styled(motion.div)`

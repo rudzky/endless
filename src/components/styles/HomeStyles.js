@@ -33,7 +33,7 @@ export const SL = styled(Link)`
 
   @media ${device.laptop} {
     width: 5%;
-    font-size: 2.8em;
+    font-size: 1.8em;
   }
 `;
 
@@ -62,12 +62,12 @@ export const FrontButtons = styled.div`
 export const Logo = styled.img`
   width: 90%;
 
-  @media ${device.laptop} {
-    width: 10%;
-  }
-
   @media ${device.tablet} {
     width: 120%;
+  }
+
+  @media ${device.laptop} {
+    width: 10%;
   }
 `;
 
@@ -133,6 +133,10 @@ export const H2 = styled.h2`
     margin-top: 20px;
     font-size: 4rem;
     line-height: 4rem;
+  }
+  @media ${device.laptop} {
+    width: 100%;
+    margin-top: 20px;
   }
 `;
 
