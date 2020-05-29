@@ -2,14 +2,11 @@ import React, { useState, useEffect } from 'react';
 import '../App.css';
 import { motion } from "framer-motion";
 import { Link, Redirect } from 'react-router-dom';
-//import { switchStyleTrack, ScrollDiv, SwitchDiv, RandButton, CategoriesHeader, BackToButton } from '../styles';
 import backTo from '../img/backTo.svg';
 import roll from '../img/roll.svg';
-
 //stylesy
 import { ScrollDiv, SwitchDiv, RandButton, CategoriesHeader, BackToButton } from './styles/mainStyles';
 import { H1, H5, UL, LI, PlaylistLink, P } from './styles/CategoriesStyles';
-
 import { Image } from "react-image-and-background-image-fade";
 
 const Categories = ({ authKey }) => {
@@ -19,44 +16,39 @@ const Categories = ({ authKey }) => {
     const [red, setRed] = useState(false);
     const [randomNumb, setRandomNumb] = useState(null);
 
-      const getRandomCategory = () => {
-          //console.log(cats.length);
-          let min = 0;
-          let max = cats.length-1;
-          min = Math.ceil(min);
-          max = Math.floor(max);
-          setRandomNumb(Math.floor(Math.random() * (max - min + 1)) + min);
+    const getRandomCategory = () => {
+      let min = Math.ceil(0);
+      let max = Math.floor(cats.length-1);
+      setRandomNumb(Math.floor(Math.random() * (max - min + 1)) + min);
+    };
+
+    const getCategories = async() => {
+      if(authKey === undefined){
+        setRed(true);
+        return;
       }
+      const myHeaders = new Headers();
+      myHeaders.append("Authorization", `Bearer ${authKey.access_token}`);
 
-      const getCategories = async() => {
-        if(authKey === undefined){
-          setRed(true);
-          return;
-        }
-        const myHeaders = new Headers();
-        myHeaders.append("Authorization", `Bearer ${authKey.access_token}`);
-
-        const requestOptions = {
-          method: 'GET',
-          headers: myHeaders,
-          redirect: 'follow'
-        };
-
-        await fetch("https://api.spotify.com/v1/browse/categories?limit=50&country=US", requestOptions)
-          .then(response => response.text())
-          .then(result => { 
-            setCats(JSON.parse(result).categories.items);
-            setError(false); 
-          })
-          .catch(setError(true));
+      const requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
       };
 
-      useEffect(() => {
-        getCategories();
-        // setTimeout(()=>{
-        //   document.body.style="background: #4dd453";
-        // },1000);
-      },[]);
+      await fetch("https://api.spotify.com/v1/browse/categories?limit=50&country=US", requestOptions)
+        .then(response => response.text())
+        .then(result => { 
+          setCats(JSON.parse(result).categories.items);
+          setError(false); 
+        })
+        .catch(setError(true));
+    };
+
+    useEffect(() => {
+      getCategories();
+
+    },[]);
 
     if(error === false){
       return(
@@ -107,10 +99,10 @@ const Categories = ({ authKey }) => {
               >
 
                 <UL>
-                  {cats.map(cat => { 
+                  {cats.map((cat,idx) => { 
                   
                   return(
-                      <LI>
+                      <LI key={idx}>
 
                         <PlaylistLink to={{ 
                           pathname: `/playlists/${cat.id}`,

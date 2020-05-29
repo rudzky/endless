@@ -14,7 +14,7 @@ import "circular-std";
 import { AnimatePresence} from "framer-motion";
 // stylesy
 import { GradientWrapper, SwitchStyle, SwitchDiv } from './components/styles/mainStyles';
-import { Container, GradientBall, GradientBall2, GradientBall3, GradientBall4 } from './components/styles/AppStyles';
+import { Container, GradientBall, GradientBall2, GradientBall3, GradientBall4, SVG1 } from './components/styles/AppStyles';
 
 
 export default function App(){
@@ -47,10 +47,10 @@ export default function App(){
     refreshToken();
 
     const interval = setInterval(() => {
-      if(leftTime <= Date.now() + 3500000){
+      if(leftTime <= Date.now() + 900000){
         refreshToken();
       }
-    }, 10000);
+    }, 900000);
 
     return () => {
       clearInterval(interval);
@@ -64,13 +64,13 @@ export default function App(){
       {/* bylo position relative */}
     <Container style={{position: 'fixed', overflow: 'hidden'}}>
 
-      <GradientBall />
+      <GradientBall className="ball"/>
 
-      <GradientBall2 />
+      <GradientBall2 className="ball"/>
 
-      <GradientBall3 />
+      <GradientBall3 className="ball"/>
 
-      <GradientBall4 />
+      <GradientBall4 className="ball"/>
 
       {/* <GradientWrapper /> */}
 

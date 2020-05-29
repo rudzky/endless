@@ -37,11 +37,11 @@ const Summary = () => {
             <TestContent>
                 <List>
                     {
-                        data.map((e) => {
+                        data.map((e, i) => {
                             if(e){
-                                return <Answer correct />;
+                                return <Answer correct key={i} />;
                             }else{
-                                return <Answer />;
+                                return <Answer key={i} />;
                             }
                         })
                     }

@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import '../App.css';
-import { pageTransition } from '../App';
 import { motion } from "framer-motion";
 import { Link, Redirect, useLocation, useParams, withRouter } from 'react-router-dom';
-//import { SwitchDiv, ScrollDiv, BackToButton, CategoriesHeader, RandButton } from '../styles';
 import backTo from '../img/backTo.svg';
 import CategoryError from './CategoryError';
 import roll from '../img/roll.svg';
@@ -25,9 +23,6 @@ const Playlists = (props) => {
     const [names, setNames] = useState({id: name, name: x});
 
     const location = useLocation();
-
-    console.log('PLAYLISTs',location);
-
     const [plays, setPlays] = useState([]);
     const [error, setError] = useState();
     const [red, setRed] = useState(false);
@@ -36,13 +31,12 @@ const Playlists = (props) => {
     const [randomNumb, setRandomNumb] = useState(null);
 
     const getRandomPlaylist = () => {
-      //console.log(plays.length);
       let min = 0;
       let max = plays.length-1;
       min = Math.ceil(min);
       max = Math.floor(max);
       setRandomNumb(Math.floor(Math.random() * (max - min + 1)) + min);
-    }
+    };
 
     const getPlaylists = async() => {
       if(props.authKey.access_token === undefined){
@@ -58,16 +52,9 @@ const Playlists = (props) => {
         headers: myHeaders,
         redirect: 'follow'
       };
-
-      //https://api.spotify.com/v1/browse/categories/${location.state.id}/playlists?local=en_US
-
-      //https://api.spotify.com/v1/browse/categories/at_home/playlists?limit=50&country=US
-        console.log(names.id);
         await fetch(`https://api.spotify.com/v1/browse/categories/${names.id}/playlists?limit=50&country=US`, requestOptions)
         .then(response => response.json())
         .then(result => {
-          //console.log(result.error);
-          //console.log(result,"background: red; color: white");
           if( result.error === undefined && ( result.playlists.items.length > 4 ) ){
             setPlays(result.playlists.items);
             setError(false);
@@ -103,9 +90,9 @@ const Playlists = (props) => {
       return(
 
         <SwitchDiv
-          initial={{ opacity: 0, y: 100 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -100 }}
+          initial={{ opacity: 0}}
+          animate={{ opacity: 1}}
+          exit={{ opacity: 0}}
           transition={{ duration: 0.3 }}
         >
 
@@ -113,6 +100,8 @@ const Playlists = (props) => {
             <Redirect to={{
               pathname: `/player/${plays[randomNumb].id}`,
               search: `?name=${plays[randomNumb].name}`,
+              para1: location.pathname,
+              para2: location.search
             }} />
           )}
 

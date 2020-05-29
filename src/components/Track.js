@@ -1,38 +1,27 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { pageTransition } from '../App';
-import { withRouter, Redirect, useLocation } from 'react-router-dom';
+import React, { useState, useRef } from 'react';
+import { withRouter, Redirect } from 'react-router-dom';
 import { motion, useAnimation  } from "framer-motion";
 import pauseBut from '../img/pause.svg';
 import playBut from '../img/play.svg';
 import nextBut from '../img/next.svg';
 import tickBut from '../img/tick.svg';
-
 //stylesy
-import { Cover, ArtTitle, Title, Artist, PlayButton, Controls, HeaderPlaylist, PlaylistName, ControlBar } from './styles/TrackStyles';
-import { BackToButton } from './styles/mainStyles';
+import { Cover, ArtTitle, Title, Artist, Controls, HeaderPlaylist, PlaylistName, ControlBar, TrackStyle } from './styles/TrackStyles';
+import { CategoriesHeader } from './styles/mainStyles';
 import backTo from '../img/backTo.svg';
-
 import { Image } from "react-image-and-background-image-fade";
-
 import { Palette } from 'react-palette';
 
-
-
-
-//import Marquee from 'react-css-marquee';
-
-const Track = ({ source, playName, p1, p2 }) => {
-
-    //const {p1, p2} = linkBack;
+const Track = ({ source, playName, p1, p2, backFunc, linkToTestFunc }) => {
 
     const [play, setPlay] = useState(true);
     const [trackNumber, setTrackNumber] = useState(0);
     const [doTest, setDoTest] = useState(false);
     const [bar, setBar] = useState(0);
     const [back, setBack] = useState(false);
+    //const [color, setColor] = useState('#000');
     
-
-    const fadeAudio = (e) => {
+    const makeAudioFade = (e) => {
 
         //console.log(e);
         e.target.play();
@@ -68,8 +57,6 @@ const Track = ({ source, playName, p1, p2 }) => {
 
     const audioRef = useRef(null);
 
-    //if(unMount) audioRef.current.pause();
-
     const handlePlayPause = () => {
         setPlay(play => !play);
         if(play){
@@ -79,160 +66,152 @@ const Track = ({ source, playName, p1, p2 }) => {
         }
     };
 
-    const wowUp = () => {
+    const playNextTrack = () => {
         if(trackNumber === 4){
             audioRef.current.addEventListener('pause',function() {
-                setDoTest(true);
+                linkToTestFunc(source);
             });
+            if(!play){
+                linkToTestFunc(source);
+            };
             audioRef.current.pause();
         }else{
           setTrackNumber(trackNumber => trackNumber + 1);
           setPlay(true);
           controls.start();
         }
-      }
-
-    const TrackStyle = {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'space-evenly',
-        height: '100vh',
-        opacity: '1',
-        transform: 'none',
-        padding: '5% 0px'
     };
 
     const controls = useAnimation();
-    const variants = {
-        
-    };
+
     controls.start({
-        opacity: 1,
-        transition: { duration: 3 },
+        x: 0,
+        transition: { duration: 0.3 },
     });
 
     const updateBar = (e) => {
         setBar(parseFloat(e.target.currentTime / e.target.duration).toFixed(2));
     };
+    
+    const handleBackLink = () => {
+        audioRef.current.addEventListener('pause',function() {
+            backFunc(source);
+        });
+        if(!play){
+            backFunc(source);
+        }
+        audioRef.current.pause();
+    };
 
     return(
-        <motion.div
-            style={TrackStyle}
-            initial={{ opacity: 0, y: 100 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -100 }}
-            transition={{ duration: 0.3 }}
+        <TrackStyle
+            initial={{ opacity: 0}}
+            animate={{ opacity: 1}}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3, delay: 0.4 }}
         >
 
-            <div
-                style={{
-                    position: 'absolute',
-                    top: '5%',
-                    left: '10%'
-                }}
-                // to={{
-                //     pathname: p1 || "/categories",
-                //     search: p2
-                // }}
-                onClick={() => {
-                    // audioRef.onpause = (event) => {
-                    //     setBack(true);
-                    // };
-                    if(!play){
-                        setBack(true);
-                    }
-                    audioRef.current.addEventListener('pause',function() {
-                        setBack(true);
-                    });
-                    audioRef.current.pause();
-                }}
-            >
-                <img src={backTo} alt="Back" />
-            </div>
+            <CategoriesHeader>
 
-            {
-                back && <Redirect to={{ pathname: p1 || "/categories", search: p2 }} />
-            }
+                <div
+                    onClick={handleBackLink}
+                >
+                    <img src={backTo} alt="Back" />
+                </div>
 
-            {
-                doTest && <Redirect to={{ pathname: "/check", state: source }} />
-            }
+                {
+                    back && <Redirect to={{ pathname: p1 || "/categories", search: p2 }} />
+                }
 
-            <div>
-                <HeaderPlaylist>playing from playlist</HeaderPlaylist>
-                <PlaylistName>{playName}</PlaylistName>
-            </div>
+                {/* {
+                    doTest && <Redirect to={{ pathname: "/check", state: source }} />
+                } */}
+
+                <div>
+                    <HeaderPlaylist>playing from playlist</HeaderPlaylist>
+                    <PlaylistName>{playName}</PlaylistName>
+                </div>
+
+                <div></div>
+
+            </CategoriesHeader>
             
             <audio 
                 src={source[trackNumber].preview} 
                 type="audio/mpeg" 
-                onCanPlay={fadeAudio} 
+                onCanPlay={makeAudioFade} 
                 ref={audioRef} 
                 onPause={()=>setPlay(false)} 
                 onPlay={()=>setPlay(true)} 
                 onTimeUpdate={(e)=>updateBar(e)} 
-                onEnded={() => wowUp()} 
+                onEnded={playNextTrack} 
             />
 
-            <motion.div
-                style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    width: '100%'
-                }}
-                animate={controls}
-                exit={{ opacity: 0 }}
-            >
+            <div>
 
-                <Image 
-                    src={source[trackNumber].cover} 
-                    style={{ backgroundSize: 'cover',backgroundPosition: 'center top' }} 
-                    width='100%'
-                    height='100%'
-                    isResponsive 
-                    lazyLoad 
-                />
+                <CoverWrapper data={source[trackNumber].cover} />
 
-                <Palette src={source[trackNumber].cover}>
-                    {palette => {
-                        document.body.style=`background: ${palette.data.darkVibrant}`;
-                    }}
-                </Palette>
+                <ControlBar>
 
-            </motion.div>
-
-            <ControlBar>
-
-                <ArtTitle>
-                    <Title key={source[trackNumber].name}>{source[trackNumber].name}</Title>
-                    <Artist key={'@' + source[trackNumber].artist}>by {source[trackNumber].artist}</Artist>
-                </ArtTitle>
-                
-                <div style={{ background: 'white', width: '0px', height: '2px', alignSelf: 'flex-start' }}></div>
-
-                <progress id="seekbar" value={bar} max="1" style={{width: "400px"}}></progress>
-
-                <Controls>
-                    <motion.div onPan={{ scale: 0.8 }} onClick={handlePlayPause} >
-                        {play ? <img src={pauseBut} /> : <img src={playBut} />}
-                    </motion.div>
+                    <ArtTitle>
+                        <Title key={source[trackNumber].name}>{source[trackNumber].name}</Title>
+                        <Artist key={'@' + source[trackNumber].artist}>{source[trackNumber].artist}</Artist>
+                    </ArtTitle>
                     
-                    <motion.div onClick={wowUp} whileTap={{ scale: 0.8 }} style={{position: 'absolute', right: '0', padding: '20px'}}>
-                        {
-                            (trackNumber === 4) 
-                            ? <img src={tickBut} />
-                            : <img src={nextBut} /> 
-                        }
-                    </motion.div>
-                </Controls>
+                    <progress id="seekbar" value={bar} max="1"></progress>
 
-            </ControlBar>
-            
-        </motion.div>
+                    <Controls>
+                        <motion.div onPan={{ scale: 0.8 }} onClick={handlePlayPause} >
+                            {play ? <img src={pauseBut} /> : <img src={playBut} />}
+                        </motion.div>
+                        
+                        <motion.div onClick={playNextTrack} whileTap={{ scale: 0.8 }} style={{position: 'absolute', right: '0', padding: '20px'}}>
+                            {
+                                (trackNumber === 4) 
+                                ? <img src={tickBut} />
+                                : <img src={nextBut} /> 
+                            }
+                        </motion.div>
+                    </Controls>
+
+                </ControlBar>
+                
+            </div>            
+        
+        </TrackStyle>
     );
 }
 
-// export default withRouter(Track);
 export default withRouter(Track);
+
+const CoverWrapper = ({data}) => {
+
+    console.log(data);
+    return (
+        <Cover
+            initial={{ x: 100 }}
+            //animate={controls}
+            animate={{ x: 0 }}
+            exit={{ scale: 3 }}
+            transition={{ duration: 1 }}
+        >
+
+            <Image 
+                src={data} 
+                style={{ backgroundSize: 'cover',backgroundPosition: 'center top' }} 
+                width='100%'
+                height='100%'
+                isResponsive 
+                lazyLoad 
+            />
+
+            <Palette src={data}>
+                {palette => {
+                    document.querySelectorAll("div.ball").forEach( (e) => e.style=`background: ${palette.data.darkVibrant}`);
+                }}
+            </Palette>
+
+        </Cover>
+    );
+};
 

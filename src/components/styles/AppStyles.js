@@ -35,31 +35,31 @@ export const Container = styled.div`
 
 export const ani = keyframes`
  0% { left: 0%; top: 0%; }
- 25% { left: 60%; top: 37%; }
- 50% { left: 47%; top: 69%; }
- 75% { left: 77%; top: 22%; }
- 100% { left: 0%; top: 0%; }
+ 25% { left: 40%; top: 67%; }
+ 50% { left: 50%; top: 10%; transform: scale(0.1) }
+ 75% { left: 17%; top: 82%; }
+ 100% { left: 0%; top: 0%; transform: scale(1) }
  `;
 
  export const ani2 = keyframes`
-  0% { left: 70%; top: 99%; }
-  25% { left: 50%; top: 50%; }
-  50% { left: 20%; top: 69%; }
+  0% { left: 0%; top: 0%; }
+  25% { left: 20%; top: 77%; transform: scale(0.1)}
+  50% { left: -20%; top: 60%; }
   75% { left: 7%; top: 8%; }
-  100% { left: 70%; top: 99%; }
+  100% { left: 0%; top: 0%; transform: scale(1)}
  `;
 
  export const ani3 = keyframes`
-  0% { left: 99%; top: 5%; }
+  0% { left: 0%; top: 0%; }
   25% { left: 50%; top: 50%; }
   50% { left: 22%; top: 76%; }
-  75% { left: 74%; top: 43%; }
-  100% { left: 99%; top: 5%; }
+  75% { left: 74%; top: 43%; transform: scale(0.1)}
+  100% { left: 0%; top: 0%; transform: scale(1)}
  `;
 
  export const ani4 = keyframes`
-  0% { left: -80%;
-    top: 30%; }
+  0% { left: 0%;
+    top: 0%; }
   14% { left: -80%;
     top: -10%; }
   29% { left: 20%;
@@ -70,43 +70,46 @@ export const ani = keyframes`
     top: 31%;
  }
   68% { left: -16%;
-    top: 57%; }
+    top: 57%; transform: scale(0.1)}
   79% { left: -66%;
     top: 47%; }
   88% {     left: -36%;
     top: 33%; }
-  100% { left: -80%;
-    top: 30%; }
+  100% { left: 0%;
+    top: 0%; transform: scale(1)}
  `;
 
 
 
 export const GradientBall = styled.div`
   will-change: left, top;  
+  transition: background-color 2s ease-in-out;
   position:absolute;
   left: 0%;
-   top: 0%;
+  top: 0%;
   
-  width: 125px;
-  height: 125px;
-  background: #F39A23;
-    border-radius: 50%;
+  width: 48vh;
+  height: 48vh;
+  background: #1a01f8eb;
+  border-radius: 50%;
 
   animation-name: ${ani};
   animation-duration: 15s;
   animation-iteration-count: infinite;
 `;
 
+
 export const GradientBall2 = styled.div`
   will-change: left, top;
+  transition: background-color 2s ease-in-out;
   position:absolute;
   left: 70%;
    top: 99%;
   
-  width: 25px;
-  height: 25px;
+  width: 43vh;
+  height: 43vh;
 
-  background: #F39A23;
+  background: #1a01f8e3;
   border-radius: 50%;
 
   animation-name: ${ani2};
@@ -116,12 +119,13 @@ export const GradientBall2 = styled.div`
 
 export const GradientBall3 = styled.div`
   will-change: left, top;
+  transition: background-color 2s ease-in-out;
   position:absolute;
   left: 99%; top: 5%;
   
-  width: 35px;
-  height: 35px;
-  background: #F39A23;
+  width: 30vh;
+  height: 30vh;
+  background: #1a01f8d1;
     border-radius: 50%;
 
   animation-name: ${ani3};
@@ -131,12 +135,13 @@ export const GradientBall3 = styled.div`
 
 export const GradientBall4 = styled.div`
   will-change: left, top;
+  transition: background-color 2s ease-in-out;
   position:absolute;
   left: 20%; top: 50%;
   
-  width: 54px;
-  height: 54px;
-  background: #F39A23;
+  width: 35vh;
+  height: 35vh;
+  background: #1a01f8f0;
   border-radius: 50%;
   animation-name: ${ani4};
   animation-duration: 20s;

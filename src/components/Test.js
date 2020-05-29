@@ -104,8 +104,8 @@ const Test = () => {
                                 </TestListDescribe>
                                 {/* { answers.includes(index) && (<Choosen>Choosen</Choosen>) } */}
                                 { 
-                                    checkedTracks(index).map(el => {
-                                        return <Choosen />
+                                    checkedTracks(index).map((el,idx) => {
+                                        return <Choosen key={idx} />
                                     }) 
                                 }
                             </motion.div>

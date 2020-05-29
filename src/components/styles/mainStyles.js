@@ -44,7 +44,7 @@ export const SwitchStyle = styled(motion.div)`
 
 export const Button = styled(Link)`
   border: 2px solid #F39A23;
-  background: #000;
+  // background: #000;
   border-radius: 30px;
   width: 75%;
   min-height: 2.8em;

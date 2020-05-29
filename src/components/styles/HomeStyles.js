@@ -43,7 +43,7 @@ export const StyledDiv = styled.div`
   align-items: flex-start;
   margin: 10% 0% 0% 7%;
   @media ${device.mobileL} {
-    margin: 10% 0% 0% 0%;
+    margin: 0;
     align-items: center;
   }
 `;
@@ -54,9 +54,9 @@ export const FrontButtons = styled.div`
   width: 100%;
   align-items: center;
 
-  @media ${device.laptop} {
-    flex-basis: 50%;
-  }
+  // @media ${device.laptop} {
+  //   flex-basis: 50%;
+  // }
 `;
 
 export const Logo = styled.img`
@@ -136,7 +136,8 @@ export const H2 = styled.h2`
   }
   @media ${device.laptop} {
     width: 100%;
-    margin-top: 20px;
+    margin-top: 10px;
+    font-size: 5rem;
   }
 `;
 
@@ -167,8 +168,10 @@ export const HeaderLogo = styled.div`
   flex-direction: column; 
   align-items: center; 
   width: 100%;
+  flex-basis: 90%;
+  justify-content: space-between;
 
   @media ${device.laptop} {
-    flex-basis: 50%;
+    justify-content: center;
   }
 `;

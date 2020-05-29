@@ -1,24 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import '../App.css';
-import { pageTransition } from '../App';
 import { motion } from "framer-motion";
 import { Link, Redirect, useLocation, withRouter, useParams } from 'react-router-dom';
-//import { switchStyleTrack, ScrollDiv, PlayerDiv, ReadyStyle, AcceptButton, SwitchDiv, BackToButton } from '../styles';
 import Track from './Track';
 import backTo from '../img/backTo.svg';
-// import PlaylistError from './PlaylistError';
 
 //stylesy
-import { SwitchDiv, BackToButton } from './styles/mainStyles';
-import { PlayerDiv, AcceptButton } from './styles/PlayerStyles';
+import { SwitchDiv, BackToButton, CategoriesHeader } from './styles/mainStyles';
+import { PlayerDiv, AcceptButton, Wrapper, FramerWrapper, MiddleWrapper, ReadyH1 } from './styles/PlayerStyles';
 
 const Player = (props) => {
 
     const location = useLocation();
-
-    console.log(location);
-    //console.log(props.history.goBack);
-
     const useQuery = () => {
       return new URLSearchParams(useLocation().search);
     };
@@ -33,79 +26,71 @@ const Player = (props) => {
     const [red, setRed] = useState(false);
     const [can, setCan] = useState(false);
     const [unmount, setUnmount] = useState(false);
-
     const [isErro, setIsErro] = useState(false);
+    const [dataForTest, setDataForTest] = useState(null);
 
-      const getTracks = () => {
-        if(props.authKey.access_token === undefined){
-          setRed(true);
-          return;
-        }
-        const myHeaders = new Headers();
-        myHeaders.append("Authorization", `Bearer ${props.authKey.access_token}`);
+    const getTracks = () => {
+      if(props.authKey.access_token === undefined){
+        setRed(true);
+        return;
+      }
+      const myHeaders = new Headers();
+      myHeaders.append("Authorization", `Bearer ${props.authKey.access_token}`);
 
-        const requestOptions = {
-          method: 'GET',
-          headers: myHeaders,
-          redirect: 'follow'
-        };
-
-        fetch(`https://api.spotify.com/v1/playlists/${names.id}/tracks`, requestOptions)
-          .then(response => response.text())
-          .then(result => setTracks(JSON.parse(result)))
-          .catch(setError(true));
+      const requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
       };
 
-      const filterTracks = () => {
-        //console.log('siema',tracks);
-        if( tracks !== null && tracks !== undefined ){
-          let min = 0;
-          let max = tracks.items.length - 1;
-          min = Math.ceil(min);
-          max = Math.floor(max);
-        
-          let pack = [];
-          let usedNumbers = [];
-          let iterCount = 0;
+      fetch(`https://api.spotify.com/v1/playlists/${names.id}/tracks`, requestOptions)
+        .then(response => response.text())
+        .then(result => setTracks(JSON.parse(result)))
+        .catch(setError(true));
+    };
 
-          const check = (i) => {
-            if(usedNumbers.includes(i)){
-              return true;
-            }else{
-              return false;
-            }
-          };
+    const filterTracks = () => {
+      if( tracks !== null && tracks !== undefined ){
+        let tracks_with_preview = [];
+        let pack = [];
+        let usedNumbers = [];
 
+        const check = (i) => {
+          if(usedNumbers.includes(i)){
+            return true;
+          }else{
+            return false;
+          }
+        };
+
+        tracks_with_preview = tracks.items.filter(e => e.track.preview_url);
+
+        let min = Math.ceil(0);
+        let max = Math.floor(tracks_with_preview.length - 1);
+
+        if(tracks_with_preview.length >= 5){
           do{
             let i;
             do{
               i = Math.floor(Math.random() * (max - min + 1)) + min;
             }while(check(i));
 
-            // if(check(i)){
-            //   let i = Math.floor(Math.random() * (max - min + 1)) + min;
-            // };
+            usedNumbers.push(i);
+            
+            let song = {
+              artist: tracks_with_preview[i].track.artists[0].name,
+              name: tracks_with_preview[i].track.name,
+              preview: tracks_with_preview[i].track.preview_url,
+              cover: tracks_with_preview[i].track.album.images[1].url
+            }
+            pack.push(song);
 
-              if((tracks.items[i].track !== null) && (tracks.items[i].track !== undefined)){
-                if((tracks.items[i].track.preview_url !== null)){
-                    let song = {
-                      artist: tracks.items[i].track.artists[0].name,
-                      name: tracks.items[i].track.name,
-                      preview: tracks.items[i].track.preview_url,
-                      cover: tracks.items[i].track.album.images[1].url
-                    }
-                    pack.push(song);
-                    usedNumbers.push(i);
-                }
-              }
-              iterCount++;
-          } while((pack.length <= 4) && (iterCount < tracks.items.length - 1));
+          }while(pack.length < 5);
+        }else{
+          setIsErro(true);
+        };
 
         setFiltered(pack);
-
-        if(pack.length < 5){
-          setIsErro(true);
-        }
 
       }else{
         setIsErro(true);
@@ -114,29 +99,33 @@ const Player = (props) => {
 
     useEffect(() => {
       getTracks();
-      return () => console.log('return 1');
     },[]);
 
     useEffect(() => {
       if(tracks.length !== 0){
         filterTracks();
       };
-      return () => console.log('return 2');
     },[tracks]);
 
     const acceptGo = () => {
       setCan(true);
     };
 
+    const linkToTest = (data) => {
+      setDataForTest(data);
+    };
+
+    //console.log(tracks);
+
     return(
 
-        <SwitchDiv
-          //style={SwitchDiv}
-          initial={{ opacity: 0, y: 100 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -100 }}
-          transition={{ duration: 0.3 }}
-        >
+        <SwitchDiv initial={{ opacity: 0 }} animate={{ opacity: 1}} exit={{ opacity: 0}} transition={{ duration: 0.3 }}>
+
+          {
+            dataForTest && (
+              <Redirect to={{ pathname: "/check", state: dataForTest }} />
+            )
+          }
           
           {
             isErro && (
@@ -146,55 +135,37 @@ const Player = (props) => {
             }}
             />)
           }
-          {/* backtobutton */}
           
+          {
+            unmount && (
+              <Redirect to={{
+                pathname: location.para1 || "/categories",
+                search: location.para2
+              }} 
+            />
+          )}
 
-            {
-              unmount && (
-                <Redirect to={{
-                  pathname: location.para1 || "/categories",
-                  search: location.para2
-                }} 
-              />
-            )}
-
-            {
-              (names === undefined) ? <Redirect to="/" /> : ''
-            }
+          {
+            (names === undefined) ? <Redirect to="/" /> : ''
+          }
           
-            <PlayerDiv
-              style={{ height: '100%' }}
-            >
-              <motion.div
-                initial={{ opacity: 0, y: 100 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 100 }}
-                transition={{ duration: 1 }}
-              >
-                {
-                  !can ? (<motion.div 
-                    style={{ height: '100%' }}
-                    initial={{ opacity: 0, y: 100 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 100 }}
-                    transition={{ duration: 1 }}>
+          <PlayerDiv>
+            <FramerWrapper initial={{ opacity: 0}} animate={{ opacity: 1}} exit={{ opacity: 0 }} transition={{ duration: 1 }}>
 
-                      <Ready />
-                      <Accept fun={setCan} disabled={tracks} />
+              { !can ? (
+                <motion.div  style={{ height: '100%' }} initial={{ opacity: 0 }} animate={{ opacity: 1}} exit={{ opacity: 0}} transition={{ duration: 1 }}>
 
-                    </motion.div>) : (
-                    <motion.div
-                      initial={{ opacity: 0, y: 100 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 100 }}
-                      transition={{ delay: 1, duration: 1 }}
-                    >
-                      <Track source={filtered} playName={names.name} p1={location.para1} p2={location.para2} />
-                    </motion.div>
-                  )
-                }
-              </motion.div>
-            </PlayerDiv>
+                    <Accept fun={setCan} disabled={tracks} />
+
+                </motion.div>
+                ) : (
+                  // <motion.div initial={{ opacity: 0}} animate={{ opacity: 1}} exit={{ opacity: 0}} transition={{ delay: 1, duration: 1 }}>
+                    <Track source={filtered} playName={names.name} p1={location.para1} p2={location.para2} backFunc={() => setUnmount(true)} linkToTestFunc={(data) => linkToTest(data)} />
+                  // </motion.div>
+                )
+              }
+            </FramerWrapper>
+          </PlayerDiv>
 
         </SwitchDiv>
     );
@@ -202,35 +173,35 @@ const Player = (props) => {
 
 export default withRouter(Player);
 
-const Ready = () => {
+const Accept = ({fun, disabled}) => {
   const location = useLocation();
   return(
-    <>
-      <BackToButton
-        to={{
-          pathname: location.para1 || "/categories",
-          search: location.para2
-        }}
-      >
-        <img src={backTo} alt="Back" />
-      </BackToButton>
-      <h1 style={{marginBottom: '20px'}}>Ready?</h1>
-    </>
-  );
-};
+    <Wrapper>
+      
+      <CategoriesHeader>
+        <BackToButton
+          to={{
+            pathname: location.para1 || "/categories",
+            search: location.para2
+          }}
+        >
+          <img src={backTo} alt="Back" />
+        </BackToButton>
+      </CategoriesHeader>
 
-const Accept = ({fun, disabled}) => {
-  return(
-    <motion.div
-      initial={{ opacity: 0, y: 100 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 100 }}
-      transition={{ delay: 1, duration: 0.3 }}
-      onClick = {() => fun(true)}
-    >
-      <AcceptButton 
-        disabled={ disabled === [] ? true : false }
-      >Hell yea!</AcceptButton>
-    </motion.div>
+      <MiddleWrapper>
+
+        <ReadyH1>Ready?</ReadyH1>
+
+        <AcceptButton 
+          disabled={ disabled === [] ? true : false }
+          onClick = {() => fun(true)}
+        >
+          Hell yea!
+        </AcceptButton>
+
+      </MiddleWrapper>
+
+    </Wrapper>
   );
 };
