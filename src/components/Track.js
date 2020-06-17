@@ -6,11 +6,28 @@ import playBut from '../img/play-but.svg';
 import nextBut from '../img/next.svg';
 import tickBut from '../img/tick.svg';
 //stylesy
-import { Cover, ArtTitle, Title, Artist, Controls, HeaderPlaylist, PlaylistName, ControlBar, TrackStyle, MainWrapper, PlayPause } from './styles/TrackStyles';
+import { 
+    Cover, 
+    ArtTitle, 
+    Title, 
+    Artist, 
+    Controls, 
+    HeaderPlaylist, 
+    PlaylistName, 
+    ControlBar, 
+    TrackStyle, 
+    MainWrapper, 
+    PlayPause, 
+    PlayPauseImg,
+    TrackNumber,
+    TitleWrapper
+ } from './styles/TrackStyles';
+
 import { CategoriesHeader } from './styles/mainStyles';
 import backTo from '../img/backTo.svg';
 import { Image } from "react-image-and-background-image-fade";
 import { Palette, usePalette } from 'react-palette';
+import { useMediaQuery } from 'react-responsive';
 
 const Track = ({ source, playName, p1, p2, backFunc, linkToTestFunc }) => {
 
@@ -103,6 +120,10 @@ const Track = ({ source, playName, p1, p2, backFunc, linkToTestFunc }) => {
         audioRef.current.pause();
     };
 
+    const isLaptop = useMediaQuery({
+        query: '(min-width: 1024px)'
+    });
+
     return(
         <TrackStyle
             initial={{ opacity: 0}}
@@ -154,25 +175,62 @@ const Track = ({ source, playName, p1, p2, backFunc, linkToTestFunc }) => {
                 <ControlBar>
 
                     <ArtTitle>
-                        <Title key={source[trackNumber].name}>{source[trackNumber].name}</Title>
-                        <Artist key={'@' + source[trackNumber].artist}>{source[trackNumber].artist}</Artist>
+
+                        <TitleWrapper>
+                            <Title key={source[trackNumber].name}>{source[trackNumber].name}</Title>
+                            <Artist key={'@' + source[trackNumber].artist}>{source[trackNumber].artist}</Artist>
+                        </TitleWrapper>
+
+                        {
+                            !isLaptop && (
+
+                            <Controls>
+
+                                <PlayPause onClick={handlePlayPause} >
+                                    {play ? <PlayPauseImg src={pauseBut} /> : <PlayPauseImg src={playBut} />}
+                                </PlayPause>
+                            
+                                <motion.div onClick={playNextTrack} style={{padding: '20px'}}>
+                                    {
+                                        (trackNumber === 4) 
+                                        ? <PlayPauseImg src={tickBut} />
+                                        : <PlayPauseImg src={nextBut} /> 
+                                    }
+                                </motion.div>
+
+                            </Controls>
+                            
+                            )
+
+                        }
+
                     </ArtTitle>
                     
                     <progress id="seekbar" value={bar} max="1"></progress>
 
-                    <Controls>
-                        <PlayPause onClick={handlePlayPause} >
-                            {play ? <img src={pauseBut} /> : <img src={playBut} />}
-                        </PlayPause>
-                        
-                        <motion.div onClick={playNextTrack} whileTap={{ scale: 0.8 }} style={{position: 'absolute', right: '0', padding: '20px'}}>
-                            {
-                                (trackNumber === 4) 
-                                ? <img src={tickBut} />
-                                : <img src={nextBut} /> 
-                            }
-                        </motion.div>
-                    </Controls>
+                    {
+                        isLaptop && (
+
+                            <Controls>
+
+                                <PlayPause onClick={handlePlayPause} >
+                                    {play ? <PlayPauseImg src={pauseBut} /> : <PlayPauseImg src={playBut} />}
+                                </PlayPause>
+                            
+                                <motion.div onClick={playNextTrack} style={{padding: '20px'}}>
+                                    {
+                                        (trackNumber === 4) 
+                                        ? <PlayPauseImg src={tickBut} />
+                                        : <PlayPauseImg src={nextBut} /> 
+                                    }
+                                </motion.div>
+
+                            </Controls>
+
+                        )
+                    }
+
+                    <TrackNumber>{trackNumber + 1}/5</TrackNumber>
 
                 </ControlBar>
                 
@@ -192,7 +250,10 @@ const CoverWrapper = ({data}) => {
     //setColor(myData.darkVibrant);
 
     return (
-        <Cover style={{ boxShadow: `0px 0px 40px ${myData.darkVibrant}` }}>
+        <Cover 
+            //style={{ boxShadow: `0px 0px 140px ${myData.darkVibrant}` }}
+            tone = {myData.darkVibrant}
+        >
 
             <Image 
                 src={data} 
