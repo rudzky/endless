@@ -3,9 +3,10 @@ html{
 }
 
 body{
-  will-change: background-color;  
+  will-change: background-color;
+  background: #000;  
   /*background: transparent linear-gradient(181deg, #bcecfb 0%, #000000 100%) 0% 0% no-repeat padding-box;*/
-  background: #020201;
+  /* background: linear-gradient(155deg, #000000 0%, #890F7F 50%, #FC878A 100%) 0% 0% no-repeat padding-box;   */
   transition: background-color 2000ms ease-in-out;
   width: 100%;
   height: 100%;
@@ -39,7 +40,12 @@ div::-webkit-scrollbar-thumb
     background:rgba(255, 255, 255, 0.295);
 }
 
-h1{
+h1,h2,h3,h4,h5,h6,p {
+  color: #FFF;
+  font-family: CircularStd;
+}
+
+/* h1{
     margin: 0px;
     font-family: CircularStd;
     font-weight: 600;
@@ -48,8 +54,8 @@ h1{
     letter-spacing: -.03em;
     line-height: 3rem;
     text-align: center;
-}
-h5{
+} */
+/* h5{
   margin: 0px;
   font-family: CircularStd;
   font-weight: 300;
@@ -68,15 +74,20 @@ h3{
   margin-top: 20px;
   width: 60%;
   line-height: 1.4em;
-}
+} */
 
 span{
   font-size: 1.4rem;
   font-weight: 500;
   color: #000;
   text-align: center;
-  letter-spacing: -1.23px;
+  letter-spacing: -0.23px;
   margin: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 70%;
 }
 
 .marquee-container, .marquee-wrap  {
@@ -95,13 +106,12 @@ progress{
   -webkit-appearance: none;
 }
 progress[value] {
-  width: 250px;
+  width: 100%;
   height: 20px;
   height: 3px;
-  margin-top: 10px;
 }
 ::-webkit-progress-value {
-  background: #1DB954;
+  background: rgba(255, 255, 255, 0.404);
 }
 
 progress::-webkit-progress-bar {
@@ -115,4 +125,9 @@ progress::-webkit-progress-bar {
 
 a{
   -webkit-tap-highlight-color: transparent;
+}
+
+.ball{
+  position: absolute;
+  z-index: -10;
 }

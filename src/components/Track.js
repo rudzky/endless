@@ -1,16 +1,16 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { withRouter, Redirect } from 'react-router-dom';
 import { motion, useAnimation  } from "framer-motion";
-import pauseBut from '../img/pause.svg';
-import playBut from '../img/play.svg';
+import pauseBut from '../img/pause-but.svg';
+import playBut from '../img/play-but.svg';
 import nextBut from '../img/next.svg';
 import tickBut from '../img/tick.svg';
 //stylesy
-import { Cover, ArtTitle, Title, Artist, Controls, HeaderPlaylist, PlaylistName, ControlBar, TrackStyle } from './styles/TrackStyles';
+import { Cover, ArtTitle, Title, Artist, Controls, HeaderPlaylist, PlaylistName, ControlBar, TrackStyle, MainWrapper, PlayPause } from './styles/TrackStyles';
 import { CategoriesHeader } from './styles/mainStyles';
 import backTo from '../img/backTo.svg';
 import { Image } from "react-image-and-background-image-fade";
-import { Palette } from 'react-palette';
+import { Palette, usePalette } from 'react-palette';
 
 const Track = ({ source, playName, p1, p2, backFunc, linkToTestFunc }) => {
 
@@ -19,7 +19,7 @@ const Track = ({ source, playName, p1, p2, backFunc, linkToTestFunc }) => {
     const [doTest, setDoTest] = useState(false);
     const [bar, setBar] = useState(0);
     const [back, setBack] = useState(false);
-    //const [color, setColor] = useState('#000');
+    
     
     const makeAudioFade = (e) => {
 
@@ -147,7 +147,7 @@ const Track = ({ source, playName, p1, p2, backFunc, linkToTestFunc }) => {
                 onEnded={playNextTrack} 
             />
 
-            <div>
+            <MainWrapper>
 
                 <CoverWrapper data={source[trackNumber].cover} />
 
@@ -161,9 +161,9 @@ const Track = ({ source, playName, p1, p2, backFunc, linkToTestFunc }) => {
                     <progress id="seekbar" value={bar} max="1"></progress>
 
                     <Controls>
-                        <motion.div onPan={{ scale: 0.8 }} onClick={handlePlayPause} >
+                        <PlayPause onClick={handlePlayPause} >
                             {play ? <img src={pauseBut} /> : <img src={playBut} />}
-                        </motion.div>
+                        </PlayPause>
                         
                         <motion.div onClick={playNextTrack} whileTap={{ scale: 0.8 }} style={{position: 'absolute', right: '0', padding: '20px'}}>
                             {
@@ -176,7 +176,7 @@ const Track = ({ source, playName, p1, p2, backFunc, linkToTestFunc }) => {
 
                 </ControlBar>
                 
-            </div>            
+            </MainWrapper>            
         
         </TrackStyle>
     );
@@ -186,15 +186,13 @@ export default withRouter(Track);
 
 const CoverWrapper = ({data}) => {
 
-    console.log(data);
+    
+    const { data: myData, loading, error } = usePalette(data);
+    //const [color, setColor] = useState(myData);
+    //setColor(myData.darkVibrant);
+
     return (
-        <Cover
-            initial={{ x: 100 }}
-            //animate={controls}
-            animate={{ x: 0 }}
-            exit={{ scale: 3 }}
-            transition={{ duration: 1 }}
-        >
+        <Cover style={{ boxShadow: `0px 0px 40px ${myData.darkVibrant}` }}>
 
             <Image 
                 src={data} 
@@ -205,11 +203,13 @@ const CoverWrapper = ({data}) => {
                 lazyLoad 
             />
 
-            <Palette src={data}>
+            {/* <Palette src={data}>
                 {palette => {
-                    document.querySelectorAll("div.ball").forEach( (e) => e.style=`background: ${palette.data.darkVibrant}`);
+                    //document.querySelectorAll("div.ball").forEach( (e) => e.style=`background: ${palette.data.darkVibrant}`);
+                    //console.log(palette.data);
+                    setColor(palette.data.darkVibrant);
                 }}
-            </Palette>
+            </Palette> */}
 
         </Cover>
     );

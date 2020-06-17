@@ -6,7 +6,7 @@ import backTo from '../img/backTo.svg';
 import roll from '../img/roll.svg';
 //stylesy
 import { ScrollDiv, SwitchDiv, RandButton, CategoriesHeader, BackToButton } from './styles/mainStyles';
-import { H1, H5, UL, LI, PlaylistLink, P } from './styles/CategoriesStyles';
+import { H1, H5, UL, LI, PlaylistLink, P, RollImg } from './styles/CategoriesStyles';
 import { Image } from "react-image-and-background-image-fade";
 
 const Categories = ({ authKey }) => {
@@ -78,15 +78,15 @@ const Categories = ({ authKey }) => {
             </BackToButton>
 
             <span>
-              <H1>All categories</H1>
-              <H5>Choose or roll</H5>
+              <H1>Browse</H1>
+              <H5>Choose or get random</H5>
             </span>
 
             <motion.div 
               whileTap={{ scale: 0.8 }}
               onClick={() => getRandomCategory()}
             >
-              <img src={roll} alt="roll"/>
+              <RollImg src={roll} alt="roll"/>
             </motion.div>
 
           </CategoriesHeader>

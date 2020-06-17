@@ -43,43 +43,33 @@ export const SwitchStyle = styled(motion.div)`
 `;
 
 export const Button = styled(Link)`
-  border: 2px solid #F39A23;
-  // background: #000;
-  border-radius: 30px;
-  width: 75%;
-  min-height: 2.8em;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-filter: drop-shadow(0px 3px 6px rgba(0,0,0,0.251));
-  filter: drop-shadow(0px 3px 6px rgba(0,0,0,0.251));
-  color: #F39A23;
-  font-size: 2.0em;
-  font-family: CircularStd;
-  font-weight: 400;
-  text-align: center;
-  -webkit-text-decoration: none;
+
+  width: 275px;
   text-decoration: none;
-  margin: 15px 0px;
+  color: #000;
+  font-family: CircularStd;
+  font-weight: 500;
+  font-size: 1.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #FFF;
+  border-radius: 40px;
+  padding: 20px 10px;
+  margin-bottom: 15px;
   transition: transform .1s ease-in-out;
 
   @media ${device.mobileL} {
     width: 60%;
   }
   @media ${device.tablet} {
-    width: 50%;
+    font-size: 1.8rem;
+    width: 305px;
   }
   @media ${device.laptop} {
-    width: 20%;
+    width: 285px;
+    font-size: 1.4rem;
+    margin-top: 20px;
   }
   @media ${device.laptopL} {
     width: 15%;
@@ -109,10 +99,11 @@ export const ScrollDiv = styled(motion.div)`
   // animation-name: ${opacityAnimation};
   // animation-duration: 2s;
   width: 100%;
-  margin-top: 5%;
+  margin-top: 10px;
 
   @media ${device.laptop} {
-    width: 70%;
+    width: 100%;
+    padding: 0px 15%;
   }
 `;
 

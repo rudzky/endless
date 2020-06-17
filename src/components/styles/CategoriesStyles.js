@@ -22,17 +22,34 @@ export const device = {
 };
 
 export const H1 = styled.h1`
-    font-size: 1.2rem;
-    line-height: 1.2rem;
-    margin-bottom: 5px;
+    font-size: 1.6rem;
+    line-height: 1rem;
+    margin: 0px;
+    
+    @media ${device.tablet} {
+        font-size: 2.6rem;
+    }
+
+    @media ${device.laptop} {
+        font-size: 2.2rem;
+    }
 `;
 
 export const H5 = styled.h5`
     font-family: CircularStd;
     color: rgb(255, 255, 255);
+    font-weight: 100;
     font-size: .9rem;
-    margin-bottom: 5px;
+    margin: 0px;
     letter-spacing: 0px;
+
+    @media ${device.tablet} {
+        font-size: 1.5rem;
+    }
+
+    @media ${device.laptop} {
+        font-size: 1rem;
+    }
 `;
 
 export const UL = styled.ul`
@@ -76,3 +93,11 @@ export const P = styled.p`
     font-size: 0.9rem;
     margin: 10px 0px 0px;
 `;
+
+export const RollImg = styled.img`
+    &:hover {
+        cursor: pointer;
+        transform: rotate(360deg);
+    }
+    transition: all .4s ease-in-out;
+`;  

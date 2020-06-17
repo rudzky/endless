@@ -21,10 +21,12 @@ export const device = {
   desktopL: `(min-width: ${size.desktop})`
 };
 
-export const Cover = styled(motion.div)`
+export const Cover = styled.div`
   display: flex;
   justify-content: center;
-  width: 90%;
+  width: 85%;
+  // height: 50%;
+  transition: box-shadow 1s ease-in-out;
 
   @media ${device.laptop} {
     width: 40%;
@@ -34,7 +36,7 @@ export const Cover = styled(motion.div)`
 export const ArtTitle = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-end;
   position: relative;
   width: 100%;
@@ -83,7 +85,6 @@ export const Controls = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
-  margin-top: 30px;
 `;
 
 export const HeaderPlaylist = styled.p`
@@ -107,21 +108,36 @@ export const PlaylistName = styled.p`
 `;
 
 export const ControlBar = styled.div`
-    width: 80vw;
+    width: 90vw;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    flex-basis: 30%;
+    justify-content: space-evenly;
+    flex: 1;
+    padding-bottom: 10%;
 `;
 
 export const TrackStyle = styled(motion.div)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   height: 100vh;
   opacity: 1;
   transform: none;
-  padding: 5% 0px;
+  width: 100%;
+`;
+
+export const MainWrapper = styled.div`
+  height: 85%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+`;
+
+export const PlayPause = styled.div`
+  padding: 20px;
+  transform: scale(1.5);
 `;

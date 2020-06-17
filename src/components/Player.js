@@ -51,6 +51,7 @@ const Player = (props) => {
 
     const filterTracks = () => {
       if( tracks !== null && tracks !== undefined ){
+        let tracks_not_null = [];
         let tracks_with_preview = [];
         let pack = [];
         let usedNumbers = [];
@@ -63,7 +64,9 @@ const Player = (props) => {
           }
         };
 
-        tracks_with_preview = tracks.items.filter(e => e.track.preview_url);
+        tracks_not_null = tracks.items.filter(e => e.track !== null);
+
+        tracks_with_preview = tracks_not_null.filter(e => e.track.preview_url);
 
         let min = Math.ceil(0);
         let max = Math.floor(tracks_with_preview.length - 1);

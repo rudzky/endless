@@ -62,17 +62,9 @@ export default function App(){
 
     <Router>
       {/* bylo position relative */}
-    <Container style={{position: 'fixed', overflow: 'hidden'}}>
-
-      <GradientBall className="ball"/>
-
-      <GradientBall2 className="ball"/>
-
-      <GradientBall3 className="ball"/>
-
-      <GradientBall4 className="ball"/>
-
-      {/* <GradientWrapper /> */}
+    <Container 
+      //style={{overflow: 'hidden'}}
+    >
 
       <Route
 				render={({ location }) => (
