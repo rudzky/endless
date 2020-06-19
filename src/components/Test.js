@@ -1,16 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, Redirect} from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { TestDiv, TestHeader, TestContent, TestList, TestListItem, TestListImg, TestH3, H3, TestH5, TestH6, TestListDescribe, Choosen } from './styles/TestStyles';
+import { 
+    TestDiv, 
+    TestHeader, 
+    TestContent, 
+    TestList, 
+    TestListItem, 
+    TestListImg, 
+    TestH3, 
+    H3, 
+    TestH5, 
+    TestH6, 
+    TestListDescribe, 
+    Choosen, 
+    TrackNumber,
+    Progress,
+    ItemDiv,
+    ProgressDiv,
+    ImgWrap,
+    CheckedWrapper,
+    Img,
+    HeadWrap
+ } from './styles/TestStyles';
 import { RandButton } from './styles/mainStyles';
 
 import ProgressBar from './ProgressBar';
 
 const Test = () => {
     let location = useLocation();
-
-    console.log('KOMPONENT TEST WYRENDEROWANY');
-
+    const audioRef = useRef(null);
     const shuffle = array => {
         return array.sort(() => Math.random() - 0.5);
     };
@@ -23,19 +42,13 @@ const Test = () => {
 
     const [play, setPlay] = useState(true);
 
-    useEffect(()=>{
-        if(location.state === undefined){
-            setError(true);
-        }
-    },[location.state]);
-
     const updateAnswers = (idx,event) => {
         event.persist();
+
         if(kol === answers.length){
             if(kol < 4){
-            setKol((kol) => kol+1);  
+                setKol((kol) => kol+1);  
             }
-            console.log(kol+1);
             setAnswers([...answers,idx]);
         }
     };
@@ -48,6 +61,13 @@ const Test = () => {
         let count = answers.filter(x => x === idx);
         return count;
     };
+
+    useEffect(()=>{
+        audioRef.current.play();
+        if(location.state === undefined){
+            setError(true);
+        }
+    },[location.state]);
     
     return(
         <TestDiv
@@ -73,42 +93,49 @@ const Test = () => {
         }
 
         <TestHeader>
-        <h1 style={{fontSize: '2.4rem'}}>Track {kol+1}/5</h1>
-            <H3>Choose the right song title</H3>
+            <HeadWrap>
+                <TrackNumber>Track {kol+1}/5</TrackNumber>
+                <H3>Choose the right song title</H3>
+            </HeadWrap>
 
-            <audio src={location.state[tracks[kol]].preview} autoPlay onPlay={()=>setPlay(true)} onPause={()=>setPlay(false)} onTimeUpdate={(e)=>updateBar(e)} />
+            <audio 
+                src={location.state[tracks[kol]].preview} 
+                autoPlay 
+                onPlay={()=>setPlay(true)} 
+                onPause={()=>setPlay(false)} 
+                onTimeUpdate={(e)=>updateBar(e)} 
+                ref={audioRef}
+            />
 
-            <motion.div 
-                style={{ width: '50%', display: 'flex', justifyContent: 'center' }}
-            >
-                <progress id="seekbar" value={bar} max="1" style={{width: "400px"}}></progress>
-            </motion.div>
+            <ProgressDiv>
+                <Progress id="seekbar" value={bar} max="1"></Progress>
+            </ProgressDiv>
         </TestHeader>
 
         <TestContent>
             <TestList>
-            <TestH3>Tracks</TestH3>
             {
                 location.state.map((el,index)=>{
                     return(
                         <TestListItem key={index}>
-                            <motion.div
-                                whileTap={{ translateX: 10 }}
-                                style={{ display: 'flex' }}
+                            <ItemDiv
                                 onClick={(event) => updateAnswers(index, event) } 
                             >
-                                <TestListImg src={el.cover} alt="cover"/>
+                                {/* <ImgWrap> */}
+                                    <Img src={el.cover} />
+                                {/* </ImgWrap> */}
                                 <TestListDescribe>
                                     <TestH5>{el.name}</TestH5>
                                     <TestH6>{el.artist}</TestH6>
                                 </TestListDescribe>
-                                {/* { answers.includes(index) && (<Choosen>Choosen</Choosen>) } */}
-                                { 
-                                    checkedTracks(index).map((el,idx) => {
-                                        return <Choosen key={idx} />
-                                    }) 
-                                }
-                            </motion.div>
+                                <CheckedWrapper>
+                                    { 
+                                        checkedTracks(index).map((el,idx) => {
+                                            return <Choosen key={idx} />
+                                        }) 
+                                    }
+                                </CheckedWrapper>
+                            </ItemDiv>
                         </TestListItem>
                     )
                 })

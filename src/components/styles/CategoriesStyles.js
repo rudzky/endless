@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { Image } from "react-image-and-background-image-fade";
 
 const size = {
     mobileS: '320px',
@@ -22,9 +23,16 @@ export const device = {
 };
 
 export const H1 = styled.h1`
-    font-size: 1.6rem;
     line-height: 1rem;
     margin: 0px;
+
+    @media ${device.mobileS} {
+        font-size: 1.3rem;
+    }
+
+    @media ${device.mobileM} {
+        font-size: 1.6rem
+    }
     
     @media ${device.tablet} {
         font-size: 2.6rem;
@@ -32,6 +40,10 @@ export const H1 = styled.h1`
 
     @media ${device.laptop} {
         font-size: 2.2rem;
+    }
+
+    @media ${device.desktop} {
+        font-size: 3.2rem;
     }
 `;
 
@@ -49,6 +61,10 @@ export const H5 = styled.h5`
 
     @media ${device.laptop} {
         font-size: 1rem;
+    }
+
+    @media ${device.desktop} {
+        font-size: 2rem;
     }
 `;
 
@@ -92,6 +108,15 @@ export const P = styled.p`
     color: white;
     font-size: 0.9rem;
     margin: 10px 0px 0px;
+
+    @media ${device.tablet} {
+        font-size: 1.2rem;
+    }
+
+    @media ${device.desktop} {
+        font-size: 1.5rem;
+        margin: 30px 0px 30px;
+    }
 `;
 
 export const RollImg = styled.img`
@@ -100,4 +125,45 @@ export const RollImg = styled.img`
         transform: rotate(360deg);
     }
     transition: all .4s ease-in-out;
+
+    @media ${device.desktop} {
+        width: 50px;
+    }
 `;  
+
+export const ImageLoader = styled(Image)`
+    background-size: cover;
+    background-position: center top;
+    transition: filter .3s ease-in-out;
+
+    &:hover {
+        filter: brightness(0.5);
+    }
+`;
+
+export const BackPara = styled.p`
+    font-size: 1rem;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    @media ${device.desktop} {
+        font-size: 1.8rem;
+    }
+`;
+
+export const Loading = styled.h1`
+    z-index: 0;
+    font-size: 1.4rem;
+
+    @media ${device.tablet} {
+        font-size: 1.6rem;
+    }
+    @media ${device.laptop} {
+        font-size: 1.8rem;
+    }
+    @media ${device.desktop} {
+        font-size: 2rem;
+    }
+`;

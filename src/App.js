@@ -12,10 +12,16 @@ import Test from './components/Test';
 import Summary from './components/Summary';
 import "circular-std";
 import { AnimatePresence} from "framer-motion";
+import house from "./img/house.svg";
 // stylesy
-import { GradientWrapper, SwitchStyle, SwitchDiv } from './components/styles/mainStyles';
-import { Container, GradientBall, GradientBall2, GradientBall3, GradientBall4, SVG1 } from './components/styles/AppStyles';
-
+import { GradientWrapper, SwitchStyle, SwitchDiv, Button } from './components/styles/mainStyles';
+import { 
+  Container,  
+  InfoWrap,
+  H1,
+  P,
+  H2
+} from './components/styles/AppStyles';
 
 export default function App(){
 
@@ -118,21 +124,45 @@ export default function App(){
 
 function About() {
   return (
-    <SwitchStyle
+    <InfoWrap
       initial={{ opacity: 0, y: 100}}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -100 }}
       transition={{ duration: 0.2 }}
+      style={{ padding: '20px' }}
     >
 
       <div>
-        <h2>About</h2>
-        <Link to='/'>
-          Wracam XD
-        </Link>
+        <H1>Cześć,<br/> a nawet czołem</H1>
+        <P>Tutaj takie małe info, co to w ogóle jest...</P>
+
+        <H2>No to co to jest?</H2>
+        <P>Endless to apka/gierka, która sprawdza twoją muzyczną pamięć. Coś ala "Jaka to melodia", ale dużo łatwiej  &#128522;</P>
+        
+        <H2>A po co to komu?</H2>
+        <P>Ciężkie pytanie. Najprościej odpowiem, że to apka głównie pokazowa. Jeśli to czytasz to wyszła całkiem znośnie &#128524;</P>
+
+        <H2>Jak to jest zrobione?</H2>
+        <P>Użyłem Reacta, React-Routera, Styled-Components, Framer-Motion i jeszcze kilku innych narzędzi.</P>
+
+        <H2>A UI skąd, co?</H2>
+        <P>Do profeski trochę brakuje(dużo brakuje), ale UI zrobiłem sam, oczywiście inspirując się na Dribble i u samego Spotify &#128526;</P>
+
+        <H2>Ale skąd te dane?</H2>
+        <P>Już odpowiadam. Użyłem Spotify API. Ciekawostka: Najpierw wybrałem API, a dopiero później wpadłem na pomysł tej apki &#128513;</P>
+        
+        <H2>Czemu to po jest angielsku?</H2>
+        <P>Z przyczyn praktycznych i takich, że ten font troche słabo sobie radzi z UTF-8 &#128530;</P>
+
+        <H2>Kto to takie zrobił?</H2>
+        <P>A ja &#128519; <br /> Piotrek Rudzki</P>
+        
+        <Button to='/' style={{ position: 'fixed'}}>
+          <img src={house} alt="home"/>
+        </Button>
       </div>
 
-    </SwitchStyle>
+    </InfoWrap>
   );
 }
 

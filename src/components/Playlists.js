@@ -5,10 +5,11 @@ import { Link, Redirect, useLocation, useParams, withRouter } from 'react-router
 import backTo from '../img/backTo.svg';
 import CategoryError from './CategoryError';
 import roll from '../img/roll.svg';
+import { useMediaQuery } from 'react-responsive';
 
 //stylesy
 import { ScrollDiv, SwitchDiv, RandButton, CategoriesHeader, BackToButton } from './styles/mainStyles';
-import { H1, H5, UL, LI, PlaylistLink, P } from './styles/CategoriesStyles';
+import { H1, H5, UL, LI, PlaylistLink, P, RollImg, ImageLoader, BackPara, Loading } from './styles/CategoriesStyles';
 import { ColorExtractor } from 'react-color-extractor';
 import { Image } from "react-image-and-background-image-fade";
 
@@ -70,6 +71,10 @@ const Playlists = (props) => {
       }
     },[]);
 
+    const isLaptop = useMediaQuery({
+      query: '(min-width: 1024px)'
+    });
+
     if(error === true){
       return(
         <SwitchDiv
@@ -110,8 +115,10 @@ const Playlists = (props) => {
           <CategoriesHeader>
 
             <BackToButton to='/categories'>
-              <img src={backTo} alt="Back" />
-            </BackToButton>
+              {
+                isLaptop ? <BackPara>Back</BackPara> : <img src={backTo} alt="Back" />
+              }
+            </BackToButton> 
 
             <span>
               <H1>{names.name}</H1>
@@ -122,7 +129,7 @@ const Playlists = (props) => {
               whileTap={{ scale: 0.8 }}
               onClick={() => getRandomPlaylist()}
             >
-              <img src={roll} alt="roll"/>
+              <RollImg src={roll} alt="roll"/>
             </motion.div>
 
           </CategoriesHeader>
@@ -144,9 +151,9 @@ const Playlists = (props) => {
                           para2: location.search
                         }}>
 
-                          <Image 
+                          <ImageLoader 
                             src={play.images[0].url} 
-                            style={{ backgroundSize: 'cover',backgroundPosition: 'center top' }} 
+                            //style={{ backgroundSize: 'cover',backgroundPosition: 'center top' }} 
                             width='100%'
                             height='100%'
                             isResponsive 
@@ -170,7 +177,7 @@ const Playlists = (props) => {
   }
   else{
     return(
-      <h1 style={{ zIndex: '0'}}>Loading...</h1>
+      <Loading>Loading...</Loading>
     );
   }
 }

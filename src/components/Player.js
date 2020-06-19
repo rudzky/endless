@@ -4,9 +4,11 @@ import { motion } from "framer-motion";
 import { Link, Redirect, useLocation, withRouter, useParams } from 'react-router-dom';
 import Track from './Track';
 import backTo from '../img/backTo.svg';
+import { useMediaQuery } from 'react-responsive';
 
 //stylesy
 import { SwitchDiv, BackToButton, CategoriesHeader } from './styles/mainStyles';
+import {BackPara} from './styles/CategoriesStyles';
 import { PlayerDiv, AcceptButton, Wrapper, FramerWrapper, MiddleWrapper, ReadyH1 } from './styles/PlayerStyles';
 
 const Player = (props) => {
@@ -118,8 +120,6 @@ const Player = (props) => {
       setDataForTest(data);
     };
 
-    //console.log(tracks);
-
     return(
 
         <SwitchDiv initial={{ opacity: 0 }} animate={{ opacity: 1}} exit={{ opacity: 0}} transition={{ duration: 0.3 }}>
@@ -178,6 +178,9 @@ export default withRouter(Player);
 
 const Accept = ({fun, disabled}) => {
   const location = useLocation();
+  const isLaptop = useMediaQuery({
+    query: '(min-width: 1024px)'
+  });
   return(
     <Wrapper>
       
@@ -188,7 +191,9 @@ const Accept = ({fun, disabled}) => {
             search: location.para2
           }}
         >
-          <img src={backTo} alt="Back" />
+          {
+            isLaptop ? <BackPara>Back</BackPara> : <img src={backTo} alt="Back" />
+          }
         </BackToButton>
       </CategoriesHeader>
 

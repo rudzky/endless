@@ -39,6 +39,10 @@ export const Cover = styled.div`
     max-width: 350px;
     transform: translateY(-45px);
   }
+
+  @media ${device.desktop}  {
+    max-width: 550px;
+  }
 `;
 
 export const ArtTitle = styled.div`
@@ -71,6 +75,10 @@ export const Title = styled.p`
   @media ${device.tablet} {
     font-size: 2.2rem;
   }
+
+  @media ${device.desktop} {
+    font-size: 3.2rem;
+  }
 `;
 
 export const Artist = styled.p`
@@ -83,6 +91,10 @@ export const Artist = styled.p`
 
   @media ${device.tablet} {
     font-size: 1.6rem;
+  }
+
+  @media ${device.desktop} {
+    font-size: 2rem;
   }
 `;
 
@@ -203,6 +215,20 @@ export const PlayPauseImg = styled.img`
   @media ${device.laptop} {
     width: 20px;
   }
+
+  @media ${device.desktop} {
+    width: 30px;
+  }
+
+  transition: transform .3s ease-in-out;
+
+  @media(hover: hover) and (pointer: fine) {
+      &:hover {
+      cursor: pointer;
+      transform: translateY(-5px);
+    }
+  }
+  
 `;
 
 export const TrackNumber = styled.p`

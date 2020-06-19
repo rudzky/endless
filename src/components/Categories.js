@@ -4,9 +4,10 @@ import { motion } from "framer-motion";
 import { Link, Redirect } from 'react-router-dom';
 import backTo from '../img/backTo.svg';
 import roll from '../img/roll.svg';
+import { useMediaQuery } from 'react-responsive';
 //stylesy
 import { ScrollDiv, SwitchDiv, RandButton, CategoriesHeader, BackToButton } from './styles/mainStyles';
-import { H1, H5, UL, LI, PlaylistLink, P, RollImg } from './styles/CategoriesStyles';
+import { H1, H5, UL, LI, PlaylistLink, P, RollImg, ImageLoader, BackPara, Loading } from './styles/CategoriesStyles';
 import { Image } from "react-image-and-background-image-fade";
 
 const Categories = ({ authKey }) => {
@@ -50,6 +51,10 @@ const Categories = ({ authKey }) => {
 
     },[]);
 
+    const isLaptop = useMediaQuery({
+      query: '(min-width: 1024px)'
+    });
+
     if(error === false){
       return(
           <SwitchDiv
@@ -74,8 +79,10 @@ const Categories = ({ authKey }) => {
           <CategoriesHeader>
 
             <BackToButton to='/'>
-              <img src={backTo} alt="Back" />
-            </BackToButton>
+              {
+                isLaptop ? <BackPara>Back</BackPara> : <img src={backTo} alt="Back" />
+              }
+            </BackToButton> 
 
             <span>
               <H1>Browse</H1>
@@ -109,7 +116,7 @@ const Categories = ({ authKey }) => {
                           search: `?name=${cat.name}`,
                         }}>
                           
-                          <Image 
+                          <ImageLoader 
                             src={cat.icons[0].url} 
                             style={{ backgroundSize: 'cover',backgroundPosition: 'center top' }} 
                             width='100%'
@@ -134,7 +141,7 @@ const Categories = ({ authKey }) => {
       );
     }else{
       return(
-        <h1 style={{ zIndex: '0'}}>Loading...</h1>
+        <Loading>Loading...</Loading>
       );
     }
 }

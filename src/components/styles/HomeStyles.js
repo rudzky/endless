@@ -40,6 +40,10 @@ export const SL = styled(Link)`
     width: 5%;
     font-size: 1.2rem;
   }
+
+  @media ${device.desktop} {
+    font-size: 2rem;
+  }
 `;
 
 export const StyledDiv = styled.div`
@@ -81,6 +85,10 @@ export const Logo = styled.img`
   @media ${device.laptop} {
     width: 100px;
   }
+
+  @media ${device.desktop} {
+    width: 150px;
+  }
 `;
 
 export const H1 = styled.h1`
@@ -113,6 +121,11 @@ export const H1 = styled.h1`
     line-height: 6.5rem;
   }
 
+  @media ${device.desktop} {
+    font-size: 13.4rem;
+    line-height: 10.5rem;
+  }
+
 `;
 
 export const H2 = styled.h2`
@@ -137,6 +150,9 @@ export const H2 = styled.h2`
   }
   @media ${device.laptop} {
     font-size: 1.4rem;
+  }
+  @media ${device.desktop} {
+    font-size: 2.4rem;
   }
 `;
 
@@ -163,6 +179,9 @@ export const H3 = styled.h3`
   @media ${device.laptop} {
     font-size: 1.4rem;
     align-self: flex-end;
+  }
+  @media ${device.desktop} {
+    font-size: 2.4rem;
   }
 `;
 

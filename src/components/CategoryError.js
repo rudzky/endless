@@ -1,12 +1,9 @@
 import React from 'react';
-import { motion } from "framer-motion";
 import { useLocation } from 'react-router-dom';
 import { Button } from './styles/mainStyles'; 
-
+import {H1, H3, ErrorWrap} from './styles/ErrorStyles';
 
 const CategoryError = () => {
-
-    document.body.style="background: #f30909";
 
     const useQuery = () => {
         return new URLSearchParams(useLocation().search);
@@ -15,24 +12,15 @@ const CategoryError = () => {
     x = x.get("name");
 
     return(
-        <motion.div
-          style={{
-              position: 'absolute',
-              width: '100%',
-              height: '100%',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center'
-          }}
+        <ErrorWrap
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -100 }}
           transition={{ duration: 0.3 }}
         >
-            <h1>ERROR</h1>
-            <h3>"{x}" has no playlists now.
-            <br />That's probably server issue</h3>
+            <H1>ERROR</H1>
+            <H3>"{x}" has no playlists now.
+            <br />That's probably server issue</H3>
             <Button
                 style={{marginTop: '12%'}}
                 to='/categories'
@@ -40,7 +28,7 @@ const CategoryError = () => {
                 Go Back
             </Button>
 
-        </motion.div>
+        </ErrorWrap>
     )
 };
 

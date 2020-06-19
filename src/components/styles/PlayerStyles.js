@@ -95,6 +95,13 @@ export const AcceptButton = styled.button`
   @media ${device.laptopL} {
     width: 15%;
   }
+
+  @media ${device.desktop} {
+    font-size: 2.4rem;
+    padding: 25px 10px;
+    border-radius: 55px;
+  }
+
   &:hover {
     transform: scale(0.9);
   }

@@ -5,6 +5,7 @@ import pauseBut from '../img/pause-but.svg';
 import playBut from '../img/play-but.svg';
 import nextBut from '../img/next.svg';
 import tickBut from '../img/tick.svg';
+
 //stylesy
 import { 
     Cover, 
@@ -24,6 +25,7 @@ import {
  } from './styles/TrackStyles';
 
 import { CategoriesHeader } from './styles/mainStyles';
+import { BackPara } from './styles/CategoriesStyles';
 import backTo from '../img/backTo.svg';
 import { Image } from "react-image-and-background-image-fade";
 import { Palette, usePalette } from 'react-palette';
@@ -40,7 +42,6 @@ const Track = ({ source, playName, p1, p2, backFunc, linkToTestFunc }) => {
     
     const makeAudioFade = (e) => {
 
-        //console.log(e);
         e.target.play();
 
         const sound = e.target;
@@ -137,7 +138,9 @@ const Track = ({ source, playName, p1, p2, backFunc, linkToTestFunc }) => {
                 <div
                     onClick={handleBackLink}
                 >
-                    <img src={backTo} alt="Back" />
+                    {
+                        isLaptop ? <BackPara>Back</BackPara> : <img src={backTo} alt="Back" />
+                    }
                 </div>
 
                 {
@@ -244,14 +247,10 @@ export default withRouter(Track);
 
 const CoverWrapper = ({data}) => {
 
-    
     const { data: myData, loading, error } = usePalette(data);
-    //const [color, setColor] = useState(myData);
-    //setColor(myData.darkVibrant);
 
     return (
         <Cover 
-            //style={{ boxShadow: `0px 0px 140px ${myData.darkVibrant}` }}
             tone = {myData.darkVibrant}
         >
 
@@ -263,14 +262,6 @@ const CoverWrapper = ({data}) => {
                 isResponsive 
                 lazyLoad 
             />
-
-            {/* <Palette src={data}>
-                {palette => {
-                    //document.querySelectorAll("div.ball").forEach( (e) => e.style=`background: ${palette.data.darkVibrant}`);
-                    //console.log(palette.data);
-                    setColor(palette.data.darkVibrant);
-                }}
-            </Palette> */}
 
         </Cover>
     );
