@@ -1,0 +1,43 @@
+{
+  "files": {
+    "main.css": "/endless/static/css/main.c0ce89a3.chunk.css",
+    "main.js": "/endless/static/js/main.e0fd98b4.chunk.js",
+    "main.js.map": "/endless/static/js/main.e0fd98b4.chunk.js.map",
+    "runtime-main.js": "/endless/static/js/runtime-main.7e41e615.js",
+    "runtime-main.js.map": "/endless/static/js/runtime-main.7e41e615.js.map",
+    "static/css/2.fbc75d8e.chunk.css": "/endless/static/css/2.fbc75d8e.chunk.css",
+    "static/js/2.ff0cda3c.chunk.js": "/endless/static/js/2.ff0cda3c.chunk.js",
+    "static/js/2.ff0cda3c.chunk.js.map": "/endless/static/js/2.ff0cda3c.chunk.js.map",
+    "index.html": "/endless/index.html",
+    "precache-manifest.123da75ed81ff98e1ecc7f5091830083.js": "/endless/precache-manifest.123da75ed81ff98e1ecc7f5091830083.js",
+    "service-worker.js": "/endless/service-worker.js",
+    "static/css/2.fbc75d8e.chunk.css.map": "/endless/static/css/2.fbc75d8e.chunk.css.map",
+    "static/css/main.c0ce89a3.chunk.css.map": "/endless/static/css/main.c0ce89a3.chunk.css.map",
+    "static/js/2.ff0cda3c.chunk.js.LICENSE.txt": "/endless/static/js/2.ff0cda3c.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/endless/static/media/CircularStd-MediumItalic.fde448ff.svg",
+    "static/media/backTo.svg": "/endless/static/media/backTo.acf1ab05.svg",
+    "static/media/ball2.png": "/endless/static/media/ball2.2210acfe.png",
+    "static/media/ball3.png": "/endless/static/media/ball3.926d45ca.png",
+    "static/media/ball4.png": "/endless/static/media/ball4.81d4bfb6.png",
+    "static/media/happy.svg": "/endless/static/media/happy.626194b0.svg",
+    "static/media/heart.svg": "/endless/static/media/heart.cf58ccf7.svg",
+    "static/media/house.svg": "/endless/static/media/house.a9de3c48.svg",
+    "static/media/logo-end.svg": "/endless/static/media/logo-end.20130c2b.svg",
+    "static/media/love.svg": "/endless/static/media/love.9c953d2e.svg",
+    "static/media/neutral.svg": "/endless/static/media/neutral.4d835522.svg",
+    "static/media/next.svg": "/endless/static/media/next.151afbea.svg",
+    "static/media/pause-but.svg": "/endless/static/media/pause-but.562e3ee9.svg",
+    "static/media/play-but.svg": "/endless/static/media/play-but.01793970.svg",
+    "static/media/roll.svg": "/endless/static/media/roll.afd8cbb9.svg",
+    "static/media/sad.svg": "/endless/static/media/sad.7da98e8d.svg",
+    "static/media/tick.svg": "/endless/static/media/tick.5253c141.svg",
+    "static/media/x.svg": "/endless/static/media/x.ee1c6934.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.7e41e615.js",
+    "static/css/2.fbc75d8e.chunk.css",
+    "static/js/2.ff0cda3c.chunk.js",
+    "static/css/main.c0ce89a3.chunk.css",
+    "static/js/main.e0fd98b4.chunk.js"
+  ]
+}
