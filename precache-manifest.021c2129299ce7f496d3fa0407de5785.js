@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "7e1dbe3019cf6c5edde4b6cc435d0094",
+    "revision": "a8d6d7d00c46cb1745c5fbd22df6e22d",
     "url": "/endless/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/endless/static/css/2.fbc75d8e.chunk.css"
   },
   {
-    "revision": "b1e427718c95f90db3d3",
+    "revision": "55dc33b123fffe346151",
     "url": "/endless/static/css/main.c0ce89a3.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/endless/static/js/2.ff0cda3c.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "b1e427718c95f90db3d3",
-    "url": "/endless/static/js/main.e0fd98b4.chunk.js"
+    "revision": "55dc33b123fffe346151",
+    "url": "/endless/static/js/main.c081cbed.chunk.js"
   },
   {
     "revision": "7ffd7fc701aa2e16afce",
