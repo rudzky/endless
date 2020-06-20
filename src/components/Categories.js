@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import '../App.css';
 import { motion } from "framer-motion";
 import { Link, Redirect } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
+//styles
+import { ScrollDiv, SwitchDiv, CategoriesHeader, BackToButton } from './styles/mainStyles';
+import { H1, H5, UL, LI, PlaylistLink, P, RollImg, ImageLoader, BackPara, Loading } from './styles/CategoriesStyles';
+//svg
 import backTo from '../img/backTo.svg';
 import roll from '../img/roll.svg';
-import { useMediaQuery } from 'react-responsive';
-//stylesy
-import { ScrollDiv, SwitchDiv, RandButton, CategoriesHeader, BackToButton } from './styles/mainStyles';
-import { H1, H5, UL, LI, PlaylistLink, P, RollImg, ImageLoader, BackPara, Loading } from './styles/CategoriesStyles';
-import { Image } from "react-image-and-background-image-fade";
 
 const Categories = ({ authKey }) => {
 
@@ -48,7 +48,6 @@ const Categories = ({ authKey }) => {
 
     useEffect(() => {
       getCategories();
-
     },[]);
 
     const isLaptop = useMediaQuery({

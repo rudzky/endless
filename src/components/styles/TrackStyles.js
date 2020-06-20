@@ -140,6 +140,10 @@ export const HeaderPlaylist = styled.p`
   @media ${device.tablet} {
     font-size: 1.6em;
   }
+
+  @media ${device.desktop} {
+    font-size: 2em;
+  }
 `;
 
 export const PlaylistName = styled.p`
@@ -152,6 +156,10 @@ export const PlaylistName = styled.p`
 
   @media ${device.tablet} {
     font-size: 2em;
+  }
+
+  @media ${device.desktop} {
+    font-size: 3em;
   }
 `;
 

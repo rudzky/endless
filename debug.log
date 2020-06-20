@@ -1,0 +1,69 @@
+[0329/095905.825:ERROR:process_info.cc(359)] UncheckedAllocate
+[0420/183300.138:ERROR:process_info.cc(359)] UncheckedAllocate
+[0420/183300.138:ERROR:process_info.cc(359)] UncheckedAllocate
+[0420/183656.757:ERROR:process_info.cc(359)] UncheckedAllocate
+[0420/183702.138:ERROR:process_info.cc(359)] UncheckedAllocate
+[0420/183743.488:ERROR:process_info.cc(359)] UncheckedAllocate
+[0421/143004.443:ERROR:process_info.cc(359)] UncheckedAllocate
+[0425/120324.075:ERROR:process_info.cc(359)] UncheckedAllocate
+[0427/122919.891:ERROR:process_info.cc(359)] UncheckedAllocate
+[0427/122935.997:ERROR:process_info.cc(359)] UncheckedAllocate
+[0428/124012.210:ERROR:process_info.cc(359)] UncheckedAllocate
+[0428/135356.983:ERROR:process_info.cc(359)] UncheckedAllocate
+[0428/161921.367:ERROR:process_info.cc(359)] UncheckedAllocate
+[0429/123435.947:ERROR:process_info.cc(359)] UncheckedAllocate
+[0511/184510.980:ERROR:process_info.cc(359)] UncheckedAllocate
+[0519/184614.867:ERROR:process_info.cc(359)] UncheckedAllocate
+[0519/230750.295:ERROR:process_reader_win.cc(151)] SuspendThread: Odmowa dostêpu. (0x5)
+[0519/230750.298:ERROR:process_reader_win.cc(151)] SuspendThread: Odmowa dostêpu. (0x5)
+[0519/230750.298:ERROR:process_reader_win.cc(151)] SuspendThread: Odmowa dostêpu. (0x5)
+[0519/230750.298:ERROR:process_reader_win.cc(151)] SuspendThread: Odmowa dostêpu. (0x5)
+[0519/230750.298:ERROR:process_reader_win.cc(151)] SuspendThread: Odmowa dostêpu. (0x5)
+[0519/230750.302:ERROR:process_reader_win.cc(151)] SuspendThread: Odmowa dostêpu. (0x5)
+[0519/230750.302:ERROR:process_reader_win.cc(151)] SuspendThread: Odmowa dostêpu. (0x5)
+[0519/230750.302:ERROR:process_reader_win.cc(151)] SuspendThread: Odmowa dostêpu. (0x5)
+[0519/230750.302:ERROR:process_reader_win.cc(151)] SuspendThread: Odmowa dostêpu. (0x5)
+[0519/230750.302:ERROR:process_reader_win.cc(151)] SuspendThread: Odmowa dostêpu. (0x5)
+[0519/230750.302:ERROR:process_reader_win.cc(151)] SuspendThread: Odmowa dostêpu. (0x5)
+[0519/230750.302:ERROR:process_reader_win.cc(151)] SuspendThread: Odmowa dostêpu. (0x5)
+[0519/230750.306:ERROR:process_reader_win.cc(151)] SuspendThread: Odmowa dostêpu. (0x5)
+[0519/230750.306:ERROR:process_reader_win.cc(151)] SuspendThread: Odmowa dostêpu. (0x5)
+[0519/230750.306:ERROR:process_reader_win.cc(151)] SuspendThread: Odmowa dostêpu. (0x5)
+[0519/230750.306:ERROR:process_reader_win.cc(123)] NtOpenThread: {Odmowa dostêpu} Proces za¿¹da³ dostêpu do obiektu, ale prawa dostêpu nie zosta³y przyznane. (0xc0000022)
+[0519/230750.310:ERROR:exception_snapshot_win.cc(98)] thread ID 9564 not found in process
+[0519/230750.373:ERROR:process_reader_win.cc(123)] NtOpenThread: {Odmowa dostêpu} Proces za¿¹da³ dostêpu do obiektu, ale prawa dostêpu nie zosta³y przyznane. (0xc0000022)
+[0519/230750.373:ERROR:exception_snapshot_win.cc(98)] thread ID 9584 not found in process
+[0519/230750.545:ERROR:process_reader_win.cc(151)] SuspendThread: Odmowa dostêpu. (0x5)
+[0519/230750.545:ERROR:process_reader_win.cc(151)] SuspendThread: Odmowa dostêpu. (0x5)
+[0519/230750.545:ERROR:process_reader_win.cc(151)] SuspendThread: Odmowa dostêpu. (0x5)
+[0519/230750.545:ERROR:process_reader_win.cc(151)] SuspendThread: Odmowa dostêpu. (0x5)
+[0519/230750.551:ERROR:process_reader_win.cc(151)] SuspendThread: Odmowa dostêpu. (0x5)
+[0519/230750.551:ERROR:process_reader_win.cc(151)] SuspendThread: Odmowa dostêpu. (0x5)
+[0519/230750.551:ERROR:process_reader_win.cc(151)] SuspendThread: Odmowa dostêpu. (0x5)
+[0519/230750.556:ERROR:process_reader_win.cc(151)] SuspendThread: Odmowa dostêpu. (0x5)
+[0519/230750.556:ERROR:process_reader_win.cc(151)] SuspendThread: Odmowa dostêpu. (0x5)
+[0519/230750.556:ERROR:process_reader_win.cc(151)] SuspendThread: Odmowa dostêpu. (0x5)
+[0519/230750.556:ERROR:process_reader_win.cc(151)] SuspendThread: Odmowa dostêpu. (0x5)
+[0519/230750.556:ERROR:process_reader_win.cc(151)] SuspendThread: Odmowa dostêpu. (0x5)
+[0519/230750.556:ERROR:process_reader_win.cc(151)] SuspendThread: Odmowa dostêpu. (0x5)
+[0519/230750.556:ERROR:process_reader_win.cc(151)] SuspendThread: Odmowa dostêpu. (0x5)
+[0519/230750.556:ERROR:process_reader_win.cc(151)] SuspendThread: Odmowa dostêpu. (0x5)
+[0519/230750.556:ERROR:process_reader_win.cc(151)] SuspendThread: Odmowa dostêpu. (0x5)
+[0519/230750.556:ERROR:process_reader_win.cc(151)] SuspendThread: Odmowa dostêpu. (0x5)
+[0519/230750.556:ERROR:process_reader_win.cc(123)] NtOpenThread: {Odmowa dostêpu} Proces za¿¹da³ dostêpu do obiektu, ale prawa dostêpu nie zosta³y przyznane. (0xc0000022)
+[0519/230750.556:ERROR:process_reader_win.cc(151)] SuspendThread: Odmowa dostêpu. (0x5)
+[0519/230750.556:ERROR:process_reader_win.cc(151)] SuspendThread: Odmowa dostêpu. (0x5)
+[0519/230750.556:ERROR:exception_snapshot_win.cc(98)] thread ID 7020 not found in process
+[0519/230750.556:ERROR:process_reader_win.cc(151)] SuspendThread: Odmowa dostêpu. (0x5)
+[0519/230750.556:ERROR:process_reader_win.cc(151)] SuspendThread: Odmowa dostêpu. (0x5)
+[0519/230750.560:ERROR:process_reader_win.cc(151)] SuspendThread: Odmowa dostêpu. (0x5)
+[0519/230750.560:ERROR:process_reader_win.cc(151)] SuspendThread: Odmowa dostêpu. (0x5)
+[0519/230750.560:ERROR:process_reader_win.cc(151)] SuspendThread: Odmowa dostêpu. (0x5)
+[0519/230750.560:ERROR:process_reader_win.cc(123)] NtOpenThread: {Odmowa dostêpu} Proces za¿¹da³ dostêpu do obiektu, ale prawa dostêpu nie zosta³y przyznane. (0xc0000022)
+[0519/230750.562:ERROR:exception_snapshot_win.cc(98)] thread ID 1556 not found in process
+[0529/185559.577:ERROR:process_info.cc(359)] UncheckedAllocate
+[0613/194705.824:ERROR:process_info.cc(359)] UncheckedAllocate
+[0613/194706.933:ERROR:process_info.cc(359)] UncheckedAllocate
+[0613/194711.104:ERROR:process_info.cc(359)] UncheckedAllocate
+[0619/183717.234:ERROR:process_info.cc(359)] UncheckedAllocate
+[0619/183717.234:ERROR:process_info.cc(359)] UncheckedAllocate

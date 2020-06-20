@@ -1,15 +1,12 @@
 import React from 'react';
 import '../App.css';
 import { withRouter } from 'react-router-dom';
-//import { SL, StyledDiv, FrontButtons, Logo } from '../styles';
 import { useMediaQuery } from 'react-responsive';
-//stylesy
-import { SwitchStyle, Button, SwitchDiv } from './styles/mainStyles'; 
-import { SL, StyledDiv, FrontButtons, Logo, H1, H2, H3, LogoFramer, HomeContentWrapper, ButtonFramer, B1, B2, B3, B4 } from './styles/HomeStyles';
-
-import { motion } from "framer-motion";
+//styles
+import { SwitchStyle, Button } from './styles/mainStyles'; 
+import { SL, StyledDiv, FrontButtons, Logo, H1, H2, H3, LogoFramer, HomeContentWrapper, B1, B2, B3, B4 } from './styles/HomeStyles';
+//img
 import logo from '../img/logo-end.svg';
-
 import ball1 from '../img/ball1.png';
 import ball2 from '../img/ball2.png';
 import ball3 from '../img/ball3.png';

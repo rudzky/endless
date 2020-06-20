@@ -1,14 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, Redirect} from 'react-router-dom';
-import { motion } from 'framer-motion';
 import { 
     TestDiv, 
     TestHeader, 
     TestContent, 
     TestList, 
     TestListItem, 
-    TestListImg, 
-    TestH3, 
     H3, 
     TestH5, 
     TestH6, 
@@ -18,14 +15,10 @@ import {
     Progress,
     ItemDiv,
     ProgressDiv,
-    ImgWrap,
     CheckedWrapper,
     Img,
     HeadWrap
  } from './styles/TestStyles';
-import { RandButton } from './styles/mainStyles';
-
-import ProgressBar from './ProgressBar';
 
 const Test = () => {
     let location = useLocation();
@@ -34,7 +27,7 @@ const Test = () => {
         return array.sort(() => Math.random() - 0.5);
     };
 
-    const [error, setError] = useState(false);
+    const [error, setError] = useState();
     const [tracks, setTracks] = useState(shuffle([0,1,2,3,4]));
     const [kol, setKol] = useState(0);
     const [answers, setAnswers] = useState([]);
@@ -63,13 +56,17 @@ const Test = () => {
     };
 
     useEffect(()=>{
-        audioRef.current.play();
+        
         if(location.state === undefined){
             setError(true);
+        }else{
+            setError(false);
+            if(!setError) audioRef.current.play();
         }
     },[location.state]);
     
     return(
+
         <TestDiv
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
@@ -78,7 +75,7 @@ const Test = () => {
         >
 
         {
-            (error===null) && <Redirect to="/categories" />
+            (error === true) && <Redirect to="/categories" />
         }
 
         {
@@ -92,28 +89,32 @@ const Test = () => {
             }} />
         }
 
-        <TestHeader>
-            <HeadWrap>
-                <TrackNumber>Track {kol+1}/5</TrackNumber>
-                <H3>Choose the right song title</H3>
-            </HeadWrap>
+        {   (error === false) && (
 
-            <audio 
-                src={location.state[tracks[kol]].preview} 
-                autoPlay 
-                onPlay={()=>setPlay(true)} 
-                onPause={()=>setPlay(false)} 
-                onTimeUpdate={(e)=>updateBar(e)} 
-                ref={audioRef}
-            />
+            <>
 
-            <ProgressDiv>
-                <Progress id="seekbar" value={bar} max="1"></Progress>
-            </ProgressDiv>
-        </TestHeader>
+            <TestHeader>
+                <HeadWrap>
+                    <TrackNumber>Track {kol+1}/5</TrackNumber>
+                    <H3>Choose the right song title</H3>
+                </HeadWrap>
 
-        <TestContent>
-            <TestList>
+                <audio 
+                    src={location.state[tracks[kol]].preview} 
+                    autoPlay 
+                    onPlay={()=>setPlay(true)} 
+                    onPause={()=>setPlay(false)} 
+                    onTimeUpdate={(e)=>updateBar(e)} 
+                    ref={audioRef}
+                />
+
+                <ProgressDiv>
+                    <Progress id="seekbar" value={bar} max="1"></Progress>
+                </ProgressDiv>
+            </TestHeader>
+
+            <TestContent>
+                <TestList>
             {
                 location.state.map((el,index)=>{
                     return(
@@ -121,9 +122,7 @@ const Test = () => {
                             <ItemDiv
                                 onClick={(event) => updateAnswers(index, event) } 
                             >
-                                {/* <ImgWrap> */}
-                                    <Img src={el.cover} />
-                                {/* </ImgWrap> */}
+                                <Img src={el.cover} />
                                 <TestListDescribe>
                                     <TestH5>{el.name}</TestH5>
                                     <TestH6>{el.artist}</TestH6>
@@ -141,9 +140,12 @@ const Test = () => {
                 })
             }
             </TestList>
-        </TestContent>
+            </TestContent>
+            
+            </>
+            )
+        }
 
-        
         </TestDiv>
     );
 }

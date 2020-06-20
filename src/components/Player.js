@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import '../App.css';
 import { motion } from "framer-motion";
-import { Link, Redirect, useLocation, withRouter, useParams } from 'react-router-dom';
+import { Redirect, useLocation, withRouter, useParams } from 'react-router-dom';
 import Track from './Track';
-import backTo from '../img/backTo.svg';
 import { useMediaQuery } from 'react-responsive';
-
-//stylesy
+//styles
 import { SwitchDiv, BackToButton, CategoriesHeader } from './styles/mainStyles';
 import {BackPara} from './styles/CategoriesStyles';
 import { PlayerDiv, AcceptButton, Wrapper, FramerWrapper, MiddleWrapper, ReadyH1 } from './styles/PlayerStyles';
+//svg
+import backTo from '../img/backTo.svg';
 
 const Player = (props) => {
 
@@ -20,8 +20,8 @@ const Player = (props) => {
     let x = useQuery();
     x = x.get("name");
     let { name } = useParams();
-    const [names, setNames] = useState({id: name, name: x});
 
+    const [names, setNames] = useState({id: name, name: x});
     const [tracks, setTracks] = useState([]);
     const [filtered, setFiltered] = useState([]);
     const [error, setError] = useState(false);
@@ -112,10 +112,6 @@ const Player = (props) => {
       };
     },[tracks]);
 
-    const acceptGo = () => {
-      setCan(true);
-    };
-
     const linkToTest = (data) => {
       setDataForTest(data);
     };
@@ -162,9 +158,7 @@ const Player = (props) => {
 
                 </motion.div>
                 ) : (
-                  // <motion.div initial={{ opacity: 0}} animate={{ opacity: 1}} exit={{ opacity: 0}} transition={{ delay: 1, duration: 1 }}>
                     <Track source={filtered} playName={names.name} p1={location.para1} p2={location.para2} backFunc={() => setUnmount(true)} linkToTestFunc={(data) => linkToTest(data)} />
-                  // </motion.div>
                 )
               }
             </FramerWrapper>

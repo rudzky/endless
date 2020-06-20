@@ -2,6 +2,10 @@ html{
   background: black;
 }
 
+a{
+  text-decoration: none;
+}
+
 body{
   will-change: background-color;
   background: #000;  

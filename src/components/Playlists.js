@@ -1,17 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../App.css';
 import { motion } from "framer-motion";
-import { Link, Redirect, useLocation, useParams, withRouter } from 'react-router-dom';
+import { Redirect, useLocation, useParams, withRouter } from 'react-router-dom';
 import backTo from '../img/backTo.svg';
-import CategoryError from './CategoryError';
 import roll from '../img/roll.svg';
 import { useMediaQuery } from 'react-responsive';
 
 //stylesy
-import { ScrollDiv, SwitchDiv, RandButton, CategoriesHeader, BackToButton } from './styles/mainStyles';
+import { ScrollDiv, SwitchDiv, CategoriesHeader, BackToButton } from './styles/mainStyles';
 import { H1, H5, UL, LI, PlaylistLink, P, RollImg, ImageLoader, BackPara, Loading } from './styles/CategoriesStyles';
-import { ColorExtractor } from 'react-color-extractor';
-import { Image } from "react-image-and-background-image-fade";
 
 const Playlists = (props) => {
 
@@ -122,7 +119,7 @@ const Playlists = (props) => {
 
             <span>
               <H1>{names.name}</H1>
-              <H5>Choose or roll</H5>
+              <H5>Choose or get random</H5>
             </span>
 
             <motion.div 
@@ -153,7 +150,6 @@ const Playlists = (props) => {
 
                           <ImageLoader 
                             src={play.images[0].url} 
-                            //style={{ backgroundSize: 'cover',backgroundPosition: 'center top' }} 
                             width='100%'
                             height='100%'
                             isResponsive 
@@ -183,15 +179,3 @@ const Playlists = (props) => {
 }
 
 export default withRouter(Playlists);
-
-const Loader = () => {
-  return(
-    <div
-      style={{
-        padding: '150px',
-        background: 'gray'
-      }}
-    >
-    </div>
-  );
-}

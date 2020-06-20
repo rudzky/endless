@@ -1,18 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import { Link, Redirect, useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { TestContent } from './styles/TestStyles';
+import { useLocation, Redirect } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
+//styles
 import { 
-    AnswerBlock, 
-    List, 
     ColorizedDiv, 
-    H2, 
     H3, 
     H1, 
     Button, 
-    Positive, 
-    Negative, 
     AnswersWrapper, 
     AnswerDiv, 
     ButtonWrap,
@@ -21,6 +15,7 @@ import {
     TestHeader
 } from './styles/SummaryStyles';
 
+//svgs
 import happy from '../img/happy.svg';
 import sad from '../img/sad.svg';
 import neutral from '../img/neutral.svg';
@@ -93,6 +88,11 @@ const Summary = () => {
             exit={{ opacity: 0}}
             transition={{ duration: 0.3 }}
         >
+
+            {   (noData) && (
+                <Redirect to="/categories" />
+            )}
+
             <LapWrap>
             
                 <TestHeader>
@@ -152,15 +152,3 @@ const Summary = () => {
 };
 
 export default Summary;
-
-const Answer = ({correct}) => {
-    return(
-        <AnswerBlock>
-            <h2>
-                {
-                    correct ? "GOOD" : "Bad" 
-                }
-            </h2>
-        </AnswerBlock>
-    );
-};

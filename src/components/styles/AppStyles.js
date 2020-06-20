@@ -46,7 +46,13 @@ export const InfoWrap = styled(motion.div)`
     padding: 20px;
     overflow-y: scroll;
 
-    background: #4000F5;
+    // background: #4000F5;
+
+    background: #000;
+    
+    @media ${device.laptop} {
+      padding: 50px;
+    }
 `;
 
 export const H1 = styled.h1`
@@ -58,10 +64,14 @@ export const H1 = styled.h1`
     font-size: 4rem;
     line-height: 4rem;
   }
+  @media ${device.tablet} {
+    font-size: 6rem;
+    line-height: 6rem;
+  }
 `;
 
 export const P = styled.p`
-  font-weight: 100;
+  font-weight: 400;
   font-size: 1.3rem;
   text-align: justify;
   color: rgba(255,255,255,.8);
@@ -71,8 +81,12 @@ export const P = styled.p`
 export const H2 = styled.h2`
   font-size: 2.2rem;
   font-weight: 600;
-  line-height: 3rem;
+  line-height: 2.4rem;
   margin-top: 50px;
-  margin-bottom: 0px;
+  margin-bottom: 5px;
   font-weight: 500;
+`;
+
+export const HomeIcon = styled.img`
+  width: 100%;
 `;

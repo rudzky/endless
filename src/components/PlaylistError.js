@@ -2,6 +2,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { Button } from './styles/mainStyles'; 
 import {H1, H3, ErrorWrap} from './styles/ErrorStyles';
+
 const PlaylistError = () => {
 
     const useQuery = () => {

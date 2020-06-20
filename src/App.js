@@ -14,13 +14,14 @@ import "circular-std";
 import { AnimatePresence} from "framer-motion";
 import house from "./img/house.svg";
 // stylesy
-import { GradientWrapper, SwitchStyle, SwitchDiv, Button } from './components/styles/mainStyles';
+import { GradientWrapper, SwitchStyle, SwitchDiv, Button, HomeButton } from './components/styles/mainStyles';
 import { 
   Container,  
   InfoWrap,
   H1,
   P,
-  H2
+  H2,
+  HomeIcon
 } from './components/styles/AppStyles';
 
 export default function App(){
@@ -129,7 +130,6 @@ function About() {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -100 }}
       transition={{ duration: 0.2 }}
-      style={{ padding: '20px' }}
     >
 
       <div>
@@ -146,7 +146,7 @@ function About() {
         <P>Użyłem Reacta, React-Routera, Styled-Components, Framer-Motion i jeszcze kilku innych narzędzi.</P>
 
         <H2>A UI skąd, co?</H2>
-        <P>Do profeski trochę brakuje(dużo brakuje), ale UI zrobiłem sam, oczywiście inspirując się na Dribble i u samego Spotify &#128526;</P>
+        <P>Do profeski trochę brakuje(dużo brakuje), ale UI zrobiłem sam, oczywiście inspirując się na Dribbble i u samego Spotify. Ta podstrona jest akurat robiona bez designu (troche z lenistwa). &#128526;</P>
 
         <H2>Ale skąd te dane?</H2>
         <P>Już odpowiadam. Użyłem Spotify API. Ciekawostka: Najpierw wybrałem API, a dopiero później wpadłem na pomysł tej apki &#128513;</P>
@@ -157,9 +157,10 @@ function About() {
         <H2>Kto to takie zrobił?</H2>
         <P>A ja &#128519; <br /> Piotrek Rudzki</P>
         
-        <Button to='/' style={{ position: 'fixed'}}>
-          <img src={house} alt="home"/>
-        </Button>
+        <HomeButton to='/'>
+          {/* <HomeIcon src={house} alt="home"/> */}
+          Home
+        </HomeButton>
       </div>
 
     </InfoWrap>

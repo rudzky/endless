@@ -90,15 +90,6 @@ export const opacityAnimation = keyframes`
   from { opacity: 0 }
   to { opacity: 1 }
 `;
-//TO BYLO WCZESNIEJ _ WERSJA DZIALAJACA XD
-// export const ScrollDiv = styled.div`
-//   overflow-y: scroll; 
-//   height: 60%;
-//   animation-name: ${opacityAnimation};
-//   animation-duration: 2s;
-//   min-width: 100%;
-//   margin-top: 5%;
-// `;
 
 export const ScrollDiv = styled(motion.div)`
   overflow-y: scroll; 
@@ -151,7 +142,40 @@ export const CategoriesHeader = styled.div`
   align-items: center;
   padding: 0% 5%;
 `;
-//link był xd
+
 export const BackToButton = styled(Link)`
   width: 25px;
+`;
+
+export const HomeButton = styled(Link)`
+  font-family: CircularStd;
+  font-weight: 500;
+  font-size: 1.2rem;
+  position: fixed;
+  color: #000;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #FFF;
+  border-radius: 40px;
+  padding: 10px 20px;
+  top: 20px;
+  right: 20px;
+  margin-top: 20px;
+  transition: transform .1s ease-in-out;
+
+  @media ${device.mobileL} {
+  }
+  @media ${device.tablet} {
+
+  }
+  @media ${device.laptop} {
+    right: 100px;
+  }
+  @media ${device.laptopL} {
+  }
+
+  @media ${device.desktop} {
+  }
 `;

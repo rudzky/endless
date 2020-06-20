@@ -1,11 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { withRouter, Redirect } from 'react-router-dom';
 import { motion, useAnimation  } from "framer-motion";
 import pauseBut from '../img/pause-but.svg';
 import playBut from '../img/play-but.svg';
 import nextBut from '../img/next.svg';
 import tickBut from '../img/tick.svg';
-
 //stylesy
 import { 
     Cover, 
@@ -23,22 +22,19 @@ import {
     TrackNumber,
     TitleWrapper
  } from './styles/TrackStyles';
-
 import { CategoriesHeader } from './styles/mainStyles';
 import { BackPara } from './styles/CategoriesStyles';
 import backTo from '../img/backTo.svg';
 import { Image } from "react-image-and-background-image-fade";
-import { Palette, usePalette } from 'react-palette';
+import { usePalette } from 'react-palette';
 import { useMediaQuery } from 'react-responsive';
 
 const Track = ({ source, playName, p1, p2, backFunc, linkToTestFunc }) => {
 
     const [play, setPlay] = useState(true);
     const [trackNumber, setTrackNumber] = useState(0);
-    const [doTest, setDoTest] = useState(false);
     const [bar, setBar] = useState(0);
     const [back, setBack] = useState(false);
-    
     
     const makeAudioFade = (e) => {
 
@@ -146,10 +142,6 @@ const Track = ({ source, playName, p1, p2, backFunc, linkToTestFunc }) => {
                 {
                     back && <Redirect to={{ pathname: p1 || "/categories", search: p2 }} />
                 }
-
-                {/* {
-                    doTest && <Redirect to={{ pathname: "/check", state: source }} />
-                } */}
 
                 <div>
                     <HeaderPlaylist>playing from playlist</HeaderPlaylist>
