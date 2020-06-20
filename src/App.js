@@ -67,7 +67,7 @@ export default function App(){
 
   return(
 
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       {/* bylo position relative */}
     <Container 
       //style={{overflow: 'hidden'}}
